@@ -1,0 +1,34 @@
+# 03_control_api.keim
+welt steuerung mit 16 agenten groesse 16 8
+
+speicher antwort text startet bei "{}"
+speicher body text startet bei "{}"
+speicher daten karte startet bei {}
+speicher laufend bool startet bei wahr
+speicher wind_signal zahl startet bei 0.01
+speicher status karte startet bei {}
+speicher hat_wind bool startet bei falsch
+
+server api bei 18082 parallel 4:
+    route GET "/config" antwortet speicher antwort:
+        karte status setzt "running" auf speicher.laufend
+        karte status setzt "wind_signal" auf speicher.wind_signal
+        json schreibt speicher status in speicher antwort
+
+    route POST "/control" liest speicher body antwortet speicher antwort:
+        versuche:
+            json liest speicher body in speicher daten
+            karte daten enthaelt "wind_signal" in speicher hat_wind
+            wenn speicher hat_wind == wahr:
+                karte daten liest "wind_signal" in speicher wind_signal
+            karte status setzt "ok" auf wahr
+            karte status setzt "wind_signal" auf speicher.wind_signal
+            json schreibt speicher status in speicher antwort
+        fange fehler in speicher body:
+            karte status setzt "ok" auf falsch
+            karte status setzt "error" auf speicher.body
+            json schreibt speicher status in speicher antwort
+
+jede runde:
+    wenn speicher laufend == wahr:
+        feld dummy wird clamp(0.0)

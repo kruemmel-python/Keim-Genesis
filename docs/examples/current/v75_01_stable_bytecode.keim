@@ -1,0 +1,11 @@
+modul schulung.v75.bytecode
+
+exportiere funktion main
+
+funktion addiere(a ist ganzzahl, b ist ganzzahl) gibt ganzzahl:
+    rueckgabe a + b
+
+funktion main() gibt ganzzahl:
+    speicher basis ist ganzzahl setzt 40
+    speicher bonus ist ganzzahl setzt 2
+    rueckgabe addiere(basis, bonus)

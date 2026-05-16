@@ -1,0 +1,24 @@
+# 04_klassen_tabellen.keim
+welt objektwelt mit 4 agenten groesse 10 10
+
+speicher alarm ganzzahl startet bei 0
+speicher antwort text startet bei ""
+tabelle messungen mit tick ganzzahl, alarm ganzzahl, status text
+index messungen auf tick
+
+klasse waechter:
+    eigenschaft schwelle zahl = 0.5
+    methode pruefe:
+        wenn speicher alarm < 1:
+            speicher alarm setzt 1
+
+klasse spezial_waechter ist waechter:
+    eigenschaft name text = "alpha"
+    methode pruefe:
+        speicher alarm setzt 2
+
+objekt w ist spezial_waechter mit name="haupt"
+
+jede runde:
+    objekt w ruft pruefe
+    tabelle messungen fuegt tick=zeit alarm=speicher.alarm status="ok" ein

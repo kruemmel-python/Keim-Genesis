@@ -1,0 +1,17 @@
+modul schulung.v75.result
+
+exportiere funktion main
+
+funktion teile(a ist ganzzahl, b ist ganzzahl) gibt ergebnis<ganzzahl, text>:
+    wenn b == 0:
+        rueckgabe fehler("division durch null")
+    sonst:
+        rueckgabe ok(a / b)
+
+funktion main() gibt ganzzahl:
+    speicher r ist ergebnis<ganzzahl, text> setzt teile(84, 2)
+    match r:
+        fall ok(wert):
+            rueckgabe wert
+        fall fehler(meldung):
+            rueckgabe 0

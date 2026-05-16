@@ -1,0 +1,22 @@
+modul schulung.v785.packager
+
+exportiere funktion main
+
+typ PaketInfo:
+    name ist text
+    version ist text
+    gpu_optional ist wahrheitswert
+
+funktion beschreibe(p ist PaketInfo) gibt text:
+    wenn p.gpu_optional:
+        rueckgabe p.name + " " + p.version + " mit optionalem GPU-Fallback"
+    sonst:
+        rueckgabe p.name + " " + p.version + " ohne GPU-Pflicht"
+
+funktion main() gibt text:
+    speicher paket ist PaketInfo setzt PaketInfo(
+        name: "Keim Runtime Bundle",
+        version: "7.8.5",
+        gpu_optional: wahr
+    )
+    rueckgabe beschreibe(paket)

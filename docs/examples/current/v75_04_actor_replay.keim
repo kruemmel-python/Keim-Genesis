@@ -1,0 +1,18 @@
+modul schulung.v75.actor
+
+exportiere funktion main
+
+akteur Zaehler:
+    speicher wert ist ganzzahl setzt 0
+
+    bei "hoch":
+        wert setzt wert + 1
+
+    bei "wert" antwortet ganzzahl:
+        rueckgabe wert
+
+funktion main() gibt ganzzahl:
+    speicher z ist akteur setzt starte("Zaehler")
+    frage(z, "hoch")
+    frage(z, "hoch")
+    rueckgabe frage(z, "wert")
