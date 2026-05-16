@@ -1,0 +1,15 @@
+# Modul-Ebene: api_steuerung
+# Nutzt v4.2-Batterien: JSON, Karte, versuche/fange, HTTP-Server, Zeit, GC.
+
+baustein api_steuerung_runde:
+    zeit jetzt in speicher jetzt
+    versuche:
+        json liest speicher eingang_json in speicher api_befehl
+        karte api_befehl liest "running" in speicher api_running_text
+        karte api_status setzt "letzte_anfrage" auf speicher.jetzt
+    fange fehler in speicher api_fehler:
+        karte api_status setzt "fehler" auf "ungueltige_anfrage"
+
+    json schreibt speicher api_status in speicher ausgang_json
+    server startet bei 18080 antwortet speicher ausgang_json
+    sammle muell

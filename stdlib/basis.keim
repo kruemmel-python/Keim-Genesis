@@ -1,0 +1,25 @@
+# Keim Standardbibliothek v2.0: basis
+#
+# Enthält nur Bausteine und Werte. Keine Welt-/Feld-Deklarationen.
+
+wert std_suche_hunger = 0.50
+wert std_ruhe_energie = 0.18
+wert std_wander = 0.08
+
+baustein stoffwechsel($hunger_plus, $energie_minus):
+    agent bekommt hunger $hunger_plus
+    agent verliert energie $energie_minus
+
+baustein suche($feld, $spur, $grenze):
+    wenn $feld > $grenze: agent folgt spur $spur
+
+baustein meide_gefahr($grenze):
+    wenn agent riecht spur gefahr > $grenze: agent meidet spur gefahr
+
+baustein ruhe_wenn_schwach($energie_grenze, $ruhe_spur):
+    wenn energie < $energie_grenze: agent folgt spur $ruhe_spur
+
+baustein futter_fund($hunger_delta, $energie_delta, $spur_delta):
+    wenn agent findet futter: hunger sinkt $hunger_delta
+    wenn agent findet futter: energie waechst $energie_delta
+    wenn agent findet futter: spur futter wird staerker $spur_delta

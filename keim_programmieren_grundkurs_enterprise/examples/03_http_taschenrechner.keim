@@ -1,0 +1,26 @@
+# Mini-API: Taschenrechner-Konzept
+
+speicher antwort ist text = ""
+speicher body ist text = ""
+speicher daten ist karte
+speicher status ist ganzzahl = 200
+speicher a ist zahl = 0.0
+speicher b ist zahl = 0.0
+speicher ergebnis ist zahl = 0.0
+
+server rechner bei 18081 parallel 4:
+    route GET "/health" antwortet speicher antwort:
+        setze antwort auf "{\"ok\":true,\"service\":\"rechner\"}"
+
+    route POST "/add" liest speicher body antwortet speicher antwort status speicher status:
+        versuche:
+            json liest speicher body in speicher daten
+            karte daten liest "a" in speicher a
+            karte daten liest "b" in speicher b
+            setze ergebnis auf a + b
+            karte daten setzt "ergebnis" auf ergebnis
+            json schreibt speicher daten in speicher antwort
+            setze status auf 200
+        fange fehler in speicher err:
+            setze status auf 400
+            setze antwort auf "{\"ok\":false,\"error\":\"ungueltige Eingabe\"}"

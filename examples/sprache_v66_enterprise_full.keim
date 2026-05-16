@@ -1,0 +1,46 @@
+modul demo.v66
+
+exportiere funktion main
+
+typ Benutzer:
+    name ist text
+    alter ist ganzzahl
+
+funktion ident(x ist T) gibt T:
+    rueckgabe x
+
+funktion teile(a ist ganzzahl, b ist ganzzahl) gibt ergebnis<ganzzahl, text>:
+    wenn b == 0:
+        rueckgabe fehler("division durch null")
+    sonst:
+        rueckgabe ok(a // b)
+
+funktion summe_bis(n ist ganzzahl) gibt ganzzahl:
+    speicher i ist ganzzahl setzt 0
+    speicher s ist ganzzahl setzt 0
+    solange i < n:
+        i setzt i + 1
+        wenn i == 3:
+            weiter
+        wenn i > 5:
+            abbruch
+        s setzt s + i
+    rueckgabe s
+
+funktion main() gibt ganzzahl:
+    speicher b ist Benutzer setzt Benutzer("Ada", 42)
+    speicher zahlen ist liste<ganzzahl> setzt [1, 2, 3]
+    speicher k ist karte<text, ganzzahl> setzt {"x": 7}
+    speicher r ist ergebnis<ganzzahl, text> setzt teile(84, 2)
+    speicher basis ist ganzzahl setzt summe_bis(10)
+    match r:
+        fall ok(wert):
+            rueckgabe ident(wert) + basis + zahlen[0] + k.x
+        fall fehler(err):
+            rueckgabe 0
+
+test "v66 loops result match generics":
+    pruefe main() == 62
+
+test "binary safe arithmetic":
+    pruefe summe_bis(10) == 12

@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Keim Agenten-Zweige v7.8.1 GPU-aware</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <main class="shell">
+    <section class="hero">
+      <div class="badge">Keim Genesis v7.8.1</div>
+      <h1>Agenten-Zweigsystem</h1>
+      <p>
+        Eine kleine Web-Ansicht zum Keim-Schulungsbeispiel:
+        <strong>Basis = 1 + Zweig</strong>, danach <strong>Quadrat = Basis × Basis</strong>.
+      </p>
+      <p class="notice">
+        Die Web-Ansicht nutzt keinen JavaScript-<code>eval</code> und keine <code>Function</code>.
+        Die Fachlogik ist als dokumentierter Adapter gespiegelt und entspricht den Tests in
+        <code>src/main.keim</code>.
+      </p>
+    </section>
+
+    <section class="panel status-grid" aria-label="Projektstatus">
+      <div>
+        <span class="label">CPU-Referenz</span>
+        <strong>deterministisch</strong>
+      </div>
+      <div>
+        <span class="label">GPU-Paketpfad</span>
+        <strong>exe-pack --gpu-driver</strong>
+      </div>
+      <div>
+        <span class="label">Batch-Summe</span>
+        <strong id="batchSum">505</strong>
+      </div>
+    </section>
+
+    <section class="panel controls">
+      <label for="branchRange">Zweig auswählen</label>
+      <input id="branchRange" type="range" min="1" max="10" value="10">
+      <div class="branch-readout">
+        <span>Zweig</span>
+        <strong id="selectedBranch">10</strong>
+      </div>
+    </section>
+
+    <section class="panel result-card" aria-live="polite">
+      <div class="formula" id="formula">1 + 10 = 11</div>
+      <div class="result" id="result">121</div>
+      <div class="caption">Quadrat des Basiswertes</div>
+    </section>
+
+    <section class="panel">
+      <h2>Alle Zweige</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Zweig</th>
+              <th>Basis</th>
+              <th>Quadrat</th>
+            </tr>
+          </thead>
+          <tbody id="branchRows"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel commands">
+      <h2>Keim-Befehle</h2>
+      <pre><code>python -m keim core-test src/main.keim
+python -m keim exe-pack src/main.keim --out build/agenten_zweige_gpu_aware --name agenten_zweige_gpu_aware --gpu-driver driver/build/CC_OpenCl.dll
+python -m keim exe-verify build/agenten_zweige_gpu_aware --json
+python -m keim exe-run build/agenten_zweige_gpu_aware --json
+python build/agenten_zweige_gpu_aware/runtime/gpu/gpu_smoke.py --json</code></pre>
+    </section>
+  </main>
+
+  <script src="keim_agenten_adapter.js"></script>
+  <script>
+    const rows = document.getElementById("branchRows");
+    const range = document.getElementById("branchRange");
+    const selectedBranch = document.getElementById("selectedBranch");
+    const formula = document.getElementById("formula");
+    const result = document.getElementById("result");
+    const batchSum = document.getElementById("batchSum");
+
+    function renderTable() {
+      rows.innerHTML = "";
+      for (const item of KeimAgentenAdapter.allBranches()) {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `<td>${item.zweig}</td><td>${item.basis}</td><td>${item.quadrat}</td>`;
+        rows.appendChild(tr);
+      }
+      batchSum.textContent = KeimAgentenAdapter.batchSum10();
+    }
+
+    function renderSelected() {
+      const z = Number(range.value);
+      const item = KeimAgentenAdapter.branch(z);
+      selectedBranch.textContent = item.zweig;
+      formula.textContent = `1 + ${item.zweig} = ${item.basis}`;
+      result.textContent = item.quadrat;
+      for (const tr of rows.querySelectorAll("tr")) {
+        tr.classList.toggle("active", Number(tr.children[0].textContent) === z);
+      }
+    }
+
+    range.addEventListener("input", renderSelected);
+    renderTable();
+    renderSelected();
+  </script>
+</body>
+</html>

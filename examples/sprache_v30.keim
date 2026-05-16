@@ -1,0 +1,31 @@
+welt genesis30 mit 3 agenten groesse 12 6
+feld aktiv bool startet bei wahr
+feld alter ganzzahl startet bei 1
+feld hunger zahl startet bei 0.20
+speicher alarm bool startet bei falsch
+speicher zaehler ganzzahl startet bei 0
+spur futter startet bei 0.0 quellen 1 diffundiert 0.05 zerfaellt 0.01
+
+klasse waechter:
+    eigenschaft schwelle zahl = 0.5
+    methode pruefe:
+        wenn hunger > selbst.schwelle:
+            speicher alarm setzt wahr
+
+klasse spezial_waechter ist waechter:
+    eigenschaft modus text = wach
+    methode pruefe:
+        wenn alter >= 1:
+            speicher alarm setzt wahr
+
+objekt w ist spezial_waechter
+
+jede runde:
+    erzeuge 2 agenten
+    rufe w.pruefe
+    wenn speicher alarm == wahr:
+        loesche 1 agenten
+    alter waechst 1
+    hunger waechst 0.05
+    spur futter breitet sich aus
+    zeige genesis30

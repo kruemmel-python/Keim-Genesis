@@ -1,0 +1,43 @@
+# Autonome Simulations-API — Keim-v4.2-Programmseite
+#
+# Dieses Keim-Programm beschreibt Steuer- und Simulationslogik. Der dauerhafte
+# Daemon liegt in ../api_service.py, weil v4.2 zwar HTTP/JSON als Batterie hat,
+# v4.3 ergänzt einen vollwertigen Handler-Multiplexer; siehe autonome_api_v43.keim.
+
+verwende "sim_kern"
+verwende "api_steuerung"
+
+welt autonome_api mit 256 agenten groesse 96 64
+
+feld energie startet bei 0.85
+feld drift startet bei 0.0
+spur futter startet bei 0.0 quellen 8 diffundiert 0.10 zerfaellt 0.01
+
+speicher energie_verlust startet bei 0.001
+speicher wind_signal startet bei 0.01
+speicher energie_mittel startet bei 0.0
+speicher energie_min startet bei 0.0
+speicher eingang_json text startet bei '{"running":true}'
+speicher ausgang_json text startet bei '{}'
+speicher api_befehl karte startet bei {}
+speicher api_status karte startet bei {}
+speicher api_running_text text startet bei ""
+speicher api_fehler text startet bei ""
+speicher jetzt text startet bei ""
+
+tabelle snapshots mit tick ganzzahl, energie zahl, status text
+index snapshots auf tick
+
+klasse api_server:
+    eigenschaft port ganzzahl = 8080
+    eigenschaft status text = "bereit"
+    methode tick:
+        karte api_status setzt "status" auf "laufend"
+
+objekt server ist api_server
+
+jede runde:
+    objekt server ruft tick
+    nutze sim_kern_schritt
+    nutze sim_kern_snapshot
+    nutze api_steuerung_runde

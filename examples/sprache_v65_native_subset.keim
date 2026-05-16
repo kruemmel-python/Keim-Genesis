@@ -1,0 +1,8 @@
+modul demo.v65native
+
+exportiere funktion main
+
+funktion main() gibt ganzzahl:
+    speicher a ist ganzzahl setzt 6
+    speicher b ist ganzzahl setzt 7
+    rueckgabe a * b

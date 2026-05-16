@@ -1,0 +1,31 @@
+modul demo.v65
+
+exportiere funktion main
+
+funktion ident(x ist T) gibt T:
+    rueckgabe x
+
+funktion teile(a ist ganzzahl, b ist ganzzahl) gibt ergebnis<ganzzahl, text>:
+    wenn b == 0:
+        rueckgabe fehler("division durch null")
+    sonst:
+        rueckgabe ok(a // b)
+
+funktion entpacke(r ist ergebnis<ganzzahl, text>) gibt ganzzahl:
+    match r:
+        fall ok(wert):
+            rueckgabe wert
+        fall fehler(meldung):
+            rueckgabe 0
+
+funktion main() gibt ganzzahl:
+    speicher a ist ganzzahl setzt ident(21)
+    speicher b ist ganzzahl setzt entpacke(teile(42, 2))
+    pruefe ist_ok(teile(1, 1))
+    rueckgabe a + b
+
+test "generics result match":
+    pruefe main() == 42
+
+test "fehler fall":
+    pruefe entpacke(teile(1, 0)) == 0

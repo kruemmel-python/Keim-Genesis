@@ -1,0 +1,10 @@
+# Keim Standardbibliothek v2.0: kreislauf
+
+baustein feld_zu_spur($feld, $spur, $rate):
+    feld $feld schreibt spur $spur mit $rate
+
+baustein spur_zu_feld($feld, $spur, $rate):
+    feld $feld folgt spur $spur mit $rate
+
+baustein spur_abstossung($feld, $spur, $rate):
+    feld $feld meidet spur $spur mit $rate

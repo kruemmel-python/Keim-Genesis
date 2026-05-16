@@ -1,0 +1,30 @@
+modul demo.v64
+
+exportiere funktion main
+
+typ Benutzer:
+    name ist text
+    alter ist ganzzahl
+
+funktion addiere(a ist ganzzahl, b ist ganzzahl) gibt ganzzahl:
+    rueckgabe a + b
+
+funktion punkt() gibt Benutzer:
+    rueckgabe Benutzer("Ada", 42)
+
+funktion main() gibt ganzzahl:
+    speicher a ist ganzzahl setzt 2
+    speicher b ist ganzzahl setzt 3
+    speicher c ist ganzzahl setzt a * b + 4
+    speicher user ist Benutzer setzt punkt()
+    speicher zahlen ist liste<ganzzahl> setzt [1, 2, c]
+    speicher ch ist kanal<ganzzahl> setzt kanal()
+    sende ch addiere(zahlen[0], user.alter)
+    speicher empfangen ist ganzzahl setzt empfange(ch)
+    wenn empfangen > 40:
+        rueckgabe empfangen
+    sonst:
+        rueckgabe 0
+
+test "linear bytecode und eigener parser":
+    pruefe main() == 43

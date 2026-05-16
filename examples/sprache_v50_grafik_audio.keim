@@ -1,0 +1,17 @@
+verwende system.grafik
+verwende system.audio
+
+welt kit mit 1 agenten groesse 4 4
+speicher muted bool startet bei wahr
+
+jede runde:
+    fenster haupt erzeugen 800 600 titel "Keim Fenster"
+    grafik farbe 20 30 40
+    grafik rechteck 10 20 120 60
+    grafik kreis 200 120 30
+    grafik text 20 20 "Hallo Keim"
+    grafik anzeigen
+    audio stumm wahr
+    audio ton 440 dauer 250
+    audio signal "warnung"
+    fenster haupt schliessen

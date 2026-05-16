@@ -1,0 +1,22 @@
+modul training.supply_chain
+
+exportiere funktion main
+
+typ Paket:
+    id ist ganzzahl
+    prioritaet ist ganzzahl
+
+funktion gewicht(p ist Paket) gibt ganzzahl:
+    wenn p.prioritaet > 5:
+        rueckgabe p.id + 100
+    sonst:
+        rueckgabe p.id + 10
+
+funktion main() gibt ganzzahl:
+    speicher p ist Paket setzt Paket(21, 8)
+    speicher q ist Paket setzt Paket(5, 2)
+    pruefe gewicht(p) + gewicht(q) == 136
+    rueckgabe gewicht(p) + gewicht(q)
+
+test "supply chain stable":
+    pruefe main() == 136

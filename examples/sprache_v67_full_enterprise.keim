@@ -1,0 +1,34 @@
+modul demo.v67
+
+exportiere funktion main
+
+funktion ident(x ist T) gibt T:
+    rueckgabe x
+
+funktion addiere(a ist ganzzahl, b ist ganzzahl) gibt ganzzahl:
+    rueckgabe a + b
+
+funktion teile(a ist ganzzahl, b ist ganzzahl) gibt ergebnis<ganzzahl, text>:
+    wenn b == 0:
+        rueckgabe fehler("division durch null")
+    sonst:
+        rueckgabe ok(a // b)
+
+funktion entpacke(r ist ergebnis<ganzzahl, text>) gibt ganzzahl:
+    match r:
+        fall ok(wert):
+            rueckgabe wert
+        fall fehler(meldung):
+            rueckgabe 0
+
+funktion main() gibt ganzzahl:
+    speicher a ist ganzzahl setzt ident(20)
+    speicher b ist ganzzahl setzt addiere(20, 2)
+    speicher c ist ganzzahl setzt entpacke(teile(40, 2))
+    rueckgabe a + b + c
+
+test "v67 generics result match":
+    pruefe main() == 62
+
+test "v67 fehler":
+    pruefe entpacke(teile(1, 0)) == 0

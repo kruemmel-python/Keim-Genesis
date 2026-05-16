@@ -1,0 +1,44 @@
+# Keim Genesis v2.9 — Tabellen, SQLite und Objektmethoden
+
+welt datenraum mit 80 agenten groesse 32 14
+feld hunger startet bei 0.30
+feld risiko startet bei 0.00
+feld energie startet bei 0.80
+speicher risiko_max startet bei 0.0
+speicher alarm startet bei 0.0
+spur gefahr startet bei 0.0 quellen 2 diffundiert 0.08 zerfaellt 0.015
+
+funktion score(h, g, e) = clamp(h * 0.70 + g * 0.45 - e * 0.10)
+
+tabelle messungen mit tick zahl, risiko zahl, alarm zahl, modus text
+datenbank log bei "out/keim_v29_messungen.sqlite"
+
+klasse waechter:
+    eigenschaft schwelle = 0.18
+    methode pruefe:
+        wenn speicher risiko_max > selbst.schwelle:
+            speicher alarm setzt 1.0
+            agent meidet spur gefahr
+
+objekt alarmwache ist waechter mit schwelle=0.16
+
+regel messen:
+    feld risiko wird score(hunger, spur gefahr, energie)
+    speicher risiko_max liest max feld risiko
+    tabelle messungen fuegt tick=zeit risiko=speicher.risiko_max alarm=speicher.alarm modus=aktiv ein
+
+jede runde:
+    rufe messen
+    objekt alarmwache ruft pruefe
+    datenbank log speichert tabelle messungen
+    hunger waechst 0.006
+    energie sinkt 0.002
+    wenn speicher alarm > 0.5:
+        agent meidet spur gefahr
+    sonst:
+        agent wandert 0.05
+    spur gefahr breitet sich aus
+
+erwarte feld risiko zwischen 0 und 1
+erwarte speicher alarm zwischen 0 und 1
+erwarte speicher risiko_max zwischen 0 und 1

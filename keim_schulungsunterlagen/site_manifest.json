@@ -1,0 +1,143 @@
+{
+  "name": "keim_schulungsunterlagen",
+  "version": "v4.3.3 vollständig erhalten + v7.5 Enterprise-Aufbau + v7.8.5 Runtime Packaging",
+  "generated": "2026-05-16T00:00:00Z",
+  "preservation_policy": "Originale v4.3.3- und korrekte v7.5-Inhalte bleiben erhalten; v7.8.5 wurde additiv ergänzt.",
+  "files": [
+    {
+      "path": "CHANGELOG_V750_ENTERPRISE_AUFBAU.md",
+      "size": 416,
+      "sha256": "0f3bff1412ebdc4e40dbb3f1a02693f158d1acf5bac6d736665948c49a023ffe"
+    },
+    {
+      "path": "CHANGELOG_V785_SCHULUNGSAUFBAU.md",
+      "size": 780,
+      "sha256": "c0b40b80a5d3a3ca4b391c9cc8160625ed5afe40b1874716d4224da43be019c5"
+    },
+    {
+      "path": "DOZENTENLEITFADEN.md",
+      "size": 3900,
+      "sha256": "03e21912633122d318dd5043b2e9bb059ec24b81c96a59b60be99c493ec837e7"
+    },
+    {
+      "path": "MIGRATION_V433_TO_V750.md",
+      "size": 1600,
+      "sha256": "a5c3032f4e08fb5ae5c676fb3787d950d76afcfbe30b50541fbe1b29c3f79f4f"
+    },
+    {
+      "path": "MIGRATION_V750_TO_V785.md",
+      "size": 2146,
+      "sha256": "d15c07c1503761a945a2ce0fa55690ecab4c1dad9341fd08667dffe5f23bf11f"
+    },
+    {
+      "path": "README.txt",
+      "size": 1155,
+      "sha256": "01574b009b3f4682eca9e1bb79e16e27614332761bdee65abeb475a9f369f67a"
+    },
+    {
+      "path": "examples/01_minimal.keim",
+      "size": 330,
+      "sha256": "9fd8db469960008ba8ea16be19638fa580c3f50942217702b53947851536ea6f"
+    },
+    {
+      "path": "examples/02_http_status.keim",
+      "size": 470,
+      "sha256": "62f3f57d5e30b032e63a5c4830f1bfeecaf331b4c887653be3d7615f7e18e7bb"
+    },
+    {
+      "path": "examples/03_control_api.keim",
+      "size": 1403,
+      "sha256": "5532cb60bd41046277f67febec8c235469cfde735d6c49224ac146582f569ad8"
+    },
+    {
+      "path": "examples/04_klassen_tabellen.keim",
+      "size": 666,
+      "sha256": "f6e7a3bbff08eed593f543ef6c8546065aad75ae4afd17c623927b97d9c4b18c"
+    },
+    {
+      "path": "examples/current/kbc_stable_manifest.json",
+      "size": 271,
+      "sha256": "81ecbe1695a859c436d3b2430511e8f028169e179b3d2c880cd25b4ca2603744"
+    },
+    {
+      "path": "examples/current/v75_01_stable_bytecode.keim",
+      "size": 288,
+      "sha256": "a2afed2ca86f1911a135e41773e12b0de3d2995f860d8804a56764b3299d88ef"
+    },
+    {
+      "path": "examples/current/v75_02_result_match.keim",
+      "size": 447,
+      "sha256": "ef4d395a281c201462ec8be1ef7390ab604eb018975e27affd46e42820dd8e2d"
+    },
+    {
+      "path": "examples/current/v75_03_record_map_list.keim",
+      "size": 370,
+      "sha256": "068428bc6c4fa1a2ca7f678f3d5a56810b35cf0dc040fee16c64b458e561e129"
+    },
+    {
+      "path": "examples/current/v75_04_actor_replay.keim",
+      "size": 366,
+      "sha256": "3a18d25aa2dc80d10f74edbd3f7d565d36770c55277f68d6a08c60def90b2f06"
+    },
+    {
+      "path": "examples/current/v75_05_web_adapter.keim",
+      "size": 206,
+      "sha256": "144bce00d1947e225d5e5fb763d46b1e7b4d258d4569bb043c30093accf6f97c"
+    },
+    {
+      "path": "examples/current/v75_06_training_impossible_policy.keim",
+      "size": 303,
+      "sha256": "c91c440cf567c3b0cc92a2bcc6bac2d80758f2d85e9c3b72d3e7d476b1eee154"
+    },
+    {
+      "path": "examples/current/v785_01_exe_runtime_packager.keim",
+      "size": 577,
+      "sha256": "d6670b3868cba014340cd29c04221c5f1571f2f7be165a8878614d0aecf45153"
+    },
+    {
+      "path": "examples/current/v785_02_gpu_aware_packaging.keim",
+      "size": 579,
+      "sha256": "a22684c14365b50ca391650e6e8e115f7774efd3a8afb2e2f08ed74f3aa6ed41"
+    },
+    {
+      "path": "examples/current/v785_03_web_overlay_policy.keim",
+      "size": 460,
+      "sha256": "26b851a2dfb61273ba14bb80f2645aa01f60826cd73550917d2ad477a3ad279d"
+    },
+    {
+      "path": "examples/current/v785_packager_manifest.json",
+      "size": 1460,
+      "sha256": "ab2b6adc9817e1c944e0590f90328ac8996a79d22b5505d9bc9e8ea52a1a0bd9"
+    },
+    {
+      "path": "examples/current/web_importmap_demo.html",
+      "size": 443,
+      "sha256": "046a98698340b3910afd5167314f8d12bd633aea520ea21932d742a6d2d837a6"
+    },
+    {
+      "path": "examples/legacy/01_minimal.keim",
+      "size": 330,
+      "sha256": "9fd8db469960008ba8ea16be19638fa580c3f50942217702b53947851536ea6f"
+    },
+    {
+      "path": "examples/legacy/02_http_status.keim",
+      "size": 470,
+      "sha256": "62f3f57d5e30b032e63a5c4830f1bfeecaf331b4c887653be3d7615f7e18e7bb"
+    },
+    {
+      "path": "examples/legacy/03_control_api.keim",
+      "size": 1403,
+      "sha256": "5532cb60bd41046277f67febec8c235469cfde735d6c49224ac146582f569ad8"
+    },
+    {
+      "path": "examples/legacy/04_klassen_tabellen.keim",
+      "size": 666,
+      "sha256": "f6e7a3bbff08eed593f543ef6c8546065aad75ae4afd17c623927b97d9c4b18c"
+    },
+    {
+      "path": "index.html",
+      "size": 66606,
+      "sha256": "7691814f64bff216ac55f81c0daf0e0bc7e30de402e1c689aa8082167755d57c"
+    }
+  ]
+}

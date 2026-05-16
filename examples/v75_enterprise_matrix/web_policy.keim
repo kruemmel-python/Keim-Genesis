@@ -1,0 +1,18 @@
+modul training.web_policy
+
+berechtigung dom
+exportiere funktion main
+
+funktion route_score(path ist text, hot ist bool) gibt ganzzahl:
+    wenn hot:
+        rueckgabe 20
+    sonst:
+        rueckgabe 5
+
+funktion main() gibt ganzzahl:
+    speicher score ist ganzzahl setzt route_score("/dashboard", wahr)
+    pruefe score == 20
+    rueckgabe score
+
+test "web policy stable":
+    pruefe main() == 20

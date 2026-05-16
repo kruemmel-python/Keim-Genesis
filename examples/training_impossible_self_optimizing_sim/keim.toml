@@ -1,0 +1,14 @@
+[projekt]
+name = "training.impossible_self_optimizing_sim"
+version = "0.1.0"
+keim = ">=7.2"
+main = "src/policy.keim"
+
+[build]
+target = "training-native-policy"
+assets = ["README.md", "lesson_plan.md"]
+
+[training]
+kind = "self-steering-simulation-native-bytecode-optimizer"
+duration_steps = 120
+gui = true

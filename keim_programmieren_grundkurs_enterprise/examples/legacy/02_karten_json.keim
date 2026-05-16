@@ -1,0 +1,14 @@
+# Karten und JSON
+
+speicher benutzer ist karte
+speicher name ist text = ""
+speicher raw ist text = ""
+
+karte benutzer setzt "name" auf "Ada"
+karte benutzer setzt "alter" auf 36
+karte benutzer setzt "aktiv" auf wahr
+
+wenn karte benutzer enthaelt "name":
+    karte benutzer liest "name" in speicher name
+
+json schreibt speicher benutzer in speicher raw

@@ -1,0 +1,16 @@
+[projekt]
+name = "agenten_zweige_v78_1_gpu_aware"
+version = "0.3.0"
+keim = ">=7.8.1"
+main = "src/main.keim"
+
+[build]
+target = "bytecode"
+profile = "debug"
+
+[berechtigungen]
+io = false
+netz = false
+ffi = false
+gpu = true
+web = true

@@ -1,0 +1,18 @@
+modul training.iot_stream
+
+exportiere funktion main
+
+funktion normalize(x ist ganzzahl) gibt ganzzahl:
+    wenn x > 50:
+        rueckgabe x - 10
+    sonst:
+        rueckgabe x + 2
+
+funktion main() gibt ganzzahl:
+    speicher a ist ganzzahl setzt normalize(60)
+    speicher b ist ganzzahl setzt normalize(12)
+    pruefe a + b == 64
+    rueckgabe a + b
+
+test "iot stream stable":
+    pruefe main() == 64

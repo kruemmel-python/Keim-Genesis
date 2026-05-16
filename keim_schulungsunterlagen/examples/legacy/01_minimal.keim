@@ -1,0 +1,11 @@
+# 01_minimal.keim
+welt lernen mit 4 agenten groesse 12 6
+
+feld energie startet bei 0.8
+spur futter startet bei 0.0 quellen 2 diffundiert 0.10 zerfaellt 0.01
+speicher runde ganzzahl startet bei 0
+
+jede runde:
+    feld energie wird clamp(energie - 0.01 + futter * 0.05)
+    spur futter breitet sich aus
+    speicher runde waechst 1

@@ -1,0 +1,43 @@
+# Keim Genesis v4.0 - Batteries included / Best of Both Worlds
+
+funktion nervenrauschen(x, y) = perlin(x * 0.13, y * 0.17, 42)
+
+welt genesis40 mit 32 agenten groesse 16 10
+feld energie ganzzahl startet bei 1
+feld signal startet bei 0.0
+speicher treffer liste mit ganzzahl startet bei []
+speicher antwort text startet bei ""
+speicher letzter ganzzahl startet bei 0
+spur futter startet bei 0.0 quellen 2 diffundiert 0.16 zerfaellt 0.01
+
+tabelle messungen mit tick ganzzahl, energie zahl, tag text
+index messungen auf tick
+tabelle route mit schritt ganzzahl, x ganzzahl, y ganzzahl, kosten zahl
+
+klasse waechter:
+    eigenschaft schwelle zahl = 0.3
+    methode pruefe:
+        wenn signal > selbst.schwelle:
+            speicher letzter setzt 1
+
+klasse spezial_waechter ist waechter:
+    eigenschaft name text = "alpha"
+    methode pruefe:
+        wenn signal > selbst.schwelle:
+            speicher letzter setzt 2
+
+objekt alarm ist waechter mit schwelle=0.25
+
+jede runde:
+    feld signal wird clamp(signal + perlin(energie, signal, 4) * 0.01)
+    liste treffer haengt 1 an
+    tabelle messungen fuegt tick=zeit energie=feld.energie tag="runde" ein
+    tabelle messungen sucht tick == 1 in speicher treffer
+    neu spezial_waechter als dyn_alarm mit schwelle=0.2
+    objekt dyn_alarm ruft pruefe
+    pfad von 0 0 nach 5 4 mit spur futter in tabelle route
+    bild schreibt png "build/v4_frame.png" aus spur futter
+    dashboard startet bei "build/v4_dashboard.html"
+    loesche objekt dyn_alarm
+    sammle muell
+    spur futter breitet sich aus

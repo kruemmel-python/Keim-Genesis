@@ -1,0 +1,63 @@
+# Keim Genesis v2.6
+# Drei neue Sprachschritte:
+# - reine Ausdrucksfunktionen
+# - aggregierende Speicherzuweisungen
+# - rising-edge Ereignisblöcke
+
+funktion risikoformel(h, g, alarm, e) = clamp(mix(h, g, 0.35) + alarm * 0.20 - e * 0.04)
+funktion suchdruck(h, futter, gefahr) = clamp(h + max(futter - gefahr, 0) * 0.25)
+
+welt sprache26 mit 90 agenten groesse 30 14
+feld hunger startet bei 0.24
+feld energie startet bei 0.74
+feld risiko startet bei 0.0
+feld druck startet bei 0.0
+speicher alarm startet bei 0.0
+speicher hunger_mittel startet bei 0.0
+speicher risiko_max startet bei 0.0
+spur futter startet bei 0.0 quellen 4 diffundiert 0.12 zerfaellt 0.01
+spur gefahr startet bei 0.0 quellen 2 diffundiert 0.09 zerfaellt 0.02
+
+regel messen:
+    speicher hunger_mittel liest mittel feld hunger
+    speicher risiko_max liest max feld risiko
+
+regel denken:
+    feld risiko wird risikoformel(hunger, spur gefahr, speicher alarm, energie)
+    feld druck wird suchdruck(hunger, spur futter, spur gefahr)
+
+regel suchen:
+    wenn druck > 0.16 und energie > 0.20:
+        agent folgt spur futter
+    sonst:
+        agent wandert 0.04
+
+ereignis alarmstart wenn speicher risiko_max > 0.25:
+    speicher alarm setzt 1.0
+    agent meidet spur gefahr
+
+ereignis beruhigt wenn speicher hunger_mittel < 0.18:
+    speicher alarm sinkt 0.35
+    agent ruht
+
+jede runde:
+    rufe messen
+    rufe denken
+    rufe suchen
+    wenn agent findet futter:
+        hunger sinkt 0.15
+        energie waechst 0.04
+    hunger waechst 0.006
+    energie sinkt 0.003
+    speicher alarm sinkt 0.03
+    feld energie schreibt spur futter mit 0.004
+    spur futter breitet sich aus
+
+alle 4 runden:
+    spur gefahr breitet sich aus
+
+erwarte feld risiko zwischen 0 und 1
+erwarte feld druck zwischen 0 und 1
+erwarte speicher alarm zwischen 0 und 1
+erwarte speicher hunger_mittel zwischen 0 und 1
+erwarte speicher risiko_max zwischen 0 und 1

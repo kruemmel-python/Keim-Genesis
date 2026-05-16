@@ -1,0 +1,82 @@
+# Keim Genesis v1.7 — echte Kontrollblöcke und Sprachtests
+#
+# v1.6: wenn-/sonst-Blöcke und wiederhole-Blöcke
+# v1.7: erwarte-Kontrakte als eingebaute Sprachtests
+
+verwende "basis"
+verwende "kreislauf"
+
+wert agenten = 900
+wert breite = 90
+wert hoehe = 30
+wert hunger_start = 0.18 + 0.02
+wert energie_start = 0.82 + 0.04
+wert hunger_suche = std_suche_hunger
+wert gefahr_grenze = 0.26
+wert ruhe_grenze = 0.18
+wert emit_rate = 0.010
+
+welt sprache17 mit $agenten agenten groesse $breite $hoehe
+
+feld hunger startet bei $hunger_start
+feld energie startet bei $energie_start
+feld mut startet bei 0.30
+feld fokus startet bei 0.14
+
+spur futter startet bei 0.0 quellen 18 diffundiert 0.15 zerfaellt 0.012
+spur gefahr startet bei 0.0 quellen 7 diffundiert 0.10 zerfaellt 0.018
+spur ruhe startet bei 0.0 quellen 5 diffundiert 0.12 zerfaellt 0.010
+spur signal startet bei 0.0 quellen 4 diffundiert 0.17 zerfaellt 0.016
+
+quelle futter bei 14 8 staerke 1.0
+quelle futter bei 76 24 staerke 1.0
+quelle gefahr bei 45 15 staerke 1.0
+quelle ruhe bei 9 26 staerke 1.0
+quelle ruhe bei 80 5 staerke 1.0
+quelle signal bei 45 6 staerke 1.0
+
+baustein instinkt:
+    wenn agent riecht spur gefahr > $gefahr_grenze:
+        agent meidet spur gefahr
+        mut sinkt 0.003
+    sonst:
+        mut waechst 0.001
+
+baustein suche_block:
+    wenn hunger > $hunger_suche:
+        agent folgt spur futter
+        feld mut schreibt spur signal mit $emit_rate
+
+baustein erholung:
+    wenn energie < $ruhe_grenze:
+        agent folgt spur ruhe
+        fokus waechst 0.010
+
+jede runde:
+    wiederhole 2 mal:
+        agent wandert 0.035
+    nutze stoffwechsel(0.006, 0.004)
+    nutze spur_zu_feld(fokus, ruhe, 0.012)
+    nutze spur_abstossung(mut, gefahr, 0.016)
+    nutze instinkt
+    nutze suche_block
+    nutze erholung
+    nutze futter_fund(0.36, 0.24, 0.55)
+    feld fokus schreibt spur ruhe mit 0.010
+    feld hunger zeichnet spur gefahr mit 0.002
+    spur futter breitet sich aus
+    zeige sprache17
+
+alle 3 runden:
+    spur ruhe breitet sich aus
+    spur signal breitet sich aus
+    fokus sinkt 0.008
+
+alle 5 runden:
+    spur gefahr breitet sich aus
+    mut sinkt 0.010
+
+erwarte feld hunger zwischen 0 und 1
+erwarte feld energie zwischen 0 und 1
+erwarte spur futter zwischen 0 und 1
+erwarte treffer >= 0

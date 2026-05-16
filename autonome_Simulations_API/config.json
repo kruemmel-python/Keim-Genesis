@@ -1,0 +1,15 @@
+{
+  "width": 96,
+  "height": 64,
+  "agent_count": 4096,
+  "seed": 42,
+  "tick_hz": 20.0,
+  "steps_per_tick": 1,
+  "running": true,
+  "wind_x": 1,
+  "wind_y": 0,
+  "energy_delta": -0.001,
+  "native_enabled": true,
+  "gpu_driver_path": null,
+  "snapshot_limit": 32
+}

@@ -1,0 +1,10 @@
+modul schulung.v75.web
+
+berechtigung system.dom
+berechtigung system.netz
+
+exportiere funktion main
+
+funktion main() gibt text:
+    speicher titel ist text setzt "Keim v7.5 Web-Schulung"
+    rueckgabe titel

@@ -1,0 +1,17 @@
+modul training.agent_policy
+
+exportiere funktion main
+
+funktion choose(energy ist ganzzahl, risk ist ganzzahl) gibt ganzzahl:
+    wenn energy > risk:
+        rueckgabe energy - risk
+    sonst:
+        rueckgabe risk - energy
+
+funktion main() gibt ganzzahl:
+    speicher x ist ganzzahl setzt choose(77, 34)
+    pruefe x == 43
+    rueckgabe x
+
+test "agent policy stable":
+    pruefe main() == 43

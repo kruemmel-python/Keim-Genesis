@@ -1,0 +1,15 @@
+[projekt]
+name = "keim_genesis_prototype"
+version = "6.5.0-native-generics-result-match-binary"
+main = "examples/sprache_v64_professional_core.keim"
+keim = ">=6.5"
+
+[build]
+target = "bytecode-binary"
+
+[berechtigungen]
+io = true
+netz = false
+ffi = false
+
+[abhaengigkeiten]

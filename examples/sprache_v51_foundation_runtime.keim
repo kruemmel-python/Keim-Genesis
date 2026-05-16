@@ -1,0 +1,16 @@
+modul demo.math
+
+exportiere funktion addiere
+exportiere funktion faktor
+
+funktion addiere(a ist ganzzahl, b ist ganzzahl) gibt ganzzahl:
+    rueckgabe a + b
+
+funktion faktor(x ist kommazahl) gibt kommazahl:
+    wenn x > 10:
+        rueckgabe x * 2.0
+    sonst:
+        rueckgabe x + 1.0
+
+test "addition":
+    pruefe addiere(2, 3) == 5

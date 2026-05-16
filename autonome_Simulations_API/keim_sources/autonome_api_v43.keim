@@ -1,0 +1,153 @@
+# Autonome Simulations-API — Keim-v4.3-interner HTTP-Dienst
+#
+# Dieses Programm nutzt das neue interne Request-Handler-Modell:
+# server NAME bei PORT parallel WORKERS:
+#     route METHOD "/pfad" [liest speicher BODY] antwortet speicher RESPONSE:
+#         ... Keim-Schritte ...
+#
+# Die Routen laufen im Keim-Backend selbst. Der Python-Host startet nur noch
+# den Daemon und tickt die Simulation; Routing, JSON-Mapping und Fehlerfang
+# liegen in Keim.
+
+welt autonome_api mit 256 agenten groesse 96 64
+
+feld energie startet bei 0.85
+feld drift startet bei 0.0
+spur futter startet bei 0.0 quellen 8 diffundiert 0.10 zerfaellt 0.01
+
+speicher energie_verlust zahl startet bei 0.001
+speicher wind_signal zahl startet bei 0.01
+speicher energie_mittel zahl startet bei 0.0
+speicher energie_min zahl startet bei 0.0
+speicher tick ganzzahl startet bei 0
+speicher laufend bool startet bei wahr
+speicher eingang_json text startet bei "{}"
+speicher antwort text startet bei "{}"
+speicher api_befehl karte startet bei {}
+speicher api_status karte startet bei {}
+speicher api_fehler text startet bei ""
+speicher jetzt text startet bei ""
+speicher status_code ganzzahl startet bei 200
+speicher persistenz_datei text startet bei "autonome_Simulations_API/state_snapshot.json"
+speicher api_routen array startet bei ["/health","/snapshot","/metrics","/control","/step","/routes","/config","/save"]
+speicher hat_running bool startet bei falsch
+speicher hat_wind_signal bool startet bei falsch
+speicher hat_energy_loss bool startet bei falsch
+
+tabelle snapshots mit tick ganzzahl, energie zahl, status text
+index snapshots auf tick
+
+server api bei 18080 parallel 8:
+    route GET "/health" antwortet speicher antwort:
+        karte api_status setzt "ok" auf wahr
+        karte api_status setzt "service" auf "autonome_Simulations_API"
+        karte api_status setzt "round" auf speicher.tick
+        karte api_status setzt "running" auf speicher.laufend
+        json schreibt speicher api_status in speicher antwort
+
+    route GET "/snapshot" antwortet speicher antwort:
+        speicher energie_mittel liest mittel feld energie
+        speicher energie_min liest min feld energie
+        karte api_status setzt "ok" auf wahr
+        karte api_status setzt "round" auf speicher.tick
+        karte api_status setzt "energy_mean" auf speicher.energie_mittel
+        karte api_status setzt "energy_min" auf speicher.energie_min
+        karte api_status setzt "wind_signal" auf speicher.wind_signal
+        json schreibt speicher api_status in speicher antwort
+
+
+    route GET "/metrics" antwortet speicher antwort:
+        speicher energie_mittel liest mittel feld energie
+        speicher energie_min liest min feld energie
+        karte api_status setzt "ok" auf wahr
+        karte api_status setzt "service" auf "autonome_Simulations_API"
+        karte api_status setzt "round" auf speicher.tick
+        karte api_status setzt "running" auf speicher.laufend
+        karte api_status setzt "agents" auf 256
+        karte api_status setzt "energy_mean" auf speicher.energie_mittel
+        karte api_status setzt "energy_min" auf speicher.energie_min
+        karte api_status setzt "wind_signal" auf speicher.wind_signal
+        karte api_status setzt "energy_loss" auf speicher.energie_verlust
+        json schreibt speicher api_status in speicher antwort
+
+    route GET "/routes" antwortet speicher antwort:
+        karte api_status setzt "ok" auf wahr
+        karte api_status setzt "service" auf "autonome_Simulations_API"
+        karte api_status setzt "routes" auf speicher.api_routen
+        json schreibt speicher api_status in speicher antwort
+
+    route GET "/config" antwortet speicher antwort:
+        karte api_status setzt "ok" auf wahr
+        karte api_status setzt "running" auf speicher.laufend
+        karte api_status setzt "wind_signal" auf speicher.wind_signal
+        karte api_status setzt "energy_loss" auf speicher.energie_verlust
+        karte api_status setzt "agents" auf 256
+        json schreibt speicher api_status in speicher antwort
+
+    route GET "/control" antwortet speicher antwort:
+        karte api_status setzt "ok" auf wahr
+        karte api_status setzt "running" auf speicher.laufend
+        karte api_status setzt "wind_signal" auf speicher.wind_signal
+        karte api_status setzt "energy_loss" auf speicher.energie_verlust
+        json schreibt speicher api_status in speicher antwort
+
+    route POST "/control" liest speicher eingang_json antwortet speicher antwort status speicher status_code:
+        versuche:
+            speicher status_code setzt 200
+            json liest speicher eingang_json in speicher api_befehl
+            wenn karte api_befehl enthaelt "running":
+                karte api_befehl liest "running" in speicher laufend
+            wenn karte api_befehl enthaelt "wind_signal":
+                karte api_befehl liest "wind_signal" in speicher wind_signal
+            wenn karte api_befehl enthaelt "energy_loss":
+                karte api_befehl liest "energy_loss" in speicher energie_verlust
+            karte api_status setzt "ok" auf wahr
+            karte api_status setzt "running" auf speicher.laufend
+            karte api_status setzt "wind_signal" auf speicher.wind_signal
+            karte api_status setzt "energy_loss" auf speicher.energie_verlust
+        fange fehler in speicher api_fehler:
+            speicher status_code setzt 400
+            karte api_status setzt "ok" auf falsch
+            karte api_status setzt "error" auf speicher.api_fehler
+        json schreibt speicher api_status in speicher antwort
+        sammle muell
+
+    route POST "/step" liest speicher eingang_json antwortet speicher antwort:
+        speicher tick waechst 1
+        speicher energie_mittel liest mittel feld energie
+        karte api_status setzt "ok" auf wahr
+        karte api_status setzt "round" auf speicher.tick
+        karte api_status setzt "energy_mean" auf speicher.energie_mittel
+        json schreibt speicher api_status in speicher antwort
+
+    route POST "/save" antwortet speicher antwort:
+        speicher energie_mittel liest mittel feld energie
+        speicher energie_min liest min feld energie
+        karte api_status setzt "ok" auf wahr
+        karte api_status setzt "service" auf "autonome_Simulations_API"
+        karte api_status setzt "round" auf speicher.tick
+        karte api_status setzt "running" auf speicher.laufend
+        karte api_status setzt "energy_mean" auf speicher.energie_mittel
+        karte api_status setzt "energy_min" auf speicher.energie_min
+        karte api_status setzt "wind_signal" auf speicher.wind_signal
+        karte api_status setzt "energy_loss" auf speicher.energie_verlust
+        json schreibt speicher api_status in speicher antwort
+        datei schreibt json "autonome_Simulations_API/state_snapshot.json" aus tabelle snapshots
+
+jede runde:
+    speicher tick waechst 1
+    feld energie wird clamp(energie - speicher energie_verlust)
+    feld drift wird clamp(drift + speicher wind_signal)
+    wenn energie > 0.10:
+        agent wandert 0.03
+    sonst:
+        agent ruht
+    wenn agent findet futter:
+        energie waechst 0.20
+        spur futter wird staerker 0.25
+    spur futter breitet sich aus
+    speicher energie_mittel liest mittel feld energie
+    speicher energie_min liest min feld energie
+    tabelle snapshots fuegt tick=speicher.tick energie=speicher.energie_mittel status="ok" ein
+    sammle muell
+

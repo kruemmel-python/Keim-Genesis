@@ -1,0 +1,63 @@
+{
+  "format": "keim-example-manifest-v1",
+  "project": "agenten_zweige_v78_1_gpu_aware",
+  "version": "0.3.0",
+  "files": {
+    "README.md": {
+      "sha256": "022db08f04123108d3d93ec6e1df596fb46c7eea2e662867f4049108eedcc4d8",
+      "bytes": 4512
+    },
+    "build/.gitkeep": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "docs/ARCHITEKTUR.md": {
+      "sha256": "ea80f661d4a5e03052c694308616f33f45abd15a50004338a1d8c17506071e06",
+      "bytes": 2618
+    },
+    "docs/GPU_AWARE_PACKAGING_V7_8_1.md": {
+      "sha256": "20903b37ec5f1b07552dd721b22736b2d9ce4edce6941b05b7e27d1b5be59487",
+      "bytes": 1438
+    },
+    "docs/WEB_ANSICHT_V7_8_1.md": {
+      "sha256": "468066e2ec5a9375d99d029db8e93bda6317b4b65161eda30fe082107a3bcda9",
+      "bytes": 1083
+    },
+    "gpu_reports/.gitkeep": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "keim.toml": {
+      "sha256": "cfcb1ebc08d71a7357c34b93979e46da1a21534964fbdcfa84f1f25080110a12",
+      "bytes": 231
+    },
+    "scripts/gpu_mass_driver_demo.py": {
+      "sha256": "3417bb8048c787ac96dafbb64b9ae6fdda492c86df32a6f0671f11406485b6a5",
+      "bytes": 5072
+    },
+    "scripts/run_gpu_aware_windows.ps1": {
+      "sha256": "684e7b8feab6661dde2f62d7c3ace20e57e1ee0cc22e96417e36471a7f0799a5",
+      "bytes": 927
+    },
+    "src/gpu_mass_bench.keim": {
+      "sha256": "dffd344592f26715b82ffe2db8e03c1d23ca1ee02b26f836fc626891949bd887",
+      "bytes": 1468
+    },
+    "src/main.keim": {
+      "sha256": "31337c19724c70a94a09678a1bf66de216d00a0aa557b89ff4fcc319e37be7d1",
+      "bytes": 2715
+    },
+    "web/assets/style.css": {
+      "sha256": "0791df16ad8cfa8b1f11dabb0e5597accfa4a07a76d3e65be07f0bc25cc752b4",
+      "bytes": 4472
+    },
+    "web/index.html": {
+      "sha256": "c4d0c7aa53222dabd1faf9d791b8c27ea922698fb41e06a3bbc8969af7bab34a",
+      "bytes": 3998
+    },
+    "web/keim_agenten_adapter.js": {
+      "sha256": "c31ab8505869c61fb492ac59a0a475185f3da0c658242e6553e88b94e03f2764",
+      "bytes": 1422
+    }
+  }
+}

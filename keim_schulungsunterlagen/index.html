@@ -1,0 +1,1240 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Keim Genesis Schulungsunterlagen · v4.3.3 vollständig + v7.5 Enterprise + v7.8.5 Packaging</title>
+<style>
+:root{
+  --bg:#0f1218; --panel:#171c25; --panel2:#1e2633; --text:#eef3ff; --muted:#aab7cc;
+  --accent:#78dce8; --accent2:#a9dc76; --warn:#ffd866; --danger:#ff6188; --code:#0a0d12;
+  --border:#2f3a4d; --shadow:0 18px 50px rgba(0,0,0,.28);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:linear-gradient(145deg,#0f1218,#151b26 45%,#10141c);color:var(--text);line-height:1.62}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+header.hero{padding:56px 28px 34px;border-bottom:1px solid var(--border);background:radial-gradient(circle at 20% 20%,rgba(120,220,232,.18),transparent 35%),radial-gradient(circle at 80% 0%,rgba(169,220,118,.12),transparent 32%),#111722}
+.hero-inner{max-width:1220px;margin:0 auto}
+.badge{display:inline-block;border:1px solid rgba(120,220,232,.45);color:var(--accent);border-radius:999px;padding:5px 12px;background:rgba(120,220,232,.08);font-size:.9rem}
+h1{font-size:clamp(2.1rem,5vw,4.4rem);line-height:1.03;margin:18px 0 12px;letter-spacing:-.04em}
+.subtitle{font-size:1.22rem;color:var(--muted);max-width:900px}
+.layout{display:grid;grid-template-columns:310px minmax(0,1fr);gap:24px;max-width:1460px;margin:0 auto;padding:24px}
+nav{position:sticky;top:16px;align-self:start;background:rgba(23,28,37,.86);border:1px solid var(--border);border-radius:22px;padding:16px;box-shadow:var(--shadow);backdrop-filter:blur(12px);max-height:calc(100vh - 32px);overflow:auto}
+nav h2{font-size:1rem;margin:6px 8px 12px;color:var(--accent2)}
+nav a{display:block;padding:8px 10px;border-radius:10px;color:var(--muted);font-size:.95rem}
+nav a:hover{background:var(--panel2);color:var(--text);text-decoration:none}
+main{min-width:0}
+section{background:rgba(23,28,37,.82);border:1px solid var(--border);border-radius:24px;margin:0 0 24px;padding:28px;box-shadow:var(--shadow)}
+section section{box-shadow:none;background:rgba(30,38,51,.45);border-radius:18px;padding:18px;margin:18px 0}
+h2{font-size:2rem;line-height:1.15;margin:0 0 12px;color:#fff}
+h3{font-size:1.35rem;margin:26px 0 10px;color:#f9fbff}
+h4{font-size:1.05rem;color:var(--accent2);margin:22px 0 8px}
+p,li{color:#dce6f7}
+.muted{color:var(--muted)}
+.grid{display:grid;gap:16px}
+.grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.grid.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+.card{background:rgba(30,38,51,.7);border:1px solid var(--border);border-radius:18px;padding:18px}
+.kpi{font-size:1.8rem;font-weight:800;color:var(--accent)}
+table{border-collapse:collapse;width:100%;margin:14px 0;background:rgba(10,13,18,.35);border-radius:14px;overflow:hidden}
+th,td{border:1px solid var(--border);padding:10px 12px;text-align:left;vertical-align:top}
+th{background:#202939;color:#fff}
+td{color:#dce6f7}
+code,kbd{font-family:ui-monospace,SFMono-Regular,Consolas,Liberation Mono,monospace;background:rgba(10,13,18,.85);border:1px solid var(--border);border-radius:7px;padding:.1em .36em;color:#e9f3ff}
+pre{position:relative;margin:14px 0;padding:18px;overflow:auto;background:var(--code);border:1px solid var(--border);border-radius:18px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.02)}
+pre code{background:transparent;border:0;padding:0;color:#f7fbff;white-space:pre;font-size:.94rem}
+.copy{position:absolute;right:10px;top:10px;border:1px solid var(--border);background:#202939;color:var(--text);border-radius:10px;padding:4px 8px;cursor:pointer}
+.copy:hover{background:#2b3547}
+.note{border-left:4px solid var(--accent);background:rgba(120,220,232,.08);padding:14px 16px;border-radius:12px;margin:16px 0;color:#e9fbff}
+.warn{border-left:4px solid var(--warn);background:rgba(255,216,102,.08);padding:14px 16px;border-radius:12px;margin:16px 0}
+.danger{border-left:4px solid var(--danger);background:rgba(255,97,136,.08);padding:14px 16px;border-radius:12px;margin:16px 0}
+.exercise{border:1px solid rgba(169,220,118,.35);background:rgba(169,220,118,.06);border-radius:18px;padding:16px;margin:16px 0}
+.exercise summary{cursor:pointer;font-weight:700;color:var(--accent2)}
+.checklist li{margin:8px 0}
+.searchbox{width:100%;padding:12px 14px;border-radius:14px;border:1px solid var(--border);background:#0b0f16;color:var(--text);margin-bottom:12px}
+footer{max-width:1220px;margin:0 auto;padding:40px 24px;color:var(--muted)}
+@media (max-width:980px){.layout{grid-template-columns:1fr;padding:12px}nav{position:relative;top:0}.grid.two,.grid.three{grid-template-columns:1fr}section{padding:20px}}
+.enterprise-note{border-left:4px solid var(--accent);background:rgba(120,220,232,.08);padding:14px 16px;border-radius:14px;margin:18px 0}.pill{display:inline-block;border:1px solid var(--border);border-radius:999px;padding:3px 9px;margin:2px;color:var(--muted);background:rgba(30,38,51,.65)}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="hero-inner">
+    <span class="badge">Keim Genesis · v4.3.3 erhalten · v7.5 Enterprise · v7.8.5 Runtime Packaging ergänzt</span>
+    <h1>Keim Genesis Schulungsunterlagen: Grundlagen, Runtime und Enterprise-Plattform</h1>
+    <p class="subtitle">Die ursprüngliche v4.3.3-Schulung bleibt vollständig erhalten. Ergänzt wurden der v7.5-Aufbaukurs zu KBC-STABLE-1, Runtime, Native/WASM, GC, Security, Web-Interop, Training Impossible und Enterprise-Hardening sowie die v7.8.5-Schicht für Full Runtime Packaging, GPU-aware Bundles, Self-Bootstrapping Launcher und Web-Overlays.</p>
+  </div>
+</header>
+<div class="layout">
+<nav>
+  <input class="searchbox" id="search" placeholder="Kapitel suchen …">
+  <h2>Inhalt</h2>
+  <a href="#vorwort">0. Vorwort: Die Genesis von Keim</a>
+  <a href="#ziel">1. Ziel dieser Schulung</a>
+  <a href="#mentalmodell">2. Das Denkmodell von Keim</a>
+  <a href="#einrichtung">3. Einrichtung</a>
+  <a href="#projektstruktur">4. Projektstruktur</a>
+  <a href="#erstes-programm">5. Erstes Programm</a>
+  <a href="#syntax">6. Syntax-Grundlagen</a>
+  <a href="#typen">7. Werte und Typen</a>
+  <a href="#welt">8. Welt, Felder, Spuren</a>
+  <a href="#speicher">9. Speicher und Collections</a>
+  <a href="#kontrollfluss">10. Kontrollfluss</a>
+  <a href="#funktionen">11. Funktionen, Werte, Bausteine</a>
+  <a href="#objekte">12. Klassen und Objekte</a>
+  <a href="#tabellen">13. Tabellen und Daten</a>
+  <a href="#stdlib">14. Standardbibliothek</a>
+  <a href="#http">15. HTTP-APIs</a>
+  <a href="#fehler">16. Fehlerbehandlung</a>
+  <a href="#runtime">17. Ausführung und CLI</a>
+  <a href="#native">18. Native VM und Performance</a>
+  <a href="#debugging">19. Debugging</a>
+  <a href="#projekte">20. Übungsprojekte</a>
+  <a href="#referenz">21. Kurzreferenz</a>
+  <a href="#glossar">22. Glossar</a>
+
+  <h2>v7.5 Enterprise-Aufbau</h2>
+  <a href="#v75-ueberblick">23. Projektstand v7.5</a>
+  <a href="#v75-architektur">24. Aktuelle Architektur</a>
+  <a href="#v75-kbc-stable">25. KBC-STABLE-1</a>
+  <a href="#v75-typen-match">26. Result, Match, Typdenken</a>
+  <a href="#v75-datenmodell">27. Records, Listen, Maps</a>
+  <a href="#v75-gc-runtime">28. GC, Region, Hashmap</a>
+  <a href="#v75-native-wasm">29. Native und WASM</a>
+  <a href="#v75-security">30. Security, SBOM, Capabilities</a>
+  <a href="#v75-web">31. Web und JS-Interop</a>
+  <a href="#v75-training-impossible">32. Training Impossible</a>
+  <a href="#v75-hardening">33. Hardening Matrix</a>
+  <a href="#v75-unterrichtsplan">34. Unterrichtsplan</a>
+  <h2>v7.8.5 Runtime Packaging</h2>
+  <a href="#v785-runtime-packager">35. Self-Bootstrapping Packager</a>
+</nav>
+<main>
+
+<section id="update-hinweis">
+<h2>Aktualisierungshinweis</h2>
+<div class="enterprise-note">
+<p><strong>Diese Ausgabe ersetzt die ursprünglichen Keim-v4.3.3-Schulungsunterlagen nicht.</strong> Sie bewahrt den vollständigen Originalkurs und ergänzt ihn um den Enterprise-Aufbaupfad für Keim Genesis v7.5 sowie den aktuellen v7.8.5-Pfad für Runtime Packaging, GPU-aware Bundles und Self-Bootstrapping Launcher.</p>
+<p><span class="pill">Original erhalten</span><span class="pill">Legacy-Beispiele enthalten</span><span class="pill">v7.5-Aufbau ergänzt</span><span class="pill">v7.8.5 Packaging ergänzt</span><span class="pill">Dozentenmaterial ergänzt</span></p>
+</div>
+</section>
+
+
+
+<section id="vorwort">
+<h2>0. Vorwort: Die Genesis von Keim</h2>
+<h3>Die Vision</h3>
+<p>Keim wurde nicht als weitere Skriptsprache für den Alltag entwickelt, sondern aus einer tiefen Unzufriedenheit mit einer Software-Landschaft, die oft immer schwerer, indirekter und abhängiger wird. In einer Zeit, in der Programme sich hinter vielen Abstraktionsebenen verstecken, entstand der Wunsch nach einer <strong>souveränen Technologie</strong>: verständlich, kontrollierbar, lokal ausführbar und offen für die Nähe zur Maschine.</p>
+<p>Die Sprache wurde von <strong>Ralf Krümmel</strong> im Mai 2026 erschaffen, unter dem Leitbild des <em>Deep-Substrate Architects</em>. Das Ziel war eine Umgebung, die die rohe Kraft nativer Ausführung mit der Lesbarkeit moderner Logik verbindet, ohne dabei zwingend von Cloud-Diensten oder fremden Frameworks abhängig zu sein. Keim richtet sich an Menschen, die Programmieren wieder als bewusstes Handwerk verstehen wollen: präzise, effizient, unabhängig und erklärbar.</p>
+
+<h3>Warum der Name „Keim“?</h3>
+<p>Der Name ist Programm. Ein <strong>Keim</strong> ist die kleinste, hochkonzentrierte Einheit eines entstehenden Systems. Er trägt einen Bauplan in sich, benötigt wenige Ressourcen und kann dennoch zu etwas Komplexem wachsen.</p>
+<ul>
+<li><strong>Potenzial:</strong> Ein kleines Keim-Programm kann durch Tabellen, Karten, Agentenlogik, HTTP-Routen und Hotspot-Ausführung zu einem massiven System heranwachsen.</li>
+<li><strong>Ursprung:</strong> Keim steht für den Anfang von etwas Neuem und für die Rückbesinnung auf das Wesentliche: Daten, Zustand, Regeln, Ausführung.</li>
+<li><strong>Wachstum:</strong> Die Sprache ist darauf ausgelegt, organisch zu wachsen: vom ersten Wert im Speicher bis zum autonomen Dienst, der Anfragen verarbeitet und seinen Zustand verwaltet.</li>
+</ul>
+
+<h3>Der Weg zur v4.3.3</h3>
+<p>Was als Experiment zur Simulation biologischer Prozesse begann, hat sich zu einer <strong>General Purpose Language</strong> entwickelt. Mit Version 4.3.3 besitzt Keim zentrale Bausteine moderner Programmierung: Datentypen, dynamische Collections, Module, Klassen, Objekte, Vererbung, JSON, HTTP-Routing, Fehlerbehandlung, Garbage Collection, Native-Hotspots und eine autonome API-Architektur.</p>
+<p>Diese Schulung ist deshalb mehr als eine Syntaxübersicht. Sie ist eine Einladung, Programmieren als kontrollierbares Systemdenken zu lernen: Was ist ein Wert? Was ist Zustand? Wann verändert sich etwas? Welche Grenze trennt einfache Logik von robuster Architektur?</p>
+<p><strong>Willkommen in der Welt von Keim.</strong></p>
+</section>
+
+
+<section id="ziel">
+<h2>1. Ziel dieser Schulung</h2>
+<p>Nach dieser Schulung sollst du eigene Keim-Programme schreiben können, auch wenn du vorher noch nie programmiert hast. Keim ist eine experimentelle Sprache, aber sie folgt klaren Regeln. Sie wurde nicht nur für klassische Anwendungen gebaut, sondern besonders für Simulationen, Agenten, Felder, Datenströme und autonome Dienste.</p>
+<div class="grid three">
+  <div class="card"><div class="kpi">1</div><strong>Du verstehst Programme.</strong><p>Du lernst, dass ein Programm eine geordnete Beschreibung von Zustand und Veränderung ist.</p></div>
+  <div class="card"><div class="kpi">2</div><strong>Du schreibst Keim-Code.</strong><p>Du deklarierst Welten, Speicher, Felder, Tabellen, Routen und Regeln.</p></div>
+  <div class="card"><div class="kpi">3</div><strong>Du baust APIs.</strong><p>Du steuerst eine laufende Simulation über HTTP und JSON.</p></div>
+</div>
+<p>Die Schulung verwendet Keim Genesis v4.3.3 mit internem HTTP-Router, JSON, Karten, Listen, Fehlerbehandlung, GC und optionalem C++-Hotspot.</p>
+</section>
+
+<section id="mentalmodell">
+<h2>2. Das Denkmodell von Keim</h2>
+<p>Viele Sprachen starten mit einzelnen Befehlen wie <code>print("Hallo")</code>. Keim startet anders: Keim fragt zuerst, welche Welt existiert, welche Zustände es gibt und wie sie sich pro Runde verändern.</p>
+<h3>Programmieren als Zustandsmaschine</h3>
+<p>Ein Programm besteht in Keim aus zwei großen Teilen:</p>
+<table>
+<tr><th>Teil</th><th>Frage</th><th>Beispiel</th></tr>
+<tr><td>Deklarationen</td><td>Was existiert?</td><td>Welt, Felder, Speicher, Tabellen, Klassen, Server</td></tr>
+<tr><td>Schritte</td><td>Was passiert?</td><td>Jede Runde, Routen-Handler, Regeln, Ereignisse</td></tr>
+</table>
+<p>Das ist wichtig: Keim trennt <em>Zustand</em> und <em>Veränderung</em>. Dadurch kann die Runtime später entscheiden, ob etwas im Python-Referenzinterpreter, im C++-Hotspot oder über eine GPU-Brücke laufen kann.</p>
+
+<h3>Die wichtigsten Begriffe</h3>
+<table>
+<tr><th>Begriff</th><th>Bedeutung</th><th>Warum gibt es ihn?</th></tr>
+<tr><td><code>welt</code></td><td>Der Simulationsraum</td><td>Alle Agenten und Felder brauchen Koordinaten und Größe.</td></tr>
+<tr><td><code>feld</code></td><td>Ein Wert pro Position oder Agent</td><td>Für Energie, Risiko, Temperatur, Signal, Dichte.</td></tr>
+<tr><td><code>spur</code></td><td>Diffundierendes Feld</td><td>Für Geruch, Nahrung, Markierungen, Ausbreitung.</td></tr>
+<tr><td><code>speicher</code></td><td>Ein benannter Einzelwert oder Container</td><td>Für Steuerparameter, Ergebnisse, JSON, Karten.</td></tr>
+<tr><td><code>jede runde</code></td><td>Hauptschleife</td><td>Hier steht, was pro Simulationsschritt passiert.</td></tr>
+<tr><td><code>server/route</code></td><td>HTTP-Dienst</td><td>Damit Keim-Programme als API erreichbar sind.</td></tr>
+</table>
+
+<div class="note"><strong>Warum Keim so funktioniert:</strong> Keim will nicht jedes Objekt als schweres Python-Objekt modellieren. Viele Daten liegen als kompakte Felder oder Arrays vor. Das macht Simulationen und Massenupdates schneller und bereitet native Ausführung vor.</div>
+</section>
+
+<section id="einrichtung">
+<h2>3. Einrichtung</h2>
+<h3>3.1 Projekt entpacken</h3>
+<p>Entpacke die aktuelle ZIP in einen Ordner, zum Beispiel:</p>
+<pre><button class="copy">Kopieren</button><code>D:\keim_genesis_prototype</code></pre>
+
+<h3>3.2 Virtuelle Python-Umgebung erstellen</h3>
+<p>Eine virtuelle Umgebung verhindert, dass globale Python-Pakete dein Projekt beeinflussen.</p>
+<h4>Windows PowerShell</h4>
+<pre><button class="copy">Kopieren</button><code>cd D:\keim_genesis_prototype
+py -3.12 -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install --upgrade pip</code></pre>
+<h4>Windows CMD</h4>
+<pre><button class="copy">Kopieren</button><code>cd D:\keim_genesis_prototype
+.venv\Scripts\activate.bat
+python -m pip install --upgrade pip</code></pre>
+<h4>Linux/macOS</h4>
+<pre><button class="copy">Kopieren</button><code>cd keim_genesis_prototype
+python3.12 -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip</code></pre>
+
+<h3>3.3 Tests ausführen</h3>
+<pre><button class="copy">Kopieren</button><code>python tests/run_tests.py
+python tests/run_v43_http_tests.py
+python autonome_Simulations_API/tests/test_api_smoke.py</code></pre>
+<p>Wenn alles korrekt ist, erscheinen Meldungen wie:</p>
+<pre><code>[Keim] Tests OK
+[Keim] v4.3 internal HTTP router tests OK
+[Keim] autonome_Simulations_API smoke test OK</code></pre>
+
+<h3>3.4 Native VM optional bauen</h3>
+<p>Für den C++-Hotspot brauchst du auf Windows die Visual Studio Build Tools mit C++.</p>
+<pre><button class="copy">Kopieren</button><code>python scripts/build_native_vm.py</code></pre>
+<div class="warn"><strong>Wichtig:</strong> Die Sprache und API laufen auch ohne Native VM. Die Native VM ist eine Beschleunigungsschicht.</div>
+</section>
+
+<section id="projektstruktur">
+<h2>4. Projektstruktur</h2>
+<p>Ein typisches Keim-Projekt enthält Sprachkern, Beispiele, Tests und deine eigenen Programme.</p>
+<pre><code>keim_genesis_prototype/
+├─ keim/                         # Parser, Runtime, Bytecode, Analyzer
+├─ native/                       # C++-Hotspot-Quellcode
+├─ scripts/                      # Build- und Benchmark-Skripte
+├─ tests/                        # Tests
+├─ examples/                     # Beispielprogramme
+└─ autonome_Simulations_API/
+   ├─ keim_daemon.py             # Host startet Keim-Dienst
+   ├─ sim_engine.py              # Simulationsintegration
+   ├─ config.json                # Host-Konfiguration
+   └─ keim_sources/
+      └─ autonome_api_v43.keim   # Keim-HTTP-API-Programm</code></pre>
+<p>Die wichtigste Datei für die autonome API ist:</p>
+<pre><code>autonome_Simulations_API/keim_sources/autonome_api_v43.keim</code></pre>
+</section>
+
+<section id="erstes-programm">
+<h2>5. Dein erstes Keim-Programm</h2>
+<p>Erstelle eine Datei <code>lernen_01.keim</code>:</p>
+<pre><button class="copy">Kopieren</button><code># lernen_01.keim
+welt lernen mit 4 agenten groesse 12 6
+
+feld energie startet bei 0.8
+spur futter startet bei 0.0 quellen 2 diffundiert 0.10 zerfaellt 0.01
+speicher runde ganzzahl startet bei 0
+
+jede runde:
+    feld energie wird clamp(energie - 0.01 + futter * 0.05)
+    spur futter breitet sich aus
+    speicher runde waechst 1</code></pre>
+
+<h3>Was passiert hier?</h3>
+<table>
+<tr><th>Zeile</th><th>Erklärung</th></tr>
+<tr><td><code>welt lernen ...</code></td><td>Erzeugt eine Welt mit 4 Agenten und einer Größe von 12 × 6.</td></tr>
+<tr><td><code>feld energie ...</code></td><td>Jede Zelle/Agentenposition startet mit Energie 0.8.</td></tr>
+<tr><td><code>spur futter ...</code></td><td>Erzeugt eine diffundierende Futtersignalspur.</td></tr>
+<tr><td><code>speicher runde ...</code></td><td>Ein globaler Zähler.</td></tr>
+<tr><td><code>jede runde:</code></td><td>Alles darunter wird pro Simulationsrunde ausgeführt.</td></tr>
+</table>
+
+<h3>Ausführen</h3>
+<pre><button class="copy">Kopieren</button><code>python -m keim run lernen_01.keim --rounds 20</code></pre>
+<p>Oder erst analysieren:</p>
+<pre><button class="copy">Kopieren</button><code>python -m keim analyze lernen_01.keim
+python -m keim bytecode lernen_01.keim</code></pre>
+
+<details class="exercise"><summary>Übung 1: Energie langsamer sinken lassen</summary>
+<p>Ändere <code>- 0.01</code> zu <code>- 0.002</code>. Führe das Programm erneut aus. Beobachte, ob die Energie langsamer fällt.</p></details>
+</section>
+
+<section id="syntax">
+<h2>6. Syntax-Grundlagen</h2>
+<h3>6.1 Kommentare</h3>
+<p>Alles nach <code>#</code> ist Kommentar und wird von Keim ignoriert.</p>
+<pre><code># Das ist ein Kommentar
+speicher zaehler ganzzahl startet bei 0  # Kommentar am Ende einer Zeile</code></pre>
+
+<h3>6.2 Einrückung</h3>
+<p>Keim verwendet Blöcke mit Doppelpunkt und vier Leerzeichen Einrückung. Das kennst du später auch aus Python.</p>
+<pre><code>jede runde:
+    speicher zaehler waechst 1
+    wenn speicher zaehler > 10:
+        speicher zaehler setzt 0</code></pre>
+<div class="danger"><strong>Häufiger Anfängerfehler:</strong> Tabs und Leerzeichen mischen. Nutze vier Leerzeichen pro Ebene.</div>
+
+<h3>6.3 Deklarationen und Aktionen</h3>
+<p>Deklarationen stehen oben und sagen, was existiert. Aktionen stehen in Blöcken und verändern etwas.</p>
+<table>
+<tr><th>Form</th><th>Beispiel</th><th>Ort</th></tr>
+<tr><td>Deklaration</td><td><code>speicher name text startet bei "Ada"</code></td><td>Top-Level</td></tr>
+<tr><td>Aktion</td><td><code>speicher zaehler waechst 1</code></td><td>In <code>jede runde</code>, <code>route</code>, <code>methode</code>, <code>regel</code></td></tr>
+</table>
+
+<h3>6.4 Namen</h3>
+<p>Namen sollten mit Buchstaben oder Unterstrich beginnen und danach Buchstaben, Zahlen oder Unterstriche enthalten. Vermeide Leerzeichen und Sonderzeichen.</p>
+<pre><code>speicher guter_name zahl startet bei 1.0
+speicher name2 text startet bei "ok"</code></pre>
+</section>
+
+<section id="typen">
+<h2>7. Werte und Typen</h2>
+<p>Ein Typ sagt, welche Art von Wert gespeichert wird. Keim v4.3.3 kennt mehrere Typen.</p>
+<table>
+<tr><th>Typ</th><th>Bedeutung</th><th>Beispiel</th><th>Wofür?</th></tr>
+<tr><td><code>zahl</code></td><td>Fließkommazahl</td><td><code>0.75</code></td><td>Energie, Signale, Wahrscheinlichkeiten</td></tr>
+<tr><td><code>ganzzahl</code></td><td>Integer</td><td><code>42</code></td><td>Zähler, Runden, Statuscodes</td></tr>
+<tr><td><code>bool</code></td><td>Wahrheitswert</td><td><code>wahr</code>, <code>falsch</code></td><td>Schalter, Bedingungen</td></tr>
+<tr><td><code>text</code></td><td>Zeichenkette</td><td><code>"Hallo"</code></td><td>JSON, Namen, Fehlermeldungen</td></tr>
+<tr><td><code>array</code></td><td>Liste/Array-Wert</td><td><code>[1,2,3]</code></td><td>Routenlisten, Ergebnislisten</td></tr>
+<tr><td><code>karte</code></td><td>Dictionary/Map</td><td><code>{}</code></td><td>JSON-Objekte, Konfigurationen</td></tr>
+<tr><td><code>referenz</code></td><td>Objektreferenz</td><td>Objektname/Referenz</td><td>Dynamische Objekte</td></tr>
+</table>
+
+<h3>Typisierte Speicher</h3>
+<pre><code>speicher energie zahl startet bei 0.85
+speicher tick ganzzahl startet bei 0
+speicher laufend bool startet bei wahr
+speicher name text startet bei "Keim"
+speicher daten karte startet bei {}
+speicher routen array startet bei ["/health","/metrics"]</code></pre>
+
+<h3>Warum Typen wichtig sind</h3>
+<p>Typen helfen Keim, Fehler früher zu erkennen und später native Speicherlayouts zu wählen. Eine <code>ganzzahl</code> kann beispielsweise effizienter für Indizes und Statuscodes genutzt werden als eine Fließkommazahl.</p>
+</section>
+
+<section id="welt">
+<h2>8. Welt, Felder, Spuren und Agenten</h2>
+<h3>8.1 Welt</h3>
+<pre><code>welt meine_welt mit 256 agenten groesse 96 64</code></pre>
+<p>Diese Zeile erzeugt eine Welt mit 256 Agenten und einer Rastergröße von 96 × 64. Wenn du keine Größe angibst, verwendet Keim eine Standardgröße.</p>
+
+<h3>8.2 Felder</h3>
+<p>Ein Feld ist ein verteilter Zustand. Es kann Energie, Temperatur, Risiko, Dichte oder ein anderes Signal repräsentieren.</p>
+<pre><code>feld energie zahl startet bei 0.85
+feld alarm ganzzahl startet bei 0
+feld aktiv bool startet bei wahr</code></pre>
+
+<h3>8.3 Feldberechnung</h3>
+<pre><code>jede runde:
+    feld energie wird clamp(energie - 0.01)</code></pre>
+<p><code>clamp</code> begrenzt den Wert typischerweise auf einen sicheren Bereich. Das verhindert, dass Energie negativ wird oder unkontrolliert wächst.</p>
+
+<h3>8.4 Spuren</h3>
+<pre><code>spur futter startet bei 0.0 quellen 8 diffundiert 0.10 zerfaellt 0.01</code></pre>
+<table>
+<tr><th>Teil</th><th>Bedeutung</th></tr>
+<tr><td><code>quellen 8</code></td><td>Es gibt acht Quellen, die Signal erzeugen.</td></tr>
+<tr><td><code>diffundiert 0.10</code></td><td>Signal breitet sich in Nachbarbereiche aus.</td></tr>
+<tr><td><code>zerfaellt 0.01</code></td><td>Signal wird pro Runde schwächer.</td></tr>
+</table>
+<pre><code>jede runde:
+    spur futter breitet sich aus
+    agent folgt spur futter</code></pre>
+
+<h3>8.5 Agenten erzeugen und löschen</h3>
+<pre><code>jede runde:
+    erzeuge agent
+    erzeuge 10 agenten
+    loesche 3 agenten
+    loesche aktive agenten</code></pre>
+<p>Agenten sind die beweglichen Einheiten der Simulation. Intern kann Keim sie als SoA-Struktur verwalten: getrennte Arrays für Position, Energie, Klasse und Aktivstatus. Das ist schneller als viele Einzelobjekte.</p>
+</section>
+
+<section id="speicher">
+<h2>9. Speicher und Collections</h2>
+<h3>9.1 Speicher verändern</h3>
+<pre><code>speicher zaehler ganzzahl startet bei 0
+
+jede runde:
+    speicher zaehler waechst 1
+    speicher zaehler sinkt 1
+    speicher zaehler setzt 10</code></pre>
+
+<h3>9.2 Aggregationen lesen</h3>
+<p>Speicher können Werte aus Feldern oder Spuren messen:</p>
+<pre><code>speicher energie_mittel zahl startet bei 0.0
+speicher energie_min zahl startet bei 0.0
+
+jede runde:
+    speicher energie_mittel liest mittel feld energie
+    speicher energie_min liest min feld energie</code></pre>
+
+<h3>9.3 Listen</h3>
+<pre><code>speicher werte liste mit ganzzahl startet bei []
+
+jede runde:
+    liste werte haengt 5 an
+    liste werte nimmt letztes in speicher letzter_wert</code></pre>
+<p>Listen sind gut für Reihenfolgen: Logs, Pfade, Routen, Messwerte.</p>
+
+<h3>9.4 Karten</h3>
+<p>Eine Karte ist ein Schlüssel-Wert-Speicher, ähnlich einem Dictionary.</p>
+<pre><code>speicher daten karte startet bei {}
+speicher name text startet bei ""
+speicher hat_name bool startet bei falsch
+
+jede runde:
+    karte daten setzt "name" auf "Ada"
+    karte daten enthaelt "name" in speicher hat_name
+    karte daten liest "name" in speicher name
+    karte daten loescht "name"</code></pre>
+
+<h3>Warum Karten wichtig sind</h3>
+<p>Ohne Karten müsste jedes Programm starre Variablen für jeden möglichen Wert deklarieren. Karten machen JSON, Konfigurationen und flexible Datenmodelle möglich.</p>
+</section>
+
+<section id="kontrollfluss">
+<h2>10. Kontrollfluss</h2>
+<p>Kontrollfluss bedeutet: Das Programm entscheidet, was als Nächstes passieren soll.</p>
+
+<h3>10.1 Jede Runde</h3>
+<pre><code>jede runde:
+    speicher tick waechst 1</code></pre>
+<p>Der Block <code>jede runde</code> ist die Hauptschleife der Simulation.</p>
+
+<h3>10.2 Bedingungen</h3>
+<pre><code>wenn speicher energie_mittel < 0.2:
+    speicher alarm setzt 1</code></pre>
+<p>Eine Bedingung prüft, ob etwas wahr ist. Nur dann werden die eingerückten Schritte ausgeführt.</p>
+
+<h3>10.3 Einzeilige Bedingungen</h3>
+<pre><code>wenn energie > 0.5: agent folgt spur futter</code></pre>
+
+<h3>10.4 Regeln</h3>
+<pre><code>regel alarm_pruefen:
+    wenn speicher energie_mittel < 0.2:
+        speicher alarm setzt 1
+
+jede runde:
+    rufe alarm_pruefen</code></pre>
+<p>Regeln helfen dir, Code zu strukturieren. Du kannst eine Regel an mehreren Stellen aufrufen.</p>
+
+<h3>10.5 Periodische Blöcke</h3>
+<pre><code>alle 10 runden:
+    speicher energie_mittel liest mittel feld energie</code></pre>
+<p>Dieser Block läuft nur alle zehn Runden. Das ist nützlich für teure Messungen oder Exporte.</p>
+
+<h3>10.6 Ereignisse</h3>
+<pre><code>ereignis energie_knapp wenn speicher energie_mittel < 0.1:
+    speicher alarm setzt 1</code></pre>
+<p>Ereignisse koppeln Namen an Bedingungen. Sie machen Programme lesbarer.</p>
+</section>
+
+<section id="funktionen">
+<h2>11. Funktionen, Werte, Bausteine und Module</h2>
+<h3>11.1 Funktionen</h3>
+<p>Funktionen in Keim sind Ausdrucksfunktionen. Sie berechnen aus Eingaben einen Wert.</p>
+<pre><code>funktion nervenrauschen(x, y) = perlin(x * 0.13, y * 0.17, 42)
+
+jede runde:
+    feld signal wird clamp(nervenrauschen(energie, futter))</code></pre>
+
+<h3>11.2 Eingebaute Ausdrucksfunktionen</h3>
+<table>
+<tr><th>Funktion</th><th>Zweck</th></tr>
+<tr><td><code>clamp(x)</code></td><td>Wert begrenzen</td></tr>
+<tr><td><code>perlin(x,y,seed)</code></td><td>Rauschfunktion für organische Muster</td></tr>
+<tr><td><code>simplex(x,y,seed)</code></td><td>Alternative Rauschfunktion</td></tr>
+<tr><td><code>ganz(x)</code></td><td>In Ganzzahl umwandeln</td></tr>
+</table>
+
+<h3>11.3 Werte</h3>
+<p>Werte sind Konstanten, die vor dem Parsen ersetzt werden.</p>
+<pre><code>wert start_energie = 0.85
+
+feld energie startet bei $start_energie</code></pre>
+
+<h3>11.4 Bausteine</h3>
+<p>Bausteine sind Makros: Du definierst eine Code-Schablone und nutzt sie später.</p>
+<pre><code>baustein standard_futter:
+    spur futter startet bei 0.0 quellen 4 diffundiert 0.10 zerfaellt 0.01
+
+nutze standard_futter</code></pre>
+
+<h3>11.5 Imports</h3>
+<p>Du kannst Keim-Dateien zusammenführen:</p>
+<pre><code>verwende "sim_kern.keim"
+importiere "api_steuerung.keim"
+nutze datei "gemeinsam.keim"</code></pre>
+<div class="note">Imports werden vor der Analyse textuell geladen. Zyklen werden erkannt und als Fehler gemeldet.</div>
+</section>
+
+<section id="objekte">
+<h2>12. Klassen, Objekte, Vererbung und GC</h2>
+<h3>12.1 Klasse definieren</h3>
+<pre><code>klasse waechter:
+    eigenschaft schwelle zahl = 0.5
+    methode pruefe:
+        wenn speicher alarm < 1:
+            speicher alarm setzt 1</code></pre>
+<p>Eine Klasse beschreibt Eigenschaften und Methoden. Eine Methode ist ein benannter Block von Keim-Schritten.</p>
+
+<h3>12.2 Objekt erzeugen</h3>
+<pre><code>objekt hauptwache ist waechter mit schwelle=0.3
+
+jede runde:
+    objekt hauptwache ruft pruefe</code></pre>
+
+<h3>12.3 Vererbung</h3>
+<pre><code>klasse spezial_waechter ist waechter:
+    eigenschaft name text = "alpha"
+    methode pruefe:
+        speicher alarm setzt 2</code></pre>
+<p>Eine abgeleitete Klasse übernimmt Eigenschaften und Methoden der Basis, kann aber eigene Methoden definieren.</p>
+
+<h3>12.4 Dynamische Objekte</h3>
+<pre><code>jede runde:
+    neu spezial_waechter als dyn_alarm mit schwelle=0.2
+    objekt dyn_alarm ruft pruefe
+    loesche objekt dyn_alarm
+    sammle muell</code></pre>
+
+<h3>Warum GC?</h3>
+<p>Wenn Programme mit <code>neu</code> Objekte erzeugen, muss irgendwann Speicher freigegeben werden. Keim nutzt dafür einen einfachen Mark-and-Sweep-GC: erreichbare Objekte bleiben, nicht erreichbare Objekte werden eingesammelt.</p>
+</section>
+
+<section id="tabellen">
+<h2>13. Tabellen und Daten</h2>
+<h3>13.1 Tabelle deklarieren</h3>
+<pre><code>tabelle messungen mit tick ganzzahl, energie zahl, status text
+index messungen auf tick</code></pre>
+<p>Tabellen speichern strukturierte Zeilen. Sie sind gut für Messungen, Logs und Abfragen.</p>
+
+<h3>13.2 Zeilen einfügen</h3>
+<pre><code>jede runde:
+    tabelle messungen fuegt tick=zeit energie=feld.energie status="ok" ein</code></pre>
+
+<h3>13.3 Suchen</h3>
+<pre><code>speicher treffer array startet bei []
+
+jede runde:
+    tabelle messungen sucht tick == 10 in speicher treffer</code></pre>
+
+<h3>13.4 Dateien</h3>
+<pre><code>datei schreibt json "build/messungen.json" aus tabelle messungen
+datei schreibt csv "build/messungen.csv" aus tabelle messungen
+datei liest json "build/messungen.json" in tabelle messungen</code></pre>
+
+<h3>13.5 SQLite-Datenbank</h3>
+<pre><code>datenbank log bei "build/messungen.sqlite"
+
+jede runde:
+    datenbank log speichert tabelle messungen</code></pre>
+</section>
+
+<section id="stdlib">
+<h2>14. Standardbibliothek: Batteries Included</h2>
+<h3>14.1 JSON</h3>
+<pre><code>speicher raw text startet bei "{\"name\":\"Ada\"}"
+speicher obj karte startet bei {}
+
+jede runde:
+    json liest speicher raw in speicher obj
+    karte obj setzt "rolle" auf "forscherin"
+    json schreibt speicher obj in speicher raw</code></pre>
+
+<h3>14.2 Zeit</h3>
+<pre><code>speicher jetzt text startet bei ""
+
+jede runde:
+    zeit jetzt in speicher jetzt</code></pre>
+<p>Bei Textspeicher liefert Keim eine Zeitdarstellung, bei Ganzzahlen Nanosekunden, bei Zahl Sekunden.</p>
+
+<h3>14.3 Krypto</h3>
+<pre><code>speicher name text startet bei "Ada"
+speicher digest text startet bei ""
+
+jede runde:
+    krypto sha256 speicher name in speicher digest</code></pre>
+
+<h3>14.4 Prozess</h3>
+<pre><code>speicher ausgabe text startet bei ""
+
+jede runde:
+    prozess fuehrt "python --version" in speicher ausgabe</code></pre>
+<div class="warn">Prozessaufrufe sind mächtig. Nutze sie kontrolliert. Keim verwendet keinen Shell-Modus und ein Timeout, um Risiken zu reduzieren.</div>
+
+<h3>14.5 Netzwerk-Client</h3>
+<pre><code>speicher antwort text startet bei ""
+
+jede runde:
+    anfrage GET "https://example.com" in speicher antwort</code></pre>
+
+<h3>14.6 Mathe und Pfadfindung</h3>
+<pre><code>tabelle route mit schritt ganzzahl, x ganzzahl, y ganzzahl, kosten zahl
+
+jede runde:
+    pfad von 0 0 nach 5 4 mit spur futter in tabelle route</code></pre>
+
+<h3>14.7 Visualisierung</h3>
+<pre><code>jede runde:
+    bild schreibt png "build/frame.png" aus spur futter
+    dashboard startet bei "build/dashboard.html"</code></pre>
+</section>
+
+<section id="http">
+<h2>15. HTTP-APIs mit Keim v4.3</h2>
+<p>Der größte Schritt in v4.3 ist das interne HTTP-Routing. Routen werden in Keim geschrieben, nicht fest in Python.</p>
+
+<h3>15.1 Minimaler Dienst</h3>
+<pre><button class="copy">Kopieren</button><code>welt statusdienst mit 1 agenten groesse 4 4
+
+speicher antwort text startet bei "{}"
+speicher status karte startet bei {}
+speicher zaehler ganzzahl startet bei 0
+
+server api bei 18081 parallel 4:
+    route GET "/health" antwortet speicher antwort:
+        karte status setzt "ok" auf wahr
+        karte status setzt "zaehler" auf speicher.zaehler
+        json schreibt speicher status in speicher antwort
+
+jede runde:
+    speicher zaehler waechst 1</code></pre>
+
+<h3>15.2 Route-Aufbau</h3>
+<pre><code>route POST "/control" liest speicher eingang_json antwortet speicher antwort status speicher status_code:
+    json liest speicher eingang_json in speicher api_befehl
+    karte api_befehl liest "running" in speicher laufend
+    karte api_status setzt "ok" auf wahr
+    json schreibt speicher api_status in speicher antwort</code></pre>
+<table>
+<tr><th>Teil</th><th>Bedeutung</th></tr>
+<tr><td><code>POST</code></td><td>HTTP-Methode</td></tr>
+<tr><td><code>"/control"</code></td><td>Pfad</td></tr>
+<tr><td><code>liest speicher eingang_json</code></td><td>Request-Body landet in diesem Speicher</td></tr>
+<tr><td><code>antwortet speicher antwort</code></td><td>Dieser Speicher wird zurückgesendet</td></tr>
+<tr><td><code>status speicher status_code</code></td><td>Optionaler HTTP-Statuscode</td></tr>
+</table>
+
+<h3>15.3 Partielle Updates</h3>
+<p>Partielle Updates sind wichtig: Wenn ein Request nur <code>running</code> enthält, dürfen andere Werte wie <code>wind_signal</code> nicht zurückgesetzt werden.</p>
+<pre><code>speicher api_befehl karte startet bei {}
+speicher hat_wind_signal bool startet bei falsch
+speicher wind_signal zahl startet bei 0.01
+
+route POST "/control" liest speicher eingang_json antwortet speicher antwort:
+    json liest speicher eingang_json in speicher api_befehl
+    karte api_befehl enthaelt "wind_signal" in speicher hat_wind_signal
+    wenn speicher hat_wind_signal == wahr:
+        karte api_befehl liest "wind_signal" in speicher wind_signal</code></pre>
+
+<h3>15.4 Autonome Simulations-API starten</h3>
+<pre><button class="copy">Kopieren</button><code>python autonome_Simulations_API/keim_daemon.py</code></pre>
+<p>Der Daemon meldet zum Beispiel:</p>
+<pre><code>[Keim] interne HTTP-Dienste aktiv auf Port(s): 18080</code></pre>
+
+<h3>15.5 API testen</h3>
+<h4>PowerShell</h4>
+<pre><button class="copy">Kopieren</button><code>Invoke-RestMethod -Method Get -Uri "http://127.0.0.1:18080/health"
+Invoke-RestMethod -Method Get -Uri "http://127.0.0.1:18080/snapshot"
+Invoke-RestMethod -Method Get -Uri "http://127.0.0.1:18080/metrics"</code></pre>
+<h4>POST mit PowerShell</h4>
+<pre><button class="copy">Kopieren</button><code>Invoke-RestMethod -Method Post -Uri "http://127.0.0.1:18080/control" -ContentType "application/json" -Body '{"running":false}'
+Invoke-RestMethod -Method Post -Uri "http://127.0.0.1:18080/control" -ContentType "application/json" -Body '{"wind_signal":0.05}'
+Invoke-RestMethod -Method Post -Uri "http://127.0.0.1:18080/control" -ContentType "application/json" -Body '{"running":true}'</code></pre>
+<h4>curl.exe unter Windows</h4>
+<pre><button class="copy">Kopieren</button><code>curl.exe http://127.0.0.1:18080/health
+curl.exe -X POST http://127.0.0.1:18080/control -H "Content-Type: application/json" -d "{""running"":false}"</code></pre>
+<div class="note">In PowerShell ist <code>curl</code> oft ein Alias. Verwende <code>curl.exe</code> oder <code>Invoke-RestMethod</code>.</div>
+</section>
+
+<section id="fehler">
+<h2>16. Fehlerbehandlung</h2>
+<p>Programme, die Dateien, Netzwerk oder JSON benutzen, können scheitern. Keim hat dafür <code>versuche</code> und <code>fange</code>.</p>
+<pre><code>speicher raw text startet bei "{ungueltig"
+speicher obj karte startet bei {}
+speicher fehler text startet bei ""
+
+jede runde:
+    versuche:
+        json liest speicher raw in speicher obj
+    fange fehler in speicher fehler:
+        karte obj setzt "ok" auf falsch
+        karte obj setzt "error" auf speicher.fehler</code></pre>
+
+<h3>Was wird gefangen?</h3>
+<p>Gefangen werden Runtime-Fehler der Keim-Ausführung, zum Beispiel ungültiges JSON oder fehlende Objektaufrufe. Syntaxfehler werden vor dem Start entdeckt und nicht im Programm gefangen.</p>
+
+<h3>Gute Fehlerantworten in APIs</h3>
+<pre><code>route POST "/control" liest speicher eingang_json antwortet speicher antwort status speicher status_code:
+    versuche:
+        json liest speicher eingang_json in speicher api_befehl
+        speicher status_code setzt 200
+        karte api_status setzt "ok" auf wahr
+        json schreibt speicher api_status in speicher antwort
+    fange fehler in speicher api_fehler:
+        speicher status_code setzt 400
+        karte api_status setzt "ok" auf falsch
+        karte api_status setzt "error" auf speicher.api_fehler
+        json schreibt speicher api_status in speicher antwort</code></pre>
+</section>
+
+<section id="runtime">
+<h2>17. Ausführung, CLI und Analyse</h2>
+<p>Keim wird über Python gestartet. Die wichtigsten Befehle:</p>
+<table>
+<tr><th>Befehl</th><th>Zweck</th></tr>
+<tr><td><code>python -m keim run DATEI --rounds 60</code></td><td>Programm ausführen</td></tr>
+<tr><td><code>python -m keim analyze DATEI</code></td><td>Statische Prüfung</td></tr>
+<tr><td><code>python -m keim bytecode DATEI</code></td><td>Bytecode anzeigen</td></tr>
+<tr><td><code>python -m keim explain DATEI --bytecode</code></td><td>AST/Plan/Bytecode erklären</td></tr>
+<tr><td><code>python -m keim kernel-abi DATEI --json</code></td><td>Kernel-ABI erzeugen</td></tr>
+<tr><td><code>python -m keim verify DATEI</code></td><td>Backends vergleichen</td></tr>
+<tr><td><code>python -m keim profile DATEI</code></td><td>Performance vergleichen</td></tr>
+<tr><td><code>python -m keim expand DATEI</code></td><td>Imports, Werte und Bausteine expandieren</td></tr>
+</table>
+
+<h3>Referenzinterpreter vs. Hotspot</h3>
+<p>Der Python-CPU-Backend ist die Referenzsemantik: Was dort passiert, ist die korrekte Bedeutung des Programms. Die native VM soll dieselben Ergebnisse für geeignete Hotspots schneller berechnen.</p>
+</section>
+
+<section id="native">
+<h2>18. Native VM, SoA und Performance</h2>
+<h3>18.1 Warum Native VM?</h3>
+<p>Python ist flexibel, aber einzelne Schleifen über viele Agenten sind teuer. Keim verschiebt geeignete Teile in einen C++-Hotspot.</p>
+
+<h3>18.2 SoA statt AoS</h3>
+<table>
+<tr><th>Layout</th><th>Beschreibung</th><th>Folge</th></tr>
+<tr><td>AoS</td><td>Agent ist Objekt mit x, y, Energie</td><td>Einfacher, aber schlechter für Cache und Batch-Verarbeitung</td></tr>
+<tr><td>SoA</td><td><code>x[]</code>, <code>y[]</code>, <code>energy[]</code> getrennt</td><td>Besser für Hotspots, SIMD, GPU, VRAM</td></tr>
+</table>
+
+<h3>18.3 Native VM bauen</h3>
+<pre><button class="copy">Kopieren</button><code>python scripts/build_native_vm.py</code></pre>
+
+<h3>18.4 GPU-Treiber-Brücke</h3>
+<p>Keim kann einen externen C-/GPU-Treiber laden, wenn du ihn in der Konfiguration einträgst. Der Treiber selbst bleibt extern. Erwartete Symbole sind unter anderem <code>shadow_init</code>, <code>shadow_cycle</code> und <code>subqg_set_multifield_state</code>.</p>
+
+<div class="warn">Nicht jeder Keim-Code ist automatisch GPU-fähig. HTTP, Dateien, JSON und Prozessaufrufe sind Host-Barrieren. Feld- und Agenten-Hotspots sind eher Kandidaten für native Ausführung.</div>
+</section>
+
+<section id="debugging">
+<h2>19. Debugging und typische Fehler</h2>
+<h3>19.1 Falscher Port</h3>
+<p>Wenn der Daemon sagt:</p>
+<pre><code>[Keim] interne HTTP-Dienste aktiv auf Port(s): 18080</code></pre>
+<p>dann musst du auch Port <code>18080</code> abfragen, nicht <code>8080</code>.</p>
+
+<h3>19.2 PowerShell-curl-Falle</h3>
+<p>In PowerShell ist <code>curl</code> häufig nicht das echte curl, sondern <code>Invoke-WebRequest</code>. Nutze:</p>
+<pre><code>curl.exe http://127.0.0.1:18080/health</code></pre>
+
+<h3>19.3 Syntaxfehler</h3>
+<table>
+<tr><th>Fehler</th><th>Ursache</th><th>Lösung</th></tr>
+<tr><td>Unerwartete Einrückung</td><td>Block falsch eingerückt</td><td>Vier Leerzeichen nutzen</td></tr>
+<tr><td>Route-Handler ist leer</td><td>Nach <code>route</code> keine Schritte</td><td>Mindestens eine Aktion einfügen</td></tr>
+<tr><td>Unbekannte Route</td><td>Pfad nicht registriert</td><td><code>route GET "/pfad"</code> ergänzen</td></tr>
+<tr><td>Port belegt</td><td>Alter Server läuft noch</td><td>Prozess stoppen oder anderen Port wählen</td></tr>
+<tr><td>MSVC cl.exe nicht gefunden</td><td>C++ Build Tools fehlen oder Terminal falsch</td><td>Developer PowerShell für VS nutzen</td></tr>
+</table>
+
+<h3>19.4 Analyse zuerst</h3>
+<pre><code>python -m keim analyze dein_programm.keim
+python -m keim bytecode dein_programm.keim</code></pre>
+<p>Wenn Analyse und Bytecode funktionieren, ist dein Programm syntaktisch und strukturell meist korrekt.</p>
+</section>
+
+<section id="projekte">
+<h2>20. Übungsprojekte</h2>
+<details class="exercise" open><summary>Projekt A: Status-API</summary>
+<ol>
+<li>Erzeuge einen Server auf Port 18081.</li>
+<li>Lege einen Speicher <code>zaehler</code> an.</li>
+<li>Erhöhe den Zähler jede Runde.</li>
+<li>Gib ihn über <code>GET /health</code> als JSON aus.</li>
+</ol>
+</details>
+
+<details class="exercise"><summary>Projekt B: Steuerbare Simulation</summary>
+<ol>
+<li>Lege <code>wind_signal</code> als <code>zahl</code> an.</li>
+<li>Implementiere <code>POST /control</code>.</li>
+<li>Nutze <code>karte ... enthaelt</code>, damit partielle Updates sicher sind.</li>
+<li>Zeige den Wert über <code>GET /config</code>.</li>
+</ol>
+</details>
+
+<details class="exercise"><summary>Projekt C: Messdaten speichern</summary>
+<ol>
+<li>Erstelle eine Tabelle <code>messungen</code>.</li>
+<li>Füge alle zehn Runden eine Zeile ein.</li>
+<li>Exportiere sie als JSON oder CSV.</li>
+</ol>
+</details>
+
+<details class="exercise"><summary>Projekt D: Wächter-Objekte</summary>
+<ol>
+<li>Definiere eine Klasse <code>waechter</code>.</li>
+<li>Erzeuge ein Objekt.</li>
+<li>Lasse es eine Methode aufrufen, die einen Alarm setzt.</li>
+<li>Erweitere die Klasse mit Vererbung.</li>
+</ol>
+</details>
+
+<details class="exercise"><summary>Projekt E: Autonome API erweitern</summary>
+<p>Ergänze in <code>autonome_api_v43.keim</code> eine neue Route:</p>
+<pre><code>route GET "/version" antwortet speicher antwort:
+    karte api_status setzt "ok" auf wahr
+    karte api_status setzt "version" auf "4.3.3"
+    json schreibt speicher api_status in speicher antwort</code></pre>
+</details>
+</section>
+
+<section id="referenz">
+<h2>21. Kurzreferenz</h2>
+<h3>Deklarationen</h3>
+<pre><code>welt NAME mit N agenten groesse BREITE HOEHE
+feld NAME [typ] startet bei WERT
+speicher NAME typ startet bei WERT
+spur NAME startet bei WERT quellen N diffundiert X zerfaellt Y
+tabelle NAME mit spalte typ, spalte typ
+index TABELLE auf SPALTE
+datenbank NAME bei "pfad.sqlite"
+funktion NAME(a,b) = AUSDRUCK
+klasse NAME:
+objekt NAME ist KLASSE mit eigenschaft=wert
+server NAME bei PORT parallel WORKERS:</code></pre>
+
+<h3>Aktionen</h3>
+<pre><code>speicher NAME setzt WERT
+speicher NAME waechst WERT
+speicher NAME sinkt WERT
+speicher NAME liest mittel feld FELD
+feld NAME wird AUSDRUCK
+spur NAME breitet sich aus
+agent folgt spur NAME
+agent meidet spur NAME
+erzeuge agent
+erzeuge 10 agenten
+loesche 3 agenten
+neu KLASSE als NAME
+objekt NAME ruft METHODE
+sammle muell</code></pre>
+
+<h3>Collections</h3>
+<pre><code>liste NAME haengt WERT an
+liste NAME nimmt letztes in speicher ZIEL
+karte NAME setzt KEY auf WERT
+karte NAME liest KEY in speicher ZIEL
+karte NAME enthaelt KEY in speicher BOOL
+karte NAME loescht KEY</code></pre>
+
+<h3>Standardbibliothek</h3>
+<pre><code>json liest speicher RAW in speicher OBJ
+json schreibt speicher OBJ in speicher RAW
+zeit jetzt in speicher NAME
+krypto sha256 speicher QUELLE in speicher ZIEL
+prozess fuehrt "BEFEHL" in speicher ZIEL
+anfrage GET "URL" in speicher ZIEL
+datei schreibt json "pfad.json" aus tabelle T
+bild schreibt png "bild.png" aus spur NAME
+dashboard startet bei "dashboard.html"</code></pre>
+
+<h3>HTTP</h3>
+<pre><code>server api bei 18080 parallel 8:
+    route GET "/health" antwortet speicher antwort:
+        ...
+
+    route POST "/control" liest speicher body antwortet speicher antwort status speicher status_code:
+        ...</code></pre>
+</section>
+
+<section id="glossar">
+<h2>22. Glossar</h2>
+<table>
+<tr><th>Wort</th><th>Erklärung</th></tr>
+<tr><td>API</td><td>Schnittstelle, über die andere Programme Daten senden oder abfragen.</td></tr>
+<tr><td>Backend</td><td>Ausführungsvariante, zum Beispiel CPU-Referenz oder Native VM.</td></tr>
+<tr><td>Bytecode</td><td>Zwischenformat, das aus Keim-Code erzeugt wird.</td></tr>
+<tr><td>Daemon</td><td>Programm, das dauerhaft im Hintergrund läuft.</td></tr>
+<tr><td>Feld</td><td>Verteilter Wert im Simulationsraum.</td></tr>
+<tr><td>GC</td><td>Garbage Collector: räumt nicht mehr genutzte Objekte auf.</td></tr>
+<tr><td>Hotspot</td><td>Programmteil, der besonders viel Rechenzeit braucht.</td></tr>
+<tr><td>JSON</td><td>Textformat für strukturierte Daten.</td></tr>
+<tr><td>Karte</td><td>Schlüssel-Wert-Speicher.</td></tr>
+<tr><td>Route</td><td>HTTP-Pfad mit Handler-Code.</td></tr>
+<tr><td>SoA</td><td>Structure of Arrays: Datenlayout mit getrennten Arrays für Eigenschaften.</td></tr>
+<tr><td>Spur</td><td>Diffundierendes Signal in der Welt.</td></tr>
+</table>
+</section>
+
+
+<section id="v75-ueberblick">
+<h2>23. Keim v7.5 Enterprise: Was sich seit v4.3.3 verändert hat</h2>
+<p>Dieses Kapitel erweitert die ursprünglichen Keim-Schulungsunterlagen, ohne die v4.3.3-Didaktik zu ersetzen. Der alte Kurs bleibt die Grundlage: Sprache lesen, kleine Programme schreiben, Simulationen verstehen, HTTP-APIs bauen. Ab hier wird der aktuelle Projektstand <strong>Keim Genesis v7.5 Enterprise Hardening Matrix</strong> ergänzt.</p>
+<div class="grid two">
+  <div class="card"><div class="kpi">KBC-STABLE-1</div><p>Keim besitzt jetzt eine stabile Bytecode-Spezifikation mit prüfbaren Sektionen, Checksums und reproduzierbaren Artefakten.</p></div>
+  <div class="card"><div class="kpi">Runtime-Kette</div><p>Source → Typed AST → Bytecode → Binary → Python-VM / Native-VM / WASM-Runtime / Hardening-Matrix.</p></div>
+</div>
+<table>
+<tr><th>Früher im Kurs</th><th>Heute in Keim v7.5</th><th>Schulungsbedeutung</th></tr>
+<tr><td>Keim als Simulations-/API-Sprache</td><td>Keim als souveräne Sprach-, Bytecode-, Web-, Native- und WASM-Plattform</td><td>Die ursprüngliche Syntax bleibt Einstieg, v7.5 erklärt den professionellen Runtime-Unterbau.</td></tr>
+<tr><td>Native VM als Performance-Idee</td><td>Native-VM-MVP, Binary Bytecode, Paritätsmanifeste</td><td>Lernende sehen, wie aus Quelltext ausführbare Artefakte entstehen.</td></tr>
+<tr><td>Debugging und Trace</td><td>Replay, Time-Travel-Dashboard, Hardening-Reports</td><td>Fehlersuche wird reproduzierbar und auditierbar.</td></tr>
+<tr><td>HTTP/API-Beispiele</td><td>Web-Interop, Importmaps, JS-Adapter, PWA-Artefakte</td><td>Keim kann kontrolliert in Web-Schulungen eingebunden werden.</td></tr>
+</table>
+<p><strong>Wichtig für Dozenten:</strong> Die Kapitel 0–22 eignen sich weiterhin für Einsteiger. Die Kapitel 23–34 sind Aufbau- und Enterprise-Module.</p>
+</section>
+
+<section id="v75-architektur">
+<h2>24. Die aktuelle Keim-Architektur als Lernmodell</h2>
+<p>Keim wird heute nicht nur als Sprache betrachtet, sondern als transparente Artefaktkette. Das ist didaktisch sehr wertvoll: Lernende sehen, dass moderne Programmiersysteme aus mehreren Schichten bestehen.</p>
+<pre><button class="copy">Kopieren</button><code>Keim-Source
+  ↓
+Tokenizer / Parser
+  ↓
+Typed AST
+  ↓
+Linearer Bytecode
+  ↓
+KBC-STABLE-1 / .kbcstable
+  ↓
+Python-VM | Native-VM | WASM Runtime
+  ↓
+Replay | Debug | Benchmark | Hardening Report</code></pre>
+<h3>Warum diese Kette wichtig ist</h3>
+<ul>
+<li><strong>Nachvollziehbarkeit:</strong> Jede Schicht kann angezeigt, geprüft und getestet werden.</li>
+<li><strong>Sicherheit:</strong> Capabilities und SBOMs zeigen, was ein Programm darf und woraus es besteht.</li>
+<li><strong>Portabilität:</strong> Derselbe Kern kann in Python, Native und WASM validiert werden.</li>
+<li><strong>Schulung:</strong> Compilerbau, Runtime, Web, Simulation und Security werden an einem System sichtbar.</li>
+</ul>
+</section>
+
+<section id="v75-kbc-stable">
+<h2>25. KBC-STABLE-1: Stabiler Bytecode als Schulungsanker</h2>
+<p>Der zentrale Enterprise-Schritt ist <code>KBC-STABLE-1</code>. Im Unterricht kann man damit erklären, warum ein professionelles System nicht nur Quelltext braucht, sondern ein stabiles Zwischenformat.</p>
+<table>
+<tr><th>Sektion</th><th>Zweck</th><th>Schulungsfrage</th></tr>
+<tr><td>HEADER</td><td>Format, Version, Plattformannahmen</td><td>Wie erkennt eine VM, welches Artefakt sie lädt?</td></tr>
+<tr><td>TYPES</td><td>Typinformationen</td><td>Warum ist statische Prüfung vor Runtime wertvoll?</td></tr>
+<tr><td>CONSTS</td><td>Konstantenpool</td><td>Warum speichert man Strings/Zahlen zentral?</td></tr>
+<tr><td>FUNCTIONS</td><td>Funktionsmetadaten</td><td>Wie findet die VM Einstiegspunkte?</td></tr>
+<tr><td>CODE</td><td>Opcode-Strom</td><td>Was führt eine VM wirklich aus?</td></tr>
+<tr><td>DEBUG</td><td>Quellpositionen und Symbolik</td><td>Wie entstehen gute Fehlermeldungen?</td></tr>
+<tr><td>SECURITY</td><td>Capabilities und Grenzen</td><td>Was darf ein Programm?</td></tr>
+<tr><td>SBOM</td><td>Bestandteile und Abhängigkeiten</td><td>Woraus besteht ein Build?</td></tr>
+</table>
+<h3>Beispiel</h3>
+<p>Siehe <code>examples/current/v75_01_stable_bytecode.keim</code>.</p>
+<pre><button class="copy">Kopieren</button><code>modul schulung.v75.bytecode
+
+exportiere funktion main
+
+funktion addiere(a ist ganzzahl, b ist ganzzahl) gibt ganzzahl:
+    rueckgabe a + b
+
+funktion main() gibt ganzzahl:
+    speicher basis ist ganzzahl setzt 40
+    speicher bonus ist ganzzahl setzt 2
+    rueckgabe addiere(basis, bonus)</code></pre>
+</section>
+
+<section id="v75-typen-match">
+<h2>26. Result, Match und Typdenken</h2>
+<p>Frühere Kapitel zeigen Werte und Fehlerbehandlung. In v7.5 wird daraus ein professionelles Muster: Ergebnisse werden als <code>ergebnis&lt;T,E&gt;</code> modelliert und mit <code>match</code> ausgewertet.</p>
+<pre><button class="copy">Kopieren</button><code>modul schulung.v75.result
+
+exportiere funktion main
+
+funktion teile(a ist ganzzahl, b ist ganzzahl) gibt ergebnis&lt;ganzzahl, text&gt;:
+    wenn b == 0:
+        rueckgabe fehler(&quot;division durch null&quot;)
+    sonst:
+        rueckgabe ok(a / b)
+
+funktion main() gibt ganzzahl:
+    speicher r ist ergebnis&lt;ganzzahl, text&gt; setzt teile(84, 2)
+    match r:
+        fall ok(wert):
+            rueckgabe wert
+        fall fehler(meldung):
+            rueckgabe 0</code></pre>
+<h3>Didaktischer Ablauf</h3>
+<ol>
+<li>Erst Fehler als Text erklären.</li>
+<li>Dann zeigen, dass Fehler Werte sein können.</li>
+<li>Dann <code>ok(...)</code> und <code>fehler(...)</code> einführen.</li>
+<li>Dann mit <code>match</code> beide Fälle sichtbar machen.</li>
+<li>Zum Schluss Exhaustiveness erklären: Jeder relevante Fall muss behandelt werden.</li>
+</ol>
+<p>Das ist besser schulbar als versteckte Exceptions, weil die Kontrolllogik im Programmtext sichtbar bleibt.</p>
+</section>
+
+<section id="v75-datenmodell">
+<h2>27. Records, Listen, Maps und WASM-Heap</h2>
+<p>Keim v7.x hat ein dynamisches Heap-Modell für Text, Listen, Maps, Records und Result-Werte. Für Lernende ist wichtig: Diese Werte sind nicht magisch. Sie werden in der Runtime über Objekt-Header, Typinformationen und Heap-Referenzen verwaltet.</p>
+<pre><button class="copy">Kopieren</button><code>modul schulung.v75.daten
+
+exportiere funktion main
+
+typ Sensor:
+    name ist text
+    wert ist ganzzahl
+
+funktion main() gibt ganzzahl:
+    speicher s ist Sensor setzt Sensor(name: &quot;temperatur&quot;, wert: 21)
+    speicher werte ist liste&lt;ganzzahl&gt; setzt [s.wert, 7, 14]
+    speicher index ist karte&lt;text, ganzzahl&gt; setzt {&quot;offset&quot;: 21}
+    rueckgabe werte[0] + index.offset</code></pre>
+<div class="grid two">
+<div class="card"><h3>Fachlicher Blick</h3><p>Ein <code>Sensor</code> ist ein Datensatz mit Feldern. Eine Liste speichert mehrere Werte. Eine Karte ordnet Namen auf Werte ab.</p></div>
+<div class="card"><h3>Runtime-Blick</h3><p>Records, Listen und Maps sind Heap-Objekte. WASM und Native-VM greifen über Intrinsics und Layout-Metadaten darauf zu.</p></div>
+</div>
+</section>
+
+<section id="v75-gc-runtime">
+<h2>28. Speicherverwaltung: Region, Hashmap, GC und Kompaktierung</h2>
+<p>Die aktuelle Keim-Runtime nutzt mehrere Speicherstrategien, die sich didaktisch gut trennen lassen.</p>
+<table>
+<tr><th>Strategie</th><th>Wofür?</th><th>Unterrichtsbild</th></tr>
+<tr><td>Region Allocator</td><td>Kurzlebige temporäre Werte</td><td>Ein Arbeitsblatt, das nach der Aufgabe komplett gelöscht wird.</td></tr>
+<tr><td>Generational GC</td><td>Viele kurzlebige Objekte effizient behandeln</td><td>Junge Objekte werden häufiger geprüft als alte.</td></tr>
+<tr><td>Compacting GC</td><td>Fragmentierung beweglicher Objekte reduzieren</td><td>Ein Regal wird neu sortiert, damit Lücken verschwinden.</td></tr>
+<tr><td>Hashmap Runtime</td><td>Schneller Zugriff auf Schlüssel/Werte</td><td>Ein Register statt einer linearen Suche.</td></tr>
+</table>
+<p>Professionelle Grenze: Host-sichtbare oder gepinnte Objekte dürfen nicht beliebig bewegt werden. Deshalb kompaktieren moderne Runtimes selektiv oder benötigen klare Pinning-Regeln.</p>
+</section>
+
+<section id="v75-native-wasm">
+<h2>29. Native und WASM: Drei Ausführungswege vergleichen</h2>
+<p>Keim-Schulungen können heute zeigen, dass ein Programm nicht nur „läuft“, sondern auf verschiedenen Zielpfaden überprüfbar ist.</p>
+<table>
+<tr><th>Pfad</th><th>Zweck</th><th>Schulungsnutzen</th></tr>
+<tr><td>Python-VM</td><td>Referenzausführung und schnelle Entwicklung</td><td>Einfach zu verstehen und zu debuggen.</td></tr>
+<tr><td>Native-VM</td><td>Souveräne Ausführung außerhalb von Python</td><td>Zeigt, wie Bytecode von einer eigenen VM ausgeführt wird.</td></tr>
+<tr><td>WASM-Runtime</td><td>Browser/Edge/Portabilität</td><td>Zeigt linearen Speicher, Heap, Intrinsics und Web-Ausführung.</td></tr>
+</table>
+<pre><button class="copy">Kopieren</button><code>python -m keim v74-build examples/sprache_v74_enterprise_stabilization.keim --out build/v74
+python -m keim v74-verify build/v74/app.kbcstable
+python -m keim v75-wasm-browser --out build/v75_browser --json
+python -m keim v75-matrix --cwd . --out build/v75_matrix --json</code></pre>
+</section>
+
+<section id="v75-security">
+<h2>30. Enterprise Security: Capabilities, SBOM und reproduzierbare Builds</h2>
+<p>Enterprise-Schulung bedeutet: Nicht nur „Kann das Programm etwas?“, sondern auch „Darf das Programm das?“ und „Woraus besteht das Programm?“</p>
+<table>
+<tr><th>Begriff</th><th>Bedeutung in Keim</th><th>Beispiel</th></tr>
+<tr><td>Capability</td><td>Erlaubnis für eine sensible Fähigkeit</td><td><code>system.dom</code>, <code>system.netz</code>, <code>system.ffi</code></td></tr>
+<tr><td>Deny-by-default</td><td>Ohne Erlaubnis ist Zugriff gesperrt</td><td>Web-/Netz-Zugriff muss deklariert werden.</td></tr>
+<tr><td>SBOM</td><td>Software Bill of Materials</td><td>Liste von Artefakten, Hashes, Quellen und Versionen.</td></tr>
+<tr><td>Reproducible Build</td><td>Builds sollen nachvollziehbar wiederholbar sein</td><td>Lockfiles und Checksums prüfen den Zustand.</td></tr>
+</table>
+<pre><button class="copy">Kopieren</button><code>python -m keim v74-security examples/sprache_v74_enterprise_stabilization.keim
+python -m keim v74-sbom --cwd . --out build/sbom
+python -m keim v67-registry publish --registry build/registry --cwd . --name schulung.demo --version 1.0.0</code></pre>
+</section>
+
+<section id="v75-web">
+<h2>31. Web-Schulung: DOM, Importmaps und JS-Interop</h2>
+<p>Keim v7.3 hat Web-Projekt-Scaffolding und kontrollierte JavaScript-Interop eingeführt. Das Ziel ist nicht, das gesamte JavaScript-Ökosystem nachzubauen, sondern es nachvollziehbar und kontrolliert anzubinden.</p>
+<ul>
+<li><code>web-new</code> erzeugt ein Web-Projekt.</li>
+<li><code>web-build</code> erzeugt HTML, Runtime, Adapter, Manifest und Lockfile.</li>
+<li>Importmaps binden JS-Bibliotheken kontrolliert ein.</li>
+<li>Adapter beschreiben Berechtigungen und Grenzen.</li>
+</ul>
+<pre><button class="copy">Kopieren</button><code>python -m keim web-new examples/web_enterprise_js_ecosystem --name keim_web_training
+python -m keim web-build --cwd examples/web_enterprise_js_ecosystem --out build/web_training --json
+python -m keim web-adapter --out build/chart_adapter.json --alias chart --module Chart --permission dom</code></pre>
+<p>Beispiel: <code>examples/current/web_importmap_demo.html</code>.</p>
+</section>
+
+<section id="v75-training-impossible">
+<h2>32. Training Impossible: Der Schulungsprototyp für Selbstoptimierung</h2>
+<p>Das Projekt <strong>Training Impossible</strong> zeigt einen „unmöglichen“ Prototypen: Eine Simulation steuert sich über Metriken, erzeugt Policy-Kandidaten, materialisiert Bytecode, schreibt Replay-Events und erzeugt ein Dashboard.</p>
+<pre><button class="copy">Kopieren</button><code>python -m keim training-impossible --steps 120 --out build/training_impossible --json</code></pre>
+<h3>Was Lernende daran verstehen</h3>
+<ul>
+<li>Simulation ist nicht nur Grafik, sondern ein messbarer Zustand.</li>
+<li>Optimierung ist nicht Magie, sondern ein Regelkreis aus Metrik, Kandidat und Vergleich.</li>
+<li>Bytecode kann als Artefakt erzeugt und geprüft werden.</li>
+<li>Replay macht Experimente nachvollziehbar.</li>
+</ul>
+<p>Beispiel-Policy: <code>examples/current/v75_06_training_impossible_policy.keim</code>.</p>
+<pre><button class="copy">Kopieren</button><code>modul schulung.v75.training
+
+exportiere funktion policy_score
+
+funktion policy_score(energie ist ganzzahl, hunger ist ganzzahl, risiko ist ganzzahl) gibt ganzzahl:
+    speicher score ist ganzzahl setzt energie - hunger - risiko
+    wenn score &lt; 0:
+        rueckgabe 0
+    sonst:
+        rueckgabe score</code></pre>
+</section>
+
+<section id="v75-hardening">
+<h2>33. Hardening Matrix: Professionell prüfen statt nur hoffen</h2>
+<p>v7.5 ergänzt harte Validierungsartefakte. Das ist für Schulungen sehr wertvoll, weil Lernende sehen, dass professionelle Software nicht nur geschrieben, sondern systematisch geprüft wird.</p>
+<table>
+<tr><th>Artefakt</th><th>Zweck</th></tr>
+<tr><td><code>differential_matrix.json</code></td><td>Vergleicht Zielpfade und Fälle.</td></tr>
+<tr><td><code>differential_matrix.junit.xml</code></td><td>CI-freundlicher Testreport.</td></tr>
+<tr><td><code>browser_wasm_smoke.html</code></td><td>Browser-Harness für WASM-Test.</td></tr>
+<tr><td><code>github_actions_matrix.yml</code></td><td>CI-Matrix für Plattformen und Browser.</td></tr>
+<tr><td><code>platform_matrix.json</code></td><td>Dokumentiert Zielplattformen und erwartete Pfade.</td></tr>
+</table>
+<pre><button class="copy">Kopieren</button><code>python -m keim v75-hardening-build --cwd . --out build/v75_hardening --json
+python -m keim v75-compat --cwd . --out build/v75_compat --json
+python -m keim v75-wasm-browser --out build/v75_browser --json</code></pre>
+</section>
+
+<section id="v75-unterrichtsplan">
+<h2>34. Unterrichtsplan: Vom alten Kurs zum Enterprise-Aufbau</h2>
+<p>Dieser Plan hilft Dozenten, die ursprünglichen Schulungsunterlagen mit dem aktuellen Projektstand zu verbinden.</p>
+<table>
+<tr><th>Einheit</th><th>Kapitel</th><th>Ziel</th><th>Übung</th></tr>
+<tr><td>1</td><td>0–7</td><td>Keim lesen, Werte und Syntax verstehen</td><td><code>01_minimal.keim</code></td></tr>
+<tr><td>2</td><td>8–13</td><td>Simulation, Speicher, Tabellen, Objekte</td><td><code>04_klassen_tabellen.keim</code></td></tr>
+<tr><td>3</td><td>14–20</td><td>APIs, Runtime, Native, Debugging</td><td><code>03_control_api.keim</code></td></tr>
+<tr><td>4</td><td>23–26</td><td>KBC-STABLE-1, Result/Match, Typdenken</td><td><code>v75_02_result_match.keim</code></td></tr>
+<tr><td>5</td><td>27–30</td><td>Heap, GC, Security, SBOM</td><td><code>v75_03_record_map_list.keim</code></td></tr>
+<tr><td>6</td><td>31–33</td><td>Web, Training Impossible, Hardening Matrix</td><td><code>training-impossible</code> und <code>v75-hardening-build</code></td></tr>
+</table>
+<h3>Abschlussprojekt</h3>
+<p>Die Gruppe baut eine kleine Simulationspolicy, erzeugt Bytecode, exportiert ein Web-Artefakt, schreibt ein Replay und dokumentiert die Sicherheitsfähigkeiten.</p>
+</section>
+
+
+<section id="v785-runtime-packager">
+<h2>35. Keim v7.8.5: Self-Bootstrapping Runtime Packager</h2>
+<div class="note">
+<strong>Status:</strong> Dieses Kapitel ergänzt den bestehenden v4.3.3-Grundkurs und den v7.5-Enterprise-Aufbau, ohne diese zu ersetzen.
+Keim v7.8.5 fokussiert auf paketierbare, selbststartende Runtime-Artefakte, GPU-aware Packaging, den internen Native-Linker und Projekt-Web-Overlays.
+</div>
+
+<h3>35.1 Was neu ist</h3>
+<table>
+<tr><th>Bereich</th><th>Neue Funktion</th><th>Lernziel</th></tr>
+<tr><td>Packaging</td><td><code>exe-pack</code>, <code>exe-verify</code>, <code>exe-run</code>, <code>exe-status</code></td><td>Ein vollständiges Keim-Programm als Runtime-Bundle verstehen und prüfen.</td></tr>
+<tr><td>Self-Bootstrapping</td><td>Native PE64-/ELF64-Launcher starten <code>run.bat</code> oder <code>run.sh</code></td><td>Unterschied zwischen AOT-Übersetzung, Bootstrapper und eingebetteter Runtime erklären.</td></tr>
+<tr><td>GPU-aware Packaging</td><td><code>--gpu-driver</code>, <code>--gpu-required</code>, GPU-Manifest, GPU-Smoke-Test, CPU-Fallback</td><td>GPU als optionale Beschleunigung mit reproduzierbarer Paketstruktur behandeln.</td></tr>
+<tr><td>Value Model</td><td>Value-Tags für <code>null</code>, <code>int</code>, <code>float</code>, <code>bool</code>, <code>text</code>, <code>list</code>, <code>map</code>, <code>record</code>, <code>result_ok</code>, <code>result_error</code>, <code>function</code>, <code>module</code>, <code>host_import</code></td><td>Dynamische Werte nicht als lose Python-Objekte, sondern als Runtime-Modell lesen.</td></tr>
+<tr><td>Runtime-Imports</td><td>IO, GPU und Web werden im Paketmanifest sichtbar gemacht</td><td>Capabilities als prüfbare Schnittstellen statt impliziter Seiteneffekte verstehen.</td></tr>
+<tr><td>Web Overlay</td><td><code>web-build</code> übernimmt projektlokales <code>web/index.html</code></td><td>Fachlogik und Web-Oberfläche als gemeinsames Projektartefakt ausliefern.</td></tr>
+<tr><td>Native Linker</td><td>interner Linker für <code>pe64-windows-x86_64</code> und <code>elf64-linux-x86_64</code></td><td>Warum keine externe C/C++-Toolchain für den Launcher nötig ist.</td></tr>
+</table>
+
+<h3>35.2 Vier Packaging-Modi</h3>
+<ul>
+<li><strong>full-runtime:</strong> vollständige Keim-Runtime, Scripts, Manifest, optional GPU/Web-Artefakte.</li>
+<li><strong>native-subset:</strong> kleinerer nativer Pfad für unterstützte Bytecode-/Opcode-Teilmengen.</li>
+<li><strong>zipapp:</strong> Single-File-Python-Artefakt als <code>.pyz</code>.</li>
+<li><strong>directory-bundle:</strong> entpackbares Verzeichnis für Schulung, Debugging und Inspektion.</li>
+</ul>
+
+<h3>35.3 Paketstruktur als Unterrichtsmodell</h3>
+<pre><button class="copy">Kopieren</button><code>dist/
+  manifest.json
+  keim_app.py
+  run.bat
+  run.ps1
+  run.sh
+  keim_app.pyz
+  runtime/
+    modules/
+    value_model/
+    gpu/
+      gpu_driver_manifest.json
+      gpu_driver_plan.json
+      gpu_smoke.py
+  web/
+    index.html
+  launcher/
+    keim_app.exe        # Windows PE64, falls Ziel Windows
+    keim_app            # Linux ELF64, falls Ziel Linux
+</code></pre>
+
+<h3>35.4 Zentrale Befehle</h3>
+<pre><button class="copy">Kopieren</button><code>python -m keim exe-status --json
+
+python -m keim exe-pack examples/agenten_zweige_v78_1_gpu_aware/src/main.keim \
+  --out build/agenten_bundle \
+  --name agenten_zweige \
+  --target auto \
+  --gpu-driver driver/build/CC_OpenCl.dll
+
+python -m keim exe-verify build/agenten_bundle --json
+python -m keim exe-run build/agenten_bundle
+</code></pre>
+
+<div class="warn">
+<strong>Didaktische Grenze:</strong> Der v7.8.5-Launcher ist ein echter Bootstrapper für die gebündelte Runtime. Er ist nicht dasselbe wie eine vollständige native AOT-Übersetzung jedes Keim-Opcodes. Für native Subsets bleibt der interne Native-Linker das passende Thema.
+</div>
+
+<h3>35.5 Unterrichtsübung</h3>
+<ol>
+<li>Führe <code>exe-status --json</code> aus und markiere <code>packaging_modes</code>, <code>native_link_targets</code> und <code>value_tags</code>.</li>
+<li>Packe ein kleines Keim-Programm als Directory-Bundle.</li>
+<li>Aktiviere optional einen GPU-Treiber und vergleiche Paketmanifest mit und ohne GPU.</li>
+<li>Prüfe das Paket mit <code>exe-verify</code>.</li>
+<li>Erkläre, welche Teile Runtime, Launcher, Web-Overlay und GPU-Schicht sind.</li>
+</ol>
+
+<h3>35.6 Prüfungsfragen</h3>
+<ul>
+<li>Warum ist ein Self-Bootstrapping Launcher kein Ersatz für einen vollständigen nativen Compiler?</li>
+<li>Welche Risiken entstehen, wenn GPU-Treiberpfade implizit statt manifestiert sind?</li>
+<li>Warum ist ein CPU-Fallback für Schulung und Betrieb wichtig?</li>
+<li>Wie unterscheiden sich <code>zipapp</code> und <code>directory-bundle</code> im Debugging?</li>
+<li>Welche Value-Tags braucht man, um <code>Result</code>, Funktionen und Host-Imports in einem Paket zu beschreiben?</li>
+</ul>
+</section>
+
+</main>
+</div>
+<footer>
+<p>Keim Genesis Schulungsunterlagen · v4.3.3 vollständig erhalten · v7.5 Enterprise-Aufbau und v7.8.5 Runtime-Packaging ergänzt · Erstellt als eigenständige HTML-Webseite. Öffne <code>index.html</code> lokal im Browser oder lege den Ordner auf einen Webserver.</p>
+</footer>
+<script>
+document.querySelectorAll('pre').forEach(pre=>{
+  const btn = pre.querySelector('.copy');
+  if(!btn) return;
+  btn.addEventListener('click', async ()=>{
+    const code = pre.querySelector('code').innerText;
+    try { await navigator.clipboard.writeText(code); btn.textContent='Kopiert'; setTimeout(()=>btn.textContent='Kopieren',1200); }
+    catch(e){ btn.textContent='Markieren'; }
+  });
+});
+const search = document.getElementById('search');
+search.addEventListener('input', ()=>{
+  const q = search.value.toLowerCase().trim();
+  document.querySelectorAll('main > section').forEach(sec=>{
+    if(!q){ sec.style.display=''; return; }
+    sec.style.display = sec.innerText.toLowerCase().includes(q) ? '' : 'none';
+  });
+});
+</script>
+</body>
+</html>

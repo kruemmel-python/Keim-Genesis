@@ -1,0 +1,43 @@
+modul examples.agenten_zweige_v78_1_gpu_aware.gpu_mass_bench
+
+exportiere funktion main
+exportiere funktion massenwert
+exportiere funktion batch_summe_10
+
+funktion massenwert(zweig ist ganzzahl) gibt ganzzahl:
+    speicher basis ist ganzzahl setzt 1 + zweig
+    speicher ergebnis ist ganzzahl setzt basis * basis
+    rueckgabe ergebnis
+
+funktion batch_summe_10() gibt ganzzahl:
+    speicher summe ist ganzzahl setzt 0
+    speicher summe setzt summe + massenwert(1)
+    speicher summe setzt summe + massenwert(2)
+    speicher summe setzt summe + massenwert(3)
+    speicher summe setzt summe + massenwert(4)
+    speicher summe setzt summe + massenwert(5)
+    speicher summe setzt summe + massenwert(6)
+    speicher summe setzt summe + massenwert(7)
+    speicher summe setzt summe + massenwert(8)
+    speicher summe setzt summe + massenwert(9)
+    speicher summe setzt summe + massenwert(10)
+    rueckgabe summe
+
+funktion main() gibt ganzzahl:
+    ausgabe "Keim v7.8.1 GPU-aware Massenberechnung Smoke"
+    ausgabe "Keim-seitiger CPU-Referenzkern: core-test pruefen."
+    ausgabe "GPU-Treiberdiagnose: gpu-driver-demo."
+    ausgabe "GPU-aware Paket: exe-pack --gpu-driver."
+    ausgabe "Batch-10-Summe:"
+    ausgabe batch_summe_10()
+    rueckgabe batch_summe_10()
+
+test "gpu bench massenwert":
+    pruefe massenwert(1) == 4
+    pruefe massenwert(10) == 121
+
+test "gpu bench batch summe":
+    pruefe batch_summe_10() == 505
+
+test "gpu bench main":
+    pruefe main() == 505

@@ -1,0 +1,16 @@
+welt mini mit 40 agenten groesse 20 10
+feld hunger startet bei 0.2
+feld energie startet bei 0.9
+spur futter startet bei 0.0 quellen 2 diffundiert 0.18 zerfaellt 0.01
+
+baustein leben($h):
+    agent bekommt hunger $h
+    agent verliert energie 0.005
+
+jede runde:
+    nutze leben(0.01)
+    wenn hunger > 0.3: agent folgt spur futter
+    wenn agent findet futter: hunger sinkt 0.2
+    wenn agent findet futter: spur futter wird staerker 0.5
+    spur futter breitet sich aus
+    zeige mini

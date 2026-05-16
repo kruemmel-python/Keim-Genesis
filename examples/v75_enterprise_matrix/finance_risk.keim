@@ -1,0 +1,18 @@
+modul training.finance_risk
+
+exportiere funktion main
+
+funktion score(a ist ganzzahl, b ist ganzzahl) gibt ganzzahl:
+    speicher base ist ganzzahl setzt a * 7 + b * 3
+    wenn base > 100:
+        rueckgabe base - 17
+    sonst:
+        rueckgabe base + 11
+
+funktion main() gibt ganzzahl:
+    speicher total ist ganzzahl setzt score(12, 9)
+    pruefe total == 94
+    rueckgabe total
+
+test "finance risk stable":
+    pruefe main() == 94

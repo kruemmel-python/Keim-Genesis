@@ -1,0 +1,64 @@
+# Keim Genesis v1.5 — Sprache statt nur Simulation
+#
+# v1.3: Werte und sichere Ausdrücke
+# v1.4: Module/Standardbibliothek
+# v1.5: Buildfähige Projektform
+
+verwende "basis"
+verwende "kreislauf"
+
+wert agenten = 1500
+wert breite = 112
+wert hoehe = 34
+wert hunger_start = 0.16 + 0.04
+wert energie_start = 0.80 + 0.06
+wert hunger_suche = std_suche_hunger + 0.02
+wert gefahr_grenze = 0.22 + 0.04
+wert ruhe_grenze = std_ruhe_energie
+wert emit_rate = 0.006 * 2
+
+welt sprache mit $agenten agenten groesse $breite $hoehe
+
+feld hunger startet bei $hunger_start
+feld energie startet bei $energie_start
+feld mut startet bei 0.30
+feld fokus startet bei 0.14
+
+spur futter startet bei 0.0 quellen 24 diffundiert 0.15 zerfaellt 0.012
+spur gefahr startet bei 0.0 quellen 8 diffundiert 0.10 zerfaellt 0.018
+spur ruhe startet bei 0.0 quellen 6 diffundiert 0.12 zerfaellt 0.010
+spur signal startet bei 0.0 quellen 4 diffundiert 0.17 zerfaellt 0.016
+
+quelle futter bei 16 8 staerke 1.0
+quelle futter bei 94 26 staerke 1.0
+quelle gefahr bei 56 17 staerke 1.0
+quelle ruhe bei 10 29 staerke 1.0
+quelle ruhe bei 104 5 staerke 1.0
+quelle signal bei 56 6 staerke 1.0
+
+baustein emotion:
+    nutze spur_zu_feld(fokus, ruhe, 0.012)
+    nutze spur_abstossung(mut, gefahr, 0.016)
+    nutze feld_zu_spur(mut, signal, $emit_rate)
+
+jede runde:
+    agent wandert $std_wander
+    nutze stoffwechsel(0.006, 0.004)
+    nutze emotion
+    nutze meide_gefahr($gefahr_grenze)
+    nutze suche(hunger, futter, $hunger_suche)
+    nutze ruhe_wenn_schwach($ruhe_grenze, ruhe)
+    nutze futter_fund(0.36, 0.24, 0.55)
+    feld fokus schreibt spur ruhe mit 0.010
+    feld hunger zeichnet spur gefahr mit 0.002
+    spur futter breitet sich aus
+    zeige sprache
+
+alle 3 runden:
+    spur ruhe breitet sich aus
+    spur signal breitet sich aus
+    fokus sinkt 0.008
+
+alle 5 runden:
+    spur gefahr breitet sich aus
+    mut sinkt 0.010

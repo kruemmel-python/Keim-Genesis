@@ -1,0 +1,55 @@
+# Keim Genesis v2.3
+# Drei neue große Sprachschritte:
+# 1) benannte Laufzeitregeln
+# 2) native strukturierte Wenn-/Sonst- und Wiederholungsblöcke
+# 3) sichere Ausdrucksfunktionen in agentenlokalen Feldern
+
+wert basis_hunger = 0.24
+wert basis_energie = 0.72
+
+welt sprache23 mit 180 agenten groesse 46 18
+feld hunger startet bei $basis_hunger
+feld energie startet bei $basis_energie
+feld risiko startet bei 0.0
+feld richtung startet bei 0.0
+speicher alarm startet bei 0.0
+spur futter startet bei 0.0 quellen 5 diffundiert 0.12 zerfaellt 0.012
+spur gefahr startet bei 0.0 quellen 3 diffundiert 0.09 zerfaellt 0.018
+
+regel stoffwechsel:
+    feld risiko wird clamp(mix(hunger, spur gefahr, 0.35) + speicher alarm * 0.20 - energie * 0.04)
+    feld richtung wird clamp(max(spur futter - spur gefahr, 0) + hunger * 0.15)
+    wenn risiko > 0.18:
+        speicher alarm waechst 0.22
+        agent meidet spur gefahr
+    sonst:
+        speicher alarm sinkt 0.02
+        energie waechst 0.002
+
+regel suche:
+    wiederhole 2 mal:
+        agent wandert 0.06
+    wenn richtung > 0.10 und energie > 0.18:
+        agent folgt spur futter
+
+regel essen:
+    wenn agent findet futter:
+        hunger sinkt 0.12
+        energie waechst 0.04
+        spur futter wird staerker 0.18
+
+jede runde:
+    rufe stoffwechsel
+    rufe suche
+    rufe essen
+    feld energie schreibt spur futter mit 0.002
+    spur futter breitet sich aus
+
+alle 4 runden:
+    spur gefahr breitet sich aus
+    speicher alarm sinkt 0.04
+
+erwarte feld risiko zwischen 0 und 1
+erwarte feld richtung zwischen 0 und 1
+erwarte speicher alarm zwischen 0 und 1
+erwarte treffer >= 0

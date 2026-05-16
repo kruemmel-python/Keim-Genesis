@@ -1,0 +1,20 @@
+modul schulung.v785.gpu
+
+exportiere funktion main
+
+funktion cpu_referenz(n ist ganzzahl) gibt ganzzahl:
+    speicher summe ist ganzzahl setzt 0
+    fuer i von 1 bis n:
+        summe setzt summe + i * i
+    rueckgabe summe
+
+funktion gpu_policy(gpu_verfuegbar ist wahrheitswert, gpu_required ist wahrheitswert) gibt text:
+    wenn gpu_verfuegbar:
+        rueckgabe "gpu"
+    wenn gpu_required:
+        rueckgabe "fehler: gpu erforderlich"
+    rueckgabe "cpu_fallback"
+
+funktion main() gibt text:
+    speicher backend ist text setzt gpu_policy(falsch, falsch)
+    rueckgabe backend

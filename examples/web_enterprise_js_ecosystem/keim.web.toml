@@ -1,0 +1,19 @@
+[web]
+name = "keim_web_enterprise_training"
+version = "0.1.0"
+title = "Keim Web Training App"
+main = "src/app.keim"
+mode = "pwa"
+permissions = ["dom", "timer", "storage"]
+
+[npm]
+"@preact/signals-core" = { version = "^1.8.0", alias = "signals", provider = "esm.sh" }
+"lit-html" = { version = "^3.2.0", alias = "lit", provider = "esm.sh" }
+
+[routes]
+"/" = "App"
+"/training" = "TrainingView"
+
+[adapter.browser]
+module = "browser"
+permissions = ["dom", "events", "storage", "timer"]

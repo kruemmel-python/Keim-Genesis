@@ -1,0 +1,26 @@
+berechtigung system.netz
+verwende system.grafik
+verwende system.audio
+
+welt sovereign mit 4 agenten groesse 12 8
+speicher status text startet bei "bereit"
+speicher zahlen ist liste<ganzzahl>
+speicher meta ist karte<text, ganzzahl>
+speicher task_ok bool startet bei falsch
+spur futter startet bei 0.0 quellen 1 diffundiert 0.10 zerfaellt 0.01
+
+hintergrund vorbereiten:
+    speicher status setzt "fertig"
+
+jede runde:
+    erwarte vorbereiten in speicher task_ok
+    liste zahlen fuegt 1 hinzu
+    karte meta setzt "runden" auf 1
+    debug beobachtet speicher status
+    debug sendet "runde"
+    grafik farbe 20 30 40
+    grafik rechteck 10 20 120 60
+    audio stumm wahr
+    audio signal "ok"
+    agent wandert 0.05
+    spur futter breitet sich aus

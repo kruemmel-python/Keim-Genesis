@@ -1,0 +1,95 @@
+modul examples.agenten_zweige_v78_1_gpu_aware.main
+
+exportiere funktion main
+exportiere funktion agent_basis
+exportiere funktion agent_quadrat
+exportiere funktion agent_zweig
+exportiere funktion agent_batch_summe_10
+
+funktion agent_basis(zweig ist ganzzahl) gibt ganzzahl:
+    speicher start ist ganzzahl setzt 1
+    speicher basis ist ganzzahl setzt start + zweig
+    rueckgabe basis
+
+funktion agent_quadrat(wert ist ganzzahl) gibt ganzzahl:
+    speicher ergebnis ist ganzzahl setzt wert * wert
+    rueckgabe ergebnis
+
+funktion agent_zweig(zweig ist ganzzahl) gibt ganzzahl:
+    speicher basis ist ganzzahl setzt agent_basis(zweig)
+    speicher ergebnis ist ganzzahl setzt agent_quadrat(basis)
+    rueckgabe ergebnis
+
+funktion agent_batch_summe_10() gibt ganzzahl:
+    speicher summe ist ganzzahl setzt 0
+    speicher summe setzt summe + agent_zweig(1)
+    speicher summe setzt summe + agent_zweig(2)
+    speicher summe setzt summe + agent_zweig(3)
+    speicher summe setzt summe + agent_zweig(4)
+    speicher summe setzt summe + agent_zweig(5)
+    speicher summe setzt summe + agent_zweig(6)
+    speicher summe setzt summe + agent_zweig(7)
+    speicher summe setzt summe + agent_zweig(8)
+    speicher summe setzt summe + agent_zweig(9)
+    speicher summe setzt summe + agent_zweig(10)
+    rueckgabe summe
+
+funktion zeige_zweig(zweig ist ganzzahl) gibt ganzzahl:
+    speicher basis ist ganzzahl setzt agent_basis(zweig)
+    speicher ergebnis ist ganzzahl setzt agent_quadrat(basis)
+
+    ausgabe "------------------------------"
+    ausgabe "Agenten-Zweig"
+    ausgabe zweig
+    ausgabe "Basiswert:"
+    ausgabe basis
+    ausgabe "Quadrat:"
+    ausgabe ergebnis
+
+    rueckgabe ergebnis
+
+funktion main() gibt ganzzahl:
+    ausgabe "Keim Agenten-Zweigsystem v7.8.1 GPU-aware"
+    ausgabe "CPU-Referenzpfad: deterministisch"
+    ausgabe "GPU-Paketpfad: exe-pack --gpu-driver"
+    ausgabe "GPU-Diagnosepfad: gpu-driver-demo und gpu_smoke.py"
+    ausgabe "Startwert:"
+    ausgabe 1
+
+    zeige_zweig(1)
+    zeige_zweig(2)
+    zeige_zweig(3)
+    zeige_zweig(4)
+    zeige_zweig(5)
+    zeige_zweig(6)
+    zeige_zweig(7)
+    zeige_zweig(8)
+    zeige_zweig(9)
+    zeige_zweig(10)
+
+    ausgabe "Batch-10-Summe:"
+    ausgabe agent_batch_summe_10()
+
+    rueckgabe agent_zweig(10)
+
+test "zweig 1":
+    pruefe agent_basis(1) == 2
+    pruefe agent_zweig(1) == 4
+
+test "zweig 2":
+    pruefe agent_basis(2) == 3
+    pruefe agent_zweig(2) == 9
+
+test "zweig 4":
+    pruefe agent_basis(4) == 5
+    pruefe agent_zweig(4) == 25
+
+test "zweig 10":
+    pruefe agent_basis(10) == 11
+    pruefe agent_zweig(10) == 121
+
+test "batch 10 summe":
+    pruefe agent_batch_summe_10() == 505
+
+test "main liefert letzten zweig":
+    pruefe main() == 121

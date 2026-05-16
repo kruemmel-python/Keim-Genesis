@@ -1,0 +1,14 @@
+modul web.training
+
+exportiere funktion main
+
+typ UiState:
+    zaehler ist ganzzahl
+    status ist text
+
+funktion main() gibt ganzzahl:
+    speicher state ist UiState setzt UiState("zaehler": 0, "status": "bereit")
+    rueckgabe state.zaehler + 1
+
+test "web state":
+    pruefe main() == 1

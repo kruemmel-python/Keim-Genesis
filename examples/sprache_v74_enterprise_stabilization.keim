@@ -1,0 +1,25 @@
+modul demo.v74
+
+berechtigung time
+berechtigung random
+
+exportiere funktion main
+
+typ Messung:
+    name ist text
+    wert ist ganzzahl
+
+funktion addiere(a ist ganzzahl, b ist ganzzahl) gibt ganzzahl:
+    rueckgabe a + b
+
+funktion main() gibt ganzzahl:
+    speicher m ist Messung setzt Messung(name: "stabil", wert: 40)
+    speicher xs ist liste<ganzzahl> setzt [1, 2, 3]
+    speicher basis ist ganzzahl setzt addiere(m.wert, xs[1])
+    wenn basis > 40:
+        rueckgabe basis
+    sonst:
+        rueckgabe 0
+
+test "enterprise stable main":
+    pruefe main() == 42

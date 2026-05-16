@@ -1,0 +1,35 @@
+modul demo.v70
+
+exportiere funktion main
+
+typ Benutzer:
+    name ist text
+    alter ist ganzzahl
+
+funktion teile(a ist ganzzahl, b ist ganzzahl) gibt ergebnis<ganzzahl, text>:
+    wenn b == 0:
+        rueckgabe fehler("division durch null")
+    sonst:
+        rueckgabe ok(a // b)
+
+funktion main() gibt ganzzahl:
+    speicher b ist Benutzer setzt Benutzer("Ada", 42)
+    speicher zahlen ist liste<ganzzahl> setzt [1, 2, 3, 4]
+    speicher k ist karte<text, ganzzahl> setzt {"x": 7, "y": 11, "z": 13}
+    speicher r ist ergebnis<ganzzahl, text> setzt teile(84, 2)
+    match r:
+        fall ok(wert):
+            rueckgabe wert + b.alter + zahlen[0] + k.x
+        fall fehler(err):
+            rueckgabe 0
+
+test "v70 generational gc runtime":
+    pruefe main() == 92
+
+test "v70 fehler result":
+    speicher r ist ergebnis<ganzzahl, text> setzt teile(1, 0)
+    match r:
+        fall ok(wert):
+            pruefe falsch
+        fall fehler(err):
+            pruefe wahr

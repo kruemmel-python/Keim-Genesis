@@ -1,0 +1,36 @@
+# Keim v4.2: GPL-Kernfunktionen
+welt app mit 2 agenten groesse 8 4
+
+speicher raw text startet bei '{"name":"Ada","rolle":"forscherin"}'
+speicher obj karte startet bei {}
+speicher name text startet bei ""
+speicher digest text startet bei ""
+speicher zeitpunkt text startet bei ""
+speicher fehler text startet bei ""
+speicher antwort text startet bei "Keim v4.2 lebt"
+
+klasse dienst:
+    eigenschaft status text = "neu"
+    methode ping:
+        speicher antwort setzt 1
+
+objekt root ist dienst
+
+jede runde:
+    zeit jetzt in speicher zeitpunkt
+    json liest speicher raw in speicher obj
+    karte obj liest "name" in speicher name
+    krypto sha256 speicher name in speicher digest
+    neu dienst als worker mit status="aktiv"
+    karte obj setzt "ref" auf "worker"
+
+    versuche:
+        objekt fehlt ruft ping
+    fange fehler in speicher fehler:
+        karte obj setzt "letzter_fehler" auf "gefangen"
+
+    # Startet einen lokalen HTTP-Server auf 127.0.0.1:18080.
+    # In produktiven Programmen Port-Kollisionen mit versuche/fange absichern.
+    server startet bei 18080 antwortet speicher antwort
+
+    sammle muell

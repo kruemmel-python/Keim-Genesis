@@ -1,0 +1,1167 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Programmieren lernen mit Keim – Grundkurs v4.3.3 mit Enterprise v7.5 und Packaging v7.8.5</title>
+<style>
+:root{--bg:#0f172a;--panel:#111827;--ink:#e5e7eb;--muted:#9ca3af;--accent:#38bdf8;--accent2:#a78bfa;--line:#334155;--code:#020617;--ok:#34d399;--warn:#fbbf24}
+*{box-sizing:border-box} body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:#0b1020;color:var(--ink);line-height:1.62}
+a{color:var(--accent)} .layout{display:grid;grid-template-columns:310px minmax(0,1fr);min-height:100vh}
+nav{position:sticky;top:0;height:100vh;overflow:auto;background:#09111f;border-right:1px solid var(--line);padding:24px}
+nav h1{font-size:1.15rem;line-height:1.25;margin:0 0 14px;color:#fff} nav .sub{color:var(--muted);font-size:.9rem;margin-bottom:18px}
+nav a{display:block;text-decoration:none;padding:7px 8px;border-radius:8px;color:#cbd5e1;font-size:.94rem} nav a:hover{background:#172036;color:#fff}
+main{padding:36px 46px;max-width:1120px}
+.hero{background:linear-gradient(135deg,#111827,#172554 55%,#312e81);border:1px solid #334155;border-radius:24px;padding:34px;margin-bottom:28px;box-shadow:0 16px 50px #0006}
+.hero h1{font-size:2.4rem;margin:.1em 0}.hero p{font-size:1.12rem;color:#d1d5db;max-width:850px}
+section{background:#111827cc;border:1px solid var(--line);border-radius:18px;margin:22px 0;padding:28px}
+h2{font-size:1.75rem;margin-top:0;border-bottom:1px solid var(--line);padding-bottom:10px} h3{font-size:1.25rem;margin-top:1.6em;color:#e0f2fe}
+h4{color:#ddd} .tag{display:inline-block;padding:2px 8px;border:1px solid #475569;border-radius:999px;color:#cbd5e1;background:#0f172a;margin:2px;font-size:.82rem}
+pre{background:var(--code);border:1px solid #1e293b;border-radius:14px;padding:16px;overflow:auto;position:relative}
+code{font-family:ui-monospace,SFMono-Regular,Consolas,Monaco,monospace;font-size:.93em}
+:not(pre)>code{background:#0f172a;border:1px solid #263449;padding:.1em .35em;border-radius:6px;color:#bae6fd}
+table{width:100%;border-collapse:collapse;margin:14px 0;background:#0b1220;border-radius:12px;overflow:hidden}
+th,td{border:1px solid #263449;padding:10px;vertical-align:top} th{background:#162033;color:#fff}
+.note,.task,.warn,.concept{border-radius:14px;padding:14px 16px;margin:16px 0;border:1px solid}
+.note{background:#082f49;border-color:#075985}.task{background:#064e3b;border-color:#047857}.warn{background:#451a03;border-color:#b45309}.concept{background:#1e1b4b;border-color:#4f46e5}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}.card{background:#0b1220;border:1px solid #263449;border-radius:14px;padding:16px}
+.check li{margin:.4em 0}.small{font-size:.92rem;color:#cbd5e1}.kbd{border:1px solid #64748b;border-bottom-width:3px;border-radius:6px;padding:1px 6px;background:#0f172a}
+footer{color:#94a3b8;padding:40px 0}
+@media(max-width:900px){.layout{display:block}nav{position:relative;height:auto}main{padding:24px 18px}.hero h1{font-size:1.8rem}}
+
+.update-banner{border:1px solid #38bdf866;background:#082f49;border-radius:18px;padding:18px;margin:20px 0;color:#e0f2fe}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.card{background:#0f172a;border:1px solid #334155;border-radius:14px;padding:16px}
+.badge{display:inline-block;border:1px solid #38bdf866;background:#0b253a;color:#bae6fd;border-radius:999px;padding:2px 9px;font-size:.78rem;margin:2px}
+.path{font-family:ui-monospace,SFMono-Regular,Consolas,Monaco,monospace;color:#a7f3d0}
+.warnbox{border-left:4px solid var(--warn);background:#2a220b;padding:14px;border-radius:10px;margin:14px 0}
+.okbox{border-left:4px solid var(--ok);background:#06281f;padding:14px;border-radius:10px;margin:14px 0}
+.teacher{border-left:4px solid var(--accent2);background:#18122b;padding:14px;border-radius:10px;margin:14px 0}
+.small{font-size:.92rem;color:#cbd5e1}
+table.checklist td:first-child{white-space:nowrap}
+@media(max-width:900px){.grid2,.grid3{grid-template-columns:1fr}}
+
+</style>
+</head>
+<body>
+<div class="layout">
+<nav>
+<h1>Programmieren lernen mit Keim</h1>
+<div class="sub">Allgemeiner Grundkurs · Original v4.3.3 vollständig erhalten · Enterprise-Erweiterung v7.5</div>
+<a href="#vorwort">0. Vorwort: Die Genesis von Keim</a>
+<a href="#ziel">1. Ziel des Kurses</a>
+<a href="#denken">2. Wie Programmieren funktioniert</a>
+<a href="#setup">3. Einrichtung & Ausführung</a>
+<a href="#erstes">4. Erstes Programm</a>
+<a href="#variablen">5. Variablen & Speicher</a>
+<a href="#typen">6. Datentypen</a>
+<a href="#operatoren">7. Operatoren & Ausdrücke</a>
+<a href="#text">8. Texte</a>
+<a href="#collections">9. Tupel, Listen, Karten</a>
+<a href="#kontrollfluss">10. Wenn, Schleifen, Ablauf</a>
+<a href="#funktionen">11. Funktionen</a>
+<a href="#module">12. Module & Imports</a>
+<a href="#oop">13. Objektorientierung</a>
+<a href="#fehler">14. Fehlerbehandlung</a>
+<a href="#dateien">15. Dateien, JSON, CSV</a>
+<a href="#http">16. HTTP & APIs</a>
+<a href="#zeitprozess">17. Zeit, Krypto, Prozesse</a>
+<a href="#debugging">18. Debugging</a>
+<a href="#projekte">19. Übungsprojekte</a>
+<a href="#referenz">20. Kurzreferenz</a>
+<a href="#abschluss">21. Lernpfad</a>
+
+<a href="#v75-ueberblick">21. Update v7.5: Was ist neu?</a>
+<a href="#migration">22. Migration v4.3.3 → v7.5</a>
+<a href="#architektur">23. Architektur: Source bis Runtime</a>
+<a href="#kbc-stable">24. KBC-STABLE-1 & Bytecode</a>
+<a href="#typen-match">25. Typen, Result & Match</a>
+<a href="#native-wasm">26. Native, WASM, GC & Heap</a>
+<a href="#web-enterprise">27. Web-Apps & JS-Interop</a>
+<a href="#security">28. Security, SBOM & Capabilities</a>
+<a href="#testing-hardening">29. Tests, Benchmarks & Hardening</a>
+<a href="#training-impossible">30. Training Impossible</a>
+<a href="#labs">31. Enterprise-Schulungslabs</a>
+<a href="#dozentenleitfaden">32. Dozentenleitfaden & Prüfungen</a>
+<a href="#v785-runtime-packager">33. Update v7.8.5: Auslieferung</a>
+</nav>
+<main>
+<div class="hero">
+<h1>Programmieren lernen mit Keim</h1>
+<p>Diese Schulung erklärt Programmierung allgemein – so wie ein klassischer Python-, JavaScript-, Java- oder C#-Grundkurs. Keim ist hier die Unterrichtssprache. Es geht nicht primär um Simulationen, sondern um Variablen, Datentypen, Listen, Maps, Funktionen, Module, Objektorientierung, Fehlerbehandlung, Dateien und APIs.</p>
+<p><span class="tag">für Anfänger</span><span class="tag">allgemeine Programmierung</span><span class="tag">OOP</span><span class="tag">Web-APIs</span><span class="tag">Keim v4.3.3</span><span class="tag">Keim v7.8.5 Packaging</span></p>
+</div>
+
+
+<section id="vorwort">
+<h2>0. Vorwort: Die Genesis von Keim</h2>
+<h3>Die Vision</h3>
+<p>Keim wurde nicht als weitere Skriptsprache für den Alltag entwickelt, sondern aus einer tiefen Unzufriedenheit mit einer Software-Landschaft, die oft immer schwerer, indirekter und abhängiger wird. In einer Zeit, in der Programme sich hinter vielen Abstraktionsebenen verstecken, entstand der Wunsch nach einer <strong>souveränen Technologie</strong>: verständlich, kontrollierbar, lokal ausführbar und offen für die Nähe zur Maschine.</p>
+<p>Die Sprache wurde von <strong>Ralf Krümmel</strong> im Mai 2026 erschaffen, unter dem Leitbild des <em>Deep-Substrate Architects</em>. Das Ziel war eine Umgebung, die die rohe Kraft nativer Ausführung mit der Lesbarkeit moderner Logik verbindet, ohne dabei zwingend von Cloud-Diensten oder fremden Frameworks abhängig zu sein. Keim richtet sich an Menschen, die Programmieren wieder als bewusstes Handwerk verstehen wollen: präzise, effizient, unabhängig und erklärbar.</p>
+
+<h3>Warum der Name „Keim“?</h3>
+<p>Der Name ist Programm. Ein <strong>Keim</strong> ist die kleinste, hochkonzentrierte Einheit eines entstehenden Systems. Er trägt einen Bauplan in sich, benötigt wenige Ressourcen und kann dennoch zu etwas Komplexem wachsen.</p>
+<ul>
+<li><strong>Potenzial:</strong> Ein kleines Keim-Programm kann durch Tabellen, Karten, Agentenlogik, HTTP-Routen und Hotspot-Ausführung zu einem massiven System heranwachsen.</li>
+<li><strong>Ursprung:</strong> Keim steht für den Anfang von etwas Neuem und für die Rückbesinnung auf das Wesentliche: Daten, Zustand, Regeln, Ausführung.</li>
+<li><strong>Wachstum:</strong> Die Sprache ist darauf ausgelegt, organisch zu wachsen: vom ersten Wert im Speicher bis zum autonomen Dienst, der Anfragen verarbeitet und seinen Zustand verwaltet.</li>
+</ul>
+
+<h3>Der Weg zur v4.3.3</h3>
+<p>Was als Experiment zur Simulation biologischer Prozesse begann, hat sich zu einer <strong>General Purpose Language</strong> entwickelt. Mit Version 4.3.3 besitzt Keim zentrale Bausteine moderner Programmierung: Datentypen, dynamische Collections, Module, Klassen, Objekte, Vererbung, JSON, HTTP-Routing, Fehlerbehandlung, Garbage Collection, Native-Hotspots und eine autonome API-Architektur.</p>
+<p>Diese Schulung ist deshalb mehr als eine Syntaxübersicht. Sie ist eine Einladung, Programmieren als kontrollierbares Systemdenken zu lernen: Was ist ein Wert? Was ist Zustand? Wann verändert sich etwas? Welche Grenze trennt einfache Logik von robuster Architektur?</p>
+<p><strong>Willkommen in der Welt von Keim.</strong></p>
+</section>
+
+
+<section id="ziel">
+<h2>1. Ziel des Kurses</h2>
+<p>Nach dieser Schulung sollst du eigene Programme in Keim schreiben können. Nicht nur Simulationsprogramme, sondern typische Anwendungen: kleine Rechenprogramme, Textverarbeitung, Konfigurationsprogramme, Datenverarbeitung, Web-APIs, Objektmodelle und einfache Tools.</p>
+<div class="grid">
+<div class="card"><h3>Du lernst Begriffe</h3><p>Variable, Typ, Ausdruck, Bedingung, Schleife, Funktion, Objekt, Klasse, Fehler, Modul, API.</p></div>
+<div class="card"><h3>Du lernst Denken</h3><p>Ein Programm ist eine Folge klarer Zustandsänderungen. Daten werden gelesen, geprüft, verändert und ausgegeben.</p></div>
+<div class="card"><h3>Du lernst Praxis</h3><p>Jedes Kapitel enthält Keim-Beispiele, typische Fehler und kleine Übungen.</p></div>
+</div>
+<div class="note"><strong>Wichtig:</strong> Die Syntax von Keim ist bewusst deutsch und lesbar. Trotzdem gelten die gleichen Grundideen wie in anderen Programmiersprachen.</div>
+</section>
+
+<section id="denken">
+<h2>1. Wie Programmieren funktioniert</h2>
+<p>Ein Computerprogramm besteht aus Anweisungen. Eine Anweisung sagt dem Computer, was als Nächstes passieren soll. Programme arbeiten fast immer nach diesem Muster:</p>
+<table>
+<tr><th>Schritt</th><th>Frage</th><th>Beispiel</th></tr>
+<tr><td>Eingabe</td><td>Welche Daten kommen rein?</td><td>Name, Alter, JSON-Request, Dateiinhalt</td></tr>
+<tr><td>Verarbeitung</td><td>Was wird berechnet oder entschieden?</td><td>Ist das Alter über 18? Wie hoch ist der Preis?</td></tr>
+<tr><td>Zustand</td><td>Was wird gespeichert?</td><td>Benutzer, Warenkorb, Einstellungen</td></tr>
+<tr><td>Ausgabe</td><td>Was kommt heraus?</td><td>Text, JSON, Datei, HTTP-Antwort</td></tr>
+</table>
+<h3>Imperatives Denken</h3>
+<p>Imperativ bedeutet: Du gibst Schritt für Schritt Befehle. Beispiel: Setze eine Zahl, erhöhe sie, gib sie aus.</p>
+<pre><code>speicher zaehler ist ganzzahl = 0
+setze zaehler auf 1
+</code></pre>
+<h3>Deklaratives Denken</h3>
+<p>Deklarativ bedeutet: Du beschreibst, was gelten soll. Keim mischt beide Denkweisen. Eine Route beschreibt zum Beispiel, welcher Pfad beantwortet wird:</p>
+<pre><code>server api bei 18080 parallel 4:
+    route GET "/health" antwortet speicher antwort:
+        setze antwort auf "{\"ok\":true}"
+</code></pre>
+</section>
+
+<section id="setup">
+<h2>2. Einrichtung & Ausführung</h2>
+<p>Du brauchst Python 3.12+, weil Keim aktuell durch einen Python-Host gestartet wird. Der native C++-Hotspot ist optional.</p>
+<h3>Virtuelle Umgebung</h3>
+<pre><code>cd D:\keim_genesis_prototype
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python --version
+</code></pre>
+<p>Auf Linux/macOS:</p>
+<pre><code>cd keim_genesis_prototype
+python3.12 -m venv .venv
+source .venv/bin/activate
+python --version
+</code></pre>
+<h3>Tests ausführen</h3>
+<pre><code>python tests/run_tests.py
+python tests/run_v43_http_tests.py
+</code></pre>
+<h3>Keim-Programm starten</h3>
+<p>Je nach Projekt gibt es einen Host-Starter. Für die autonome API:</p>
+<pre><code>python autonome_Simulations_API/keim_daemon.py
+</code></pre>
+<div class="note">In späteren Keim-Versionen kann ein dedizierter CLI-Befehl wie <code>keim run datei.keim</code> entstehen. In v4.3.3 startet der Python-Host die Runtime.</div>
+</section>
+
+<section id="erstes">
+<h2>3. Erstes Programm</h2>
+<p>Ein klassisches erstes Programm speichert einen Text und stellt ihn bereit.</p>
+<pre><code># 01_minimal.keim
+speicher nachricht ist text = "Hallo Keim"
+speicher status ist bool = wahr
+</code></pre>
+<p>Was passiert hier?</p>
+<table>
+<tr><th>Teil</th><th>Bedeutung</th></tr>
+<tr><td><code>speicher</code></td><td>legt eine Variable beziehungsweise einen benannten Speicherplatz an</td></tr>
+<tr><td><code>nachricht</code></td><td>Name des Speichers</td></tr>
+<tr><td><code>ist text</code></td><td>Typangabe: Dieser Speicher enthält Text</td></tr>
+<tr><td><code>= "Hallo Keim"</code></td><td>Startwert</td></tr>
+</table>
+<div class="task"><strong>Übung:</strong> Lege Speicher für deinen Namen, dein Alter und die Information an, ob du gerade lernst.</div>
+</section>
+
+<section id="variablen">
+<h2>4. Variablen & Speicher</h2>
+<p>In vielen Sprachen heißen benannte Werte <em>Variablen</em>. Keim nennt sie häufig <code>speicher</code>, weil sie einen Zustand halten. Eine Variable ist wie eine beschriftete Schublade.</p>
+<h3>Variable anlegen</h3>
+<pre><code>speicher alter ist ganzzahl = 36
+speicher preis ist zahl = 19.99
+speicher name ist text = "Ada"
+speicher aktiv ist bool = wahr
+</code></pre>
+<h3>Variable ändern</h3>
+<pre><code>setze alter auf 37
+setze name auf "Grace"
+setze aktiv auf falsch
+</code></pre>
+<h3>Warum Typen wichtig sind</h3>
+<p>Der Typ sagt, welche Operationen sinnvoll sind. Eine Zahl kann man addieren. Einen Text kann man verketten. Eine boolesche Variable wird für Entscheidungen verwendet.</p>
+<div class="warn"><strong>Typischer Anfängerfehler:</strong> Einen Text wie <code>"42"</code> mit einer Zahl <code>42</code> verwechseln. Beides sieht ähnlich aus, ist aber nicht dasselbe.</div>
+</section>
+
+<section id="typen">
+<h2>5. Datentypen</h2>
+<p>Ein Datentyp beschreibt, welche Art von Wert gespeichert wird.</p>
+<table>
+<tr><th>Keim-Typ</th><th>Allgemeiner Name</th><th>Beispiel</th><th>Wofür?</th></tr>
+<tr><td><code>ganzzahl</code></td><td>Integer</td><td><code>42</code></td><td>Zählen, IDs, Schleifen, Mengen</td></tr>
+<tr><td><code>zahl</code></td><td>Float/Decimal</td><td><code>3.14</code></td><td>Messwerte, Preise, Wahrscheinlichkeiten</td></tr>
+<tr><td><code>bool</code></td><td>Boolean</td><td><code>wahr</code>, <code>falsch</code></td><td>Ja/Nein-Entscheidungen</td></tr>
+<tr><td><code>text</code></td><td>String</td><td><code>"Hallo"</code></td><td>Namen, Nachrichten, JSON</td></tr>
+<tr><td><code>liste</code></td><td>Array/List</td><td><code>[1,2,3]</code></td><td>Mehrere Werte in Reihenfolge</td></tr>
+<tr><td><code>karte</code></td><td>Dictionary/Map</td><td><code>{"name":"Ada"}</code></td><td>Werte über Schlüssel finden</td></tr>
+<tr><td><code>referenz</code></td><td>Reference</td><td>Objektverweis</td><td>Auf dynamische Objekte zeigen</td></tr>
+</table>
+<h3>Boolesche Werte</h3>
+<pre><code>speicher ist_admin ist bool = falsch
+
+wenn ist_admin:
+    setze meldung auf "Zugriff erlaubt"
+</code></pre>
+<h3>Integer vs. Float</h3>
+<pre><code>speicher anzahl ist ganzzahl = 10
+speicher temperatur ist zahl = 21.5
+</code></pre>
+<p><code>ganzzahl</code> ist für exakte Ganzzahlen. <code>zahl</code> ist für Werte mit Nachkommastellen.</p>
+</section>
+
+<section id="operatoren">
+<h2>6. Operatoren & Ausdrücke</h2>
+<p>Ein Ausdruck erzeugt einen Wert. Beispiele: <code>2 + 3</code>, <code>alter &gt;= 18</code>, <code>name == "Ada"</code>.</p>
+<table>
+<tr><th>Operator</th><th>Bedeutung</th><th>Beispiel</th></tr>
+<tr><td><code>+</code></td><td>Addition oder Textverkettung</td><td><code>preis + steuer</code></td></tr>
+<tr><td><code>-</code></td><td>Subtraktion</td><td><code>konto - abzug</code></td></tr>
+<tr><td><code>*</code></td><td>Multiplikation</td><td><code>menge * preis</code></td></tr>
+<tr><td><code>/</code></td><td>Division</td><td><code>summe / anzahl</code></td></tr>
+<tr><td><code>==</code></td><td>gleich</td><td><code>rolle == "admin"</code></td></tr>
+<tr><td><code>!=</code></td><td>ungleich</td><td><code>status != "ok"</code></td></tr>
+<tr><td><code>&gt;</code>, <code>&lt;</code></td><td>größer/kleiner</td><td><code>alter &gt; 18</code></td></tr>
+</table>
+<pre><code>speicher preis ist zahl = 10.0
+speicher steuer ist zahl = 1.9
+speicher gesamt ist zahl = preis + steuer
+</code></pre>
+<div class="concept"><strong>Warum Ausdrücke zentral sind:</strong> Bedingungen, Funktionsargumente, Rückgaben und JSON-Werte basieren darauf, dass Werte berechnet werden können.</div>
+</section>
+
+<section id="text">
+<h2>7. Texte</h2>
+<p>Textwerte heißen in vielen Sprachen Strings. In Keim ist der Typ <code>text</code>.</p>
+<pre><code>speicher vorname ist text = "Ada"
+speicher nachname ist text = "Lovelace"
+speicher name ist text = vorname + " " + nachname
+</code></pre>
+<h3>Text als Datenformat</h3>
+<p>JSON ist technisch ebenfalls Text, aber mit einer festen Struktur:</p>
+<pre><code>speicher raw ist text = "{\"name\":\"Ada\",\"alter\":36}"
+speicher obj ist karte
+
+json liest speicher raw in speicher obj
+</code></pre>
+<h3>Escaping</h3>
+<p>Wenn ein Text selbst Anführungszeichen enthält, müssen sie maskiert werden:</p>
+<pre><code>speicher antwort ist text = "{\"ok\":true}"
+</code></pre>
+</section>
+
+<section id="collections">
+<h2>8. Tupel, Listen und Karten</h2>
+<p>Fast jedes echte Programm braucht mehrere Werte. Dafür gibt es Container.</p>
+<h3>8.1 Tupel</h3>
+<p>Ein Tupel ist eine feste Gruppe von Werten. Klassisch: Koordinaten, RGB-Farben, Datumsteile.</p>
+<pre><code># Konzeptuelles Tupel:
+# position = (x, y)
+speicher x ist zahl = 10.0
+speicher y ist zahl = 20.0
+</code></pre>
+<p>Keim v4.3.3 nutzt für feste kleine Gruppen aktuell meist Objekte, Karten oder mehrere Speicher. Ein expliziter Tupel-Typ ist ein sinnvoller nächster Sprachschritt. Bis dahin modelliert man Tupel so:</p>
+<pre><code>karte position setzt "x" auf 10.0
+karte position setzt "y" auf 20.0
+</code></pre>
+<h3>8.2 Listen</h3>
+<p>Eine Liste enthält mehrere Werte in Reihenfolge. Sie ist gut, wenn du alle Elemente durchgehen willst.</p>
+<pre><code>speicher zahlen ist liste mit ganzzahl
+liste zahlen fuegt 10 hinzu
+liste zahlen fuegt 20 hinzu
+liste zahlen fuegt 30 hinzu
+</code></pre>
+<p>Typische Listenoperationen:</p>
+<table>
+<tr><th>Operation</th><th>Bedeutung</th></tr>
+<tr><td>hinzufügen</td><td>neuen Wert ans Ende setzen</td></tr>
+<tr><td>lesen</td><td>Wert an Position holen</td></tr>
+<tr><td>entfernen</td><td>Wert löschen</td></tr>
+<tr><td>länge</td><td>Anzahl der Elemente bestimmen</td></tr>
+</table>
+<h3>8.3 Karten</h3>
+<p>Eine Karte speichert Werte unter Schlüsseln. Andere Sprachen nennen sie Dictionary, Map, HashMap oder Objekt-Literal.</p>
+<pre><code>speicher benutzer ist karte
+
+karte benutzer setzt "name" auf "Ada"
+karte benutzer setzt "alter" auf 36
+karte benutzer setzt "aktiv" auf wahr
+
+karte benutzer liest "name" in speicher name
+</code></pre>
+<h3>Präsenztest</h3>
+<pre><code>wenn karte benutzer enthaelt "email":
+    karte benutzer liest "email" in speicher email
+</code></pre>
+<div class="task"><strong>Übung:</strong> Erstelle eine Karte <code>produkt</code> mit Name, Preis und Lagerbestand. Lies den Preis in einen Speicher.</div>
+</section>
+
+<section id="kontrollfluss">
+<h2>9. Kontrollfluss: Wenn, Schleifen, Ablauf</h2>
+<p>Kontrollfluss entscheidet, welche Anweisungen ausgeführt werden.</p>
+<h3>Wenn-Bedingungen</h3>
+<pre><code>speicher alter ist ganzzahl = 20
+speicher meldung ist text = ""
+
+wenn alter &gt;= 18:
+    setze meldung auf "volljaehrig"
+</code></pre>
+<h3>Warum Einrückung wichtig ist</h3>
+<p>Alles, was eingerückt unter <code>wenn</code> steht, gehört zum Bedingungsblock.</p>
+<pre><code>wenn aktiv:
+    setze status auf "läuft"
+    setze zaehler auf zaehler + 1
+</code></pre>
+<h3>Schleifen</h3>
+<p>Schleifen wiederholen Code. In Keim-Projekten gibt es häufig <code>jede runde</code> für wiederkehrende Abläufe.</p>
+<pre><code>jede runde:
+    setze zaehler auf zaehler + 1
+</code></pre>
+<p>Für typische Anwendungslogik wird oft ein Host oder ein Serverloop genutzt: HTTP-Requests lösen Code aus, statt dass man manuell eine Endlosschleife schreibt.</p>
+<h3>Verzweigung in APIs</h3>
+<pre><code>wenn karte api_befehl enthaelt "running":
+    karte api_befehl liest "running" in speicher running
+</code></pre>
+</section>
+
+<section id="funktionen">
+<h2>10. Funktionen</h2>
+<p>Eine Funktion ist ein benannter Codeblock, der eine Aufgabe erledigt. Funktionen machen Programme kürzer, testbarer und verständlicher.</p>
+<h3>Warum Funktionen?</h3>
+<ul>
+<li>Du vermeidest Wiederholung.</li>
+<li>Du gibst einer Logik einen Namen.</li>
+<li>Du kannst kleine Teile unabhängig testen.</li>
+</ul>
+<h3>Konzeptuelles Beispiel</h3>
+<pre><code>funktion begruessung(name: text) gibt text:
+    gib "Hallo " + name zurück
+</code></pre>
+<p>Je nach Keim-Prototypstand kann die genaue Funktionssyntax variieren. Das wichtige Prinzip bleibt: Eingaben hinein, Ergebnis heraus.</p>
+<h3>Funktionales Denken</h3>
+<table>
+<tr><th>Begriff</th><th>Bedeutung</th></tr>
+<tr><td>Parameter</td><td>Wert, der in die Funktion hineingegeben wird</td></tr>
+<tr><td>Rückgabe</td><td>Wert, den die Funktion liefert</td></tr>
+<tr><td>Nebeneffekt</td><td>Funktion ändert Zustand außerhalb, z.B. Datei schreiben</td></tr>
+</table>
+<div class="warn"><strong>Praxisregel:</strong> Funktionen sollten möglichst klein sein. Eine Funktion mit 100 Zeilen macht meist zu viel.</div>
+</section>
+
+<section id="module">
+<h2>11. Module & Imports</h2>
+<p>Ein Modul ist eine Datei oder ein Namensraum, der zusammengehörige Funktionen, Klassen und Speicher enthält.</p>
+<pre><code>modul rechner:
+    speicher version ist text = "1.0"
+</code></pre>
+<h3>Warum Module?</h3>
+<p>Ohne Module landen alle Namen in einer Datei. Das wird schnell chaotisch. Module trennen Verantwortlichkeiten.</p>
+<table>
+<tr><th>Modul</th><th>Verantwortung</th></tr>
+<tr><td><code>api_steuerung</code></td><td>HTTP-Routen und JSON-Eingaben</td></tr>
+<tr><td><code>benutzer_logik</code></td><td>Benutzer prüfen und verwalten</td></tr>
+<tr><td><code>datei_import</code></td><td>CSV/JSON-Dateien lesen</td></tr>
+</table>
+<h3>Export</h3>
+<p>Export bedeutet: Dieser Name darf von außen benutzt werden.</p>
+<pre><code>export speicher standard_port ist ganzzahl = 18080
+</code></pre>
+</section>
+
+<section id="oop">
+<h2>12. Objektorientierte Programmierung</h2>
+<p>Objektorientierung modelliert Programme als Dinge mit Eigenschaften und Verhalten. Eine Klasse ist ein Bauplan. Ein Objekt ist eine konkrete Instanz.</p>
+<h3>Klasse</h3>
+<pre><code>klasse Benutzer:
+    eigenschaft name ist text
+    eigenschaft alter ist ganzzahl
+    eigenschaft aktiv ist bool
+</code></pre>
+<h3>Objekt</h3>
+<pre><code>objekt admin ist Benutzer:
+    name = "Ada"
+    alter = 36
+    aktiv = wahr
+</code></pre>
+<h3>Dynamisches Objekt mit <code>neu</code></h3>
+<pre><code>speicher neuer_user ist referenz
+neu Benutzer in speicher neuer_user
+</code></pre>
+<h3>Vererbung</h3>
+<p>Vererbung bedeutet: Eine Klasse übernimmt Eigenschaften einer anderen Klasse und erweitert sie.</p>
+<pre><code>klasse Admin ist Benutzer:
+    eigenschaft rechte ist text
+</code></pre>
+<table>
+<tr><th>Konzept</th><th>Bedeutung</th><th>Beispiel</th></tr>
+<tr><td>Klasse</td><td>Bauplan</td><td><code>Benutzer</code></td></tr>
+<tr><td>Objekt</td><td>konkretes Ding</td><td><code>admin</code></td></tr>
+<tr><td>Eigenschaft</td><td>Daten am Objekt</td><td><code>name</code></td></tr>
+<tr><td>Vererbung</td><td>Spezialisierung</td><td><code>Admin ist Benutzer</code></td></tr>
+<tr><td>Referenz</td><td>Zeiger auf Objekt</td><td><code>neuer_user</code></td></tr>
+</table>
+<div class="concept"><strong>Warum OOP?</strong> Wenn Daten natürlich zusammengehören, ist ein Objekt oft lesbarer als viele einzelne Variablen.</div>
+</section>
+
+<section id="fehler">
+<h2>13. Fehlerbehandlung</h2>
+<p>Programme laufen nicht immer perfekt. Dateien fehlen, JSON ist ungültig, Netzwerk antwortet nicht, Eingaben sind falsch. Fehlerbehandlung verhindert, dass ein einzelner Fehler das ganze Programm beendet.</p>
+<h3><code>versuche / fange</code></h3>
+<pre><code>versuche:
+    json liest speicher request_body in speicher daten
+fange fehler in speicher fehlertext:
+    setze status auf 400
+    setze antwort auf "{\"ok\":false,\"error\":\"ungueltiges JSON\"}"
+</code></pre>
+<h3>Warum Fehler nicht ignorieren?</h3>
+<p>Ein ignorierter Fehler wird später oft zu einem schwer verständlichen Folgefehler. Gute Programme prüfen Eingaben früh.</p>
+<table>
+<tr><th>Situation</th><th>Gute Reaktion</th></tr>
+<tr><td>Ungültiges JSON</td><td>Status 400 und Fehlermeldung</td></tr>
+<tr><td>Datei fehlt</td><td>Alternative oder klare Meldung</td></tr>
+<tr><td>Unbekannte Route</td><td>Status 404</td></tr>
+<tr><td>Interner Fehler</td><td>Status 500, Logeintrag</td></tr>
+</table>
+</section>
+
+<section id="dateien">
+<h2>14. Dateien, JSON und CSV</h2>
+<p>Dateien speichern Daten dauerhaft. JSON ist gut für strukturierte Daten. CSV ist gut für Tabellen.</p>
+<h3>JSON lesen</h3>
+<pre><code>speicher raw ist text = "{\"name\":\"Ada\",\"aktiv\":true}"
+speicher daten ist karte
+
+json liest speicher raw in speicher daten
+karte daten liest "name" in speicher name
+</code></pre>
+<h3>JSON schreiben</h3>
+<pre><code>speicher antwort_obj ist karte
+karte antwort_obj setzt "ok" auf wahr
+karte antwort_obj setzt "service" auf "mein_programm"
+
+json schreibt speicher antwort_obj in speicher antwort
+</code></pre>
+<h3>Dateien als typische Aufgabe</h3>
+<p>Ein normales Tool liest häufig eine Datei, verarbeitet Inhalt und schreibt ein Ergebnis.</p>
+<pre><code># Konzept:
+# 1. Datei lesen
+# 2. JSON parsen
+# 3. Werte prüfen
+# 4. neue Datei schreiben
+</code></pre>
+</section>
+
+<section id="http">
+<h2>15. HTTP und APIs</h2>
+<p>Eine API ist eine Schnittstelle, über die andere Programme mit deinem Programm sprechen können. HTTP ist das Protokoll, das auch Webseiten und Webservices verwenden.</p>
+<h3>Server definieren</h3>
+<pre><code>server api bei 18080 parallel 4:
+    route GET "/health" antwortet speicher antwort:
+        setze antwort auf "{\"ok\":true}"
+</code></pre>
+<h3>GET</h3>
+<p>GET wird genutzt, um Daten abzurufen.</p>
+<pre><code>route GET "/status" antwortet speicher antwort:
+    setze antwort auf "{\"status\":\"bereit\"}"
+</code></pre>
+<h3>POST</h3>
+<p>POST wird genutzt, um Daten an den Server zu senden.</p>
+<pre><code>route POST "/benutzer" liest speicher body antwortet speicher antwort status speicher status:
+    versuche:
+        json liest speicher body in speicher daten
+        karte daten liest "name" in speicher name
+        setze status auf 200
+        setze antwort auf "{\"ok\":true}"
+    fange fehler in speicher err:
+        setze status auf 400
+        setze antwort auf "{\"ok\":false}"
+</code></pre>
+<h3>Warum parallele Handler?</h3>
+<p>Mehrere Clients können gleichzeitig anfragen. Keim v4.3.3 kann Routen parallel annehmen, mutierende Weltzugriffe aber deterministisch schützen.</p>
+<div class="warn"><strong>Wichtig:</strong> Parallelität kann Race Conditions erzeugen. Deshalb schützt die Runtime gemeinsame Zustände mit Locks.</div>
+</section>
+
+<section id="zeitprozess">
+<h2>16. Zeit, Krypto und Prozesse</h2>
+<h3>Zeit</h3>
+<p>Zeitfunktionen sind nützlich für Logs, Metriken, Timeouts und Dateinamen.</p>
+<pre><code>zeit jetzt in speicher jetzt
+</code></pre>
+<h3>Krypto/Hashing</h3>
+<p>Hashing erzeugt einen Fingerabdruck von Daten. Das ist nützlich für Checksummen, IDs und Integritätsprüfung.</p>
+<pre><code>speicher passwort ist text = "geheim"
+krypto sha256 speicher passwort in speicher hash
+</code></pre>
+<h3>Externe Prozesse</h3>
+<p>Ein Programm kann andere Programme starten, zum Beispiel Systemtools oder Build-Skripte.</p>
+<pre><code>prozess fuehrt "echo Hallo" in speicher ausgabe
+</code></pre>
+<div class="warn"><strong>Sicherheitsregel:</strong> Baue niemals ungeprüfte Benutzereingaben direkt in Prozessbefehle ein. Das kann Command Injection erzeugen.</div>
+</section>
+
+<section id="debugging">
+<h2>17. Debugging</h2>
+<p>Debugging bedeutet, Fehler im Programm zu finden und zu verstehen. Gute Entwickler raten nicht nur, sondern beobachten systematisch.</p>
+<h3>Die fünf Fragen</h3>
+<ol>
+<li>Was habe ich erwartet?</li>
+<li>Was ist tatsächlich passiert?</li>
+<li>Welche Daten waren zu diesem Zeitpunkt im Speicher?</li>
+<li>Welche Anweisung wurde zuletzt ausgeführt?</li>
+<li>Ist der Fehler in Eingabe, Verarbeitung oder Ausgabe?</li>
+</ol>
+<h3>Typische Fehler</h3>
+<table>
+<tr><th>Fehler</th><th>Symptom</th><th>Lösung</th></tr>
+<tr><td>Falscher Port</td><td>404 oder Verbindung fehlgeschlagen</td><td>Serverausgabe lesen: Port 18080 statt 8080</td></tr>
+<tr><td>Ungültiges JSON</td><td>400 oder Parse-Fehler</td><td>JSON mit Validator prüfen</td></tr>
+<tr><td>Falscher Typ</td><td>Berechnung schlägt fehl</td><td>Text/Zahl/Bool trennen</td></tr>
+<tr><td>Fehlende Route</td><td><code>unbekannte Route</code></td><td>Route im Serverblock registrieren</td></tr>
+<tr><td>Einrückung falsch</td><td>Code läuft außerhalb von <code>wenn</code></td><td>Blöcke sauber einrücken</td></tr>
+</table>
+<h3>Schrittweise testen</h3>
+<p>Teste kleine Teile einzeln. Nicht erst 500 Zeilen schreiben und dann alles starten.</p>
+<pre><code>python tests/run_tests.py
+python tests/run_v43_http_tests.py
+</code></pre>
+</section>
+
+<section id="projekte">
+<h2>18. Übungsprojekte</h2>
+<h3>Projekt 1: Taschenrechner-API</h3>
+<p>Baue Endpunkte:</p>
+<ul>
+<li><code>POST /add</code> mit <code>{"a":2,"b":3}</code></li>
+<li><code>POST /mul</code></li>
+<li><code>GET /health</code></li>
+</ul>
+<h3>Projekt 2: Notizspeicher</h3>
+<p>Speichere Notizen in einer Karte. Endpunkte:</p>
+<ul>
+<li><code>POST /note</code> legt eine Notiz an</li>
+<li><code>GET /notes</code> gibt alle Notizen aus</li>
+</ul>
+<h3>Projekt 3: Benutzerverwaltung</h3>
+<p>Nutze eine Klasse <code>Benutzer</code> und Karten für IDs.</p>
+<h3>Projekt 4: Konfigurationsdienst</h3>
+<p>Lies JSON-Konfiguration, ändere Werte per API, speichere sie mit <code>POST /save</code>.</p>
+<div class="task"><strong>Abschlussübung:</strong> Kombiniere Karten, JSON, Fehlerbehandlung und HTTP-Routen zu einer kleinen Todo-API.</div>
+</section>
+
+<section id="referenz">
+<h2>19. Kurzreferenz</h2>
+<h3>Speicher</h3>
+<pre><code>speicher name ist text = "Ada"
+setze name auf "Grace"
+</code></pre>
+<h3>Typen</h3>
+<pre><code>ganzzahl
+zahl
+bool
+text
+liste
+karte
+referenz
+</code></pre>
+<h3>Karte</h3>
+<pre><code>speicher daten ist karte
+karte daten setzt "name" auf "Ada"
+karte daten liest "name" in speicher name
+
+wenn karte daten enthaelt "name":
+    setze gefunden auf wahr
+</code></pre>
+<h3>JSON</h3>
+<pre><code>json liest speicher raw in speicher obj
+json schreibt speicher obj in speicher raw
+</code></pre>
+<h3>HTTP</h3>
+<pre><code>server api bei 18080 parallel 4:
+    route GET "/health" antwortet speicher antwort:
+        setze antwort auf "{\"ok\":true}"
+</code></pre>
+<h3>Fehler</h3>
+<pre><code>versuche:
+    json liest speicher body in speicher daten
+fange fehler in speicher err:
+    setze antwort auf "{\"ok\":false}"
+</code></pre>
+<h3>Objekte</h3>
+<pre><code>klasse Benutzer:
+    eigenschaft name ist text
+
+speicher ref ist referenz
+neu Benutzer in speicher ref
+sammle muell
+</code></pre>
+</section>
+
+<section id="abschluss">
+<h2>20. Lernpfad</h2>
+<p>Wenn du neu im Programmieren bist, lerne in dieser Reihenfolge:</p>
+<ol>
+<li>Speicher und einfache Typen</li>
+<li>Ausdrücke und Bedingungen</li>
+<li>Listen und Karten</li>
+<li>JSON lesen und schreiben</li>
+<li>HTTP-Routen bauen</li>
+<li>Fehlerbehandlung einsetzen</li>
+<li>Klassen und Objekte modellieren</li>
+<li>Module trennen</li>
+<li>Tests schreiben</li>
+<li>Performance erst optimieren, wenn das Programm korrekt ist</li>
+</ol>
+<div class="concept"><strong>Der wichtigste Grundsatz:</strong> Ein gutes Programm ist zuerst verständlich und korrekt. Schnell wird es danach.</div>
+</section>
+
+<section id="v75-ueberblick">
+<h2>21. Update v7.5: Was ist neu?</h2>
+<p>
+Dieser Abschnitt ergänzt den ursprünglichen v4.3.3-Grundkurs. Er ersetzt die Grundlagen nicht. Wer neu programmiert,
+soll weiterhin mit Speicher, Typen, Bedingungen, Listen, Karten, Funktionen und Projekten beginnen. v7.5 kommt danach:
+als Enterprise-Schicht für stabile Artefakte, Web-Integration, Runtime-Härtung und Schulung in realistischen Projektketten.
+</p>
+<div class="grid2">
+<div class="card">
+<h3>Was bleibt aus v4.3.3 wichtig?</h3>
+<ul>
+<li>Variablen und klare Datentypen</li>
+<li>Karten, Listen, JSON und HTTP</li>
+<li>Fehlerbehandlung und Tests</li>
+<li>Module und Projektstruktur</li>
+<li>verständliche Programme vor Optimierung</li>
+</ul>
+</div>
+<div class="card">
+<h3>Was ergänzt v7.5?</h3>
+<ul>
+<li>KBC-STABLE-1 als stabile Bytecode-Spezifikation</li>
+<li>Native-/WASM-Paritätsartefakte</li>
+<li>Web-Projekt-Scaffold mit JS-Interop</li>
+<li>Security/SBOM/Capabilities</li>
+<li>Benchmark-/Kompatibilitätsmatrix und Browser-WASM-Harness</li>
+</ul>
+</div>
+</div>
+<h3>Versionspfad für Schulungen</h3>
+<table>
+<tr><th>Stufe</th><th>Lernziel</th><th>Praxis</th></tr>
+<tr><td>v4.3.3</td><td>Programmieren lernen</td><td>Variablen, Daten, HTTP, OOP, Fehler</td></tr>
+<tr><td>v6.x</td><td>Compiler- und Runtime-Grundlagen</td><td>Parser, Bytecode, Result/Match, Binary Artefakte</td></tr>
+<tr><td>v7.0–v7.2</td><td>Runtime-Vertiefung</td><td>WASM-Heap, GC, Region Allocator, Training Impossible</td></tr>
+<tr><td>v7.3</td><td>Web-Ökosystem</td><td>Importmaps, DOM/Event-Bridge, PWA-Artefakte</td></tr>
+<tr><td>v7.4–v7.5</td><td>Enterprise-Härtung</td><td>KBC-STABLE-1, Security, LSP, Benchmarks, CI-Matrix</td></tr>
+</table>
+<div class="teacher">
+<strong>Dozentenhinweis:</strong> Behandle v7.5 nicht als Ersatz für Kapitel 1–20. Nutze v7.5 als zweiten Kursteil:
+„Was passiert mit einem Programm, wenn es in ein echtes System wächst?“
+</div>
+</section>
+
+<section id="migration">
+<h2>22. Migration v4.3.3 → v7.5</h2>
+<p>
+Die alte Syntax wird in diesem Kurs bewusst erhalten, weil sie didaktisch gut ist. v7.5 ergänzt moderne Projekt- und
+Runtime-Konzepte. Für Schulungen ist die zentrale Botschaft: <strong>Die Lernlogik bleibt gleich, die Artefaktkette wird professioneller.</strong>
+</p>
+<h3>Begriffe übersetzen</h3>
+<table>
+<tr><th>v4.3.3-Begriff</th><th>v7.5-Erweiterung</th><th>Warum wichtig?</th></tr>
+<tr><td>Programm ausführen</td><td>Source → Bytecode → Runtime</td><td>Schüler verstehen Kompilierung und Ausführung.</td></tr>
+<tr><td>Test schreiben</td><td>JUnit/JSON/Hardening-Matrix</td><td>Tests werden CI-fähig.</td></tr>
+<tr><td>HTTP/API</td><td>Web-Projekt + JS-Adapter</td><td>Keim kann mit Web-UI und Bibliotheken arbeiten.</td></tr>
+<tr><td>Fehlerbehandlung</td><td>Result/Match + Security Policy</td><td>Fehler werden strukturiert und prüfbar.</td></tr>
+<tr><td>Projektordner</td><td>Lockfile, SBOM, Capability Manifest</td><td>Enterprise-Projekte brauchen Nachvollziehbarkeit.</td></tr>
+</table>
+<h3>Migration in vier Schritten</h3>
+<ol>
+<li><strong>Alte Beispiele ausführen:</strong> Prüfe zuerst, ob das Grundprogramm verstanden wurde.</li>
+<li><strong>Modulstruktur ergänzen:</strong> Trenne Beispielcode, Tests und Build-Artefakte.</li>
+<li><strong>Stabile Artefakte erzeugen:</strong> Bytecode, Lockfile, SBOM und Bericht.</li>
+<li><strong>Runtime-Pfad vergleichen:</strong> Python-VM, Native/WASM-Manifest und Browser-Harness auswerten.</li>
+</ol>
+<pre><code># typische v7.5-Artefaktkette
+python -m keim v74-build examples/sprache_v74_enterprise_stabilization.keim --out build/v74_final
+python -m keim v74-verify build/v74_final/app.kbcstable
+python -m keim v75-matrix --cwd . --out build/v75_matrix --json
+</code></pre>
+<div class="warnbox">
+<strong>Nicht falsch migrieren:</strong> Eine Migration ist kein Umschreiben aller Einsteigerbeispiele. Erst wenn die Lernenden
+die Grundlagen können, wird die Enterprise-Kette ergänzt.
+</div>
+</section>
+
+<section id="architektur">
+<h2>23. Architektur: Von Source bis Runtime</h2>
+<p>
+Keim v7.5 wird am besten verstanden, wenn man die Artefaktkette betrachtet. Ein Programm ist nicht nur Text.
+Es wird schrittweise in präzisere Formen überführt.
+</p>
+<pre><code>Keim-Source
+  ↓
+Tokenizer / Parser
+  ↓
+Typed AST
+  ↓
+Bytecode / KBC-STABLE-1
+  ↓
+Verifier
+  ↓
+Python-VM / Native-VM / WASM-Harness
+  ↓
+Replay / Benchmark / Security Report
+</code></pre>
+<h3>Warum diese Kette schulungstauglich ist</h3>
+<ul>
+<li><strong>sichtbar:</strong> Jede Stufe kann als Datei betrachtet werden.</li>
+<li><strong>prüfbar:</strong> Der Verifier kann fehlerhafte Artefakte ablehnen.</li>
+<li><strong>vergleichbar:</strong> Differentialtests vergleichen verschiedene Laufzeitpfade.</li>
+<li><strong>erweiterbar:</strong> Neue Backends müssen dieselbe Semantik erfüllen.</li>
+</ul>
+<h3>Minimalbeispiel: eine Funktion als Systemartefakt</h3>
+<pre><code>funktion addiere(a ist ganzzahl, b ist ganzzahl) gibt ganzzahl:
+    rueckgabe a + b
+</code></pre>
+<p>Didaktisch kann daraus gezeigt werden:</p>
+<ol>
+<li>Welche Namen gibt es?</li>
+<li>Welche Typen haben die Namen?</li>
+<li>Welche Slots werden erzeugt?</li>
+<li>Welche Bytecode-Instruktionen entstehen?</li>
+<li>Welche Runtime führt diese Instruktionen aus?</li>
+</ol>
+</section>
+
+<section id="kbc-stable">
+<h2>24. KBC-STABLE-1 & Bytecode</h2>
+<p>
+KBC-STABLE-1 ist die stabilisierte Bytecode-Spezifikation der Enterprise-Schicht. Für Lernende ist wichtig:
+Bytecode ist die maschinennahe Zwischenform, aber noch nicht direkt CPU-Maschinencode.
+</p>
+<div class="grid2">
+<div class="card">
+<h3>Was KBC-STABLE-1 leistet</h3>
+<ul>
+<li>stabile Section-Struktur</li>
+<li>Section-Checksums</li>
+<li>Payload-Hash</li>
+<li>Verifier-kompatible Struktur</li>
+<li>Debug-/Kompatibilitäts-Metadaten</li>
+</ul>
+</div>
+<div class="card">
+<h3>Warum das Enterprise-relevant ist</h3>
+<ul>
+<li>Builds werden reproduzierbarer.</li>
+<li>Artefakte können geprüft werden.</li>
+<li>Backends erhalten eine feste Zielstruktur.</li>
+<li>CI kann Kompatibilität automatisiert prüfen.</li>
+</ul>
+</div>
+</div>
+<h3>Lehrübung</h3>
+<div class="exercise">
+<strong>Aufgabe:</strong> Nimm ein einfaches Programm aus Kapitel 3 oder 10. Beschreibe ohne Code, welche Bytecode-Schritte
+vermutlich entstehen: Konstanten laden, Slots speichern, Werte addieren, zurückgeben.
+</div>
+<h3>Beispielhafte Befehle</h3>
+<pre><code>python -m keim v74-spec --json
+python -m keim v74-build examples/sprache_v74_enterprise_stabilization.keim --out build/v74_final
+python -m keim v74-verify build/v74_final/app.kbcstable
+</code></pre>
+<div class="concept">
+<strong>Merksatz:</strong> Ein stabiles Bytecodeformat ist ein Vertrag zwischen Compiler, VM, Werkzeugen und Tests.
+</div>
+</section>
+
+<section id="typen-match">
+<h2>25. Typen, Result & Match</h2>
+<p>
+v4.3.3 vermittelt einfache Typen. Moderne Keim-Versionen ergänzen strukturierte Fehler- und Entscheidungsmodelle.
+Besonders wichtig sind <code>ergebnis&lt;T,E&gt;</code> und <code>match</code>.
+</p>
+<h3>Warum Result statt unklarer Fehler?</h3>
+<p>
+Bei APIs, Dateizugriffen und Simulationen kann eine Operation scheitern. Ein Result-Wert macht das sichtbar:
+</p>
+<pre><code>funktion lade_zahl(textwert ist text) gibt ergebnis&lt;ganzzahl, text&gt;:
+    wenn textwert == "":
+        rueckgabe fehler("leer")
+    sonst:
+        rueckgabe ok(42)
+</code></pre>
+<h3>Match als saubere Verzweigung</h3>
+<pre><code>funktion nutze() gibt ganzzahl:
+    speicher r ist ergebnis&lt;ganzzahl, text&gt; setzt lade_zahl("x")
+    match r:
+        fall ok(wert):
+            rueckgabe wert
+        fall fehler(err):
+            rueckgabe 0
+</code></pre>
+<h3>Schulungslogik</h3>
+<table>
+<tr><th>Einsteigerbegriff</th><th>Enterprise-Begriff</th><th>Beispiel</th></tr>
+<tr><td>Wenn/Sonst</td><td>kontrollierte Verzweigung</td><td>Wenn Alter &gt; 18</td></tr>
+<tr><td>Fehlertext</td><td>Result-Fehlerwert</td><td>fehler("Datei fehlt")</td></tr>
+<tr><td>Wert vorhanden?</td><td>Pattern Matching</td><td>fall ok(wert)</td></tr>
+</table>
+<div class="exercise">
+<strong>Aufgabe:</strong> Schreibe eine Funktion, die eine Karte liest. Wenn der Schlüssel fehlt, gib
+<code>fehler("nicht gefunden")</code> zurück. Sonst gib <code>ok(wert)</code> zurück.
+</div>
+</section>
+
+<section id="native-wasm">
+<h2>26. Native, WASM, GC & Heap</h2>
+<p>
+Keim hat in den neueren Versionen mehrere Runtime-Pfade bekommen. Für Schulungen muss das nicht als Low-Level-Detail
+beginnen. Die einfache Frage lautet: <strong>Wo läuft mein Programm?</strong>
+</p>
+<div class="grid3">
+<div class="card"><h3>Python-VM</h3><p>gut für Entwicklung, Tests und Sichtbarkeit</p></div>
+<div class="card"><h3>Native-VM</h3><p>Ziel für eigenständige Ausführung und Performance-Pfad</p></div>
+<div class="card"><h3>WASM</h3><p>Ziel für Browser, Edge und portable Sandboxen</p></div>
+</div>
+<h3>WASM-Heap-Runtime</h3>
+<p>
+WASM kennt von Haus aus nur Zahlen und linearen Speicher. Keim modelliert dynamische Werte daher über Tagged Values,
+Heap-Objekte und Runtime-Intrinsics.
+</p>
+<pre><code>Tagged Value:
+  int / bool / null / heap_ref
+
+Heap Object:
+  header
+  type/kind
+  size
+  payload
+</code></pre>
+<h3>GC-Entwicklung in Keim</h3>
+<table>
+<tr><th>Version</th><th>Konzept</th><th>Lernwert</th></tr>
+<tr><td>v6.8</td><td>WASM Heap Runtime</td><td>Warum dynamische Werte Speicher brauchen</td></tr>
+<tr><td>v6.9</td><td>Mark/Sweep + Hashmap</td><td>Warum Speicher wieder freigegeben werden muss</td></tr>
+<tr><td>v7.0</td><td>Generational GC</td><td>Warum junge Objekte anders behandelt werden</td></tr>
+<tr><td>v7.1</td><td>Compacting GC + Region Allocator</td><td>Warum Fragmentierung und temporäre Werte wichtig sind</td></tr>
+</table>
+<div class="teacher">
+<strong>Dozentenhinweis:</strong> Vergleiche Heap/GC mit einem Lager: Kurzlebige Dinge kommen auf den Arbeitstisch
+(Region), langlebige Dinge ins Regal (Heap), Müll wird entfernt (GC), Regale werden geordnet (Compaction).
+</div>
+</section>
+
+<section id="web-enterprise">
+<h2>27. Web-Apps & JS-Interop</h2>
+<p>
+v7.3 erweitert Keim um Web-Projektfähigkeit. Das Ziel ist nicht, alle JavaScript-Ökosysteme nachzubauen.
+Der professionelle Ansatz lautet: <strong>Keim kontrolliert Semantik und Artefakte; JavaScript-Bibliotheken werden über Adapter angebunden.</strong>
+</p>
+<h3>Web-Projekt erzeugen</h3>
+<pre><code>python -m keim web-new examples/web_enterprise_js_ecosystem --name keim_web_training
+python -m keim web-build --cwd examples/web_enterprise_js_ecosystem --out build/web_enterprise --json
+</code></pre>
+<h3>Erzeugte Artefakte</h3>
+<ul>
+<li><code>index.html</code></li>
+<li><code>keim-web-runtime.js</code></li>
+<li><code>app.js</code></li>
+<li><code>keim.web.lock.json</code></li>
+<li><code>manifest.webmanifest</code></li>
+<li><code>service-worker.js</code></li>
+<li><code>adapters/keim-js-adapters.js</code></li>
+</ul>
+<h3>JS-Adapter als Grenze</h3>
+<pre><code>python -m keim web-adapter \
+  --out build/chart_adapter.json \
+  --alias chart \
+  --module Chart \
+  --permission dom
+</code></pre>
+<div class="okbox">
+<strong>Enterprise-Idee:</strong> JS-Bibliotheken werden nicht wild importiert. Sie erhalten Adapter, Berechtigungen,
+Lockfile-Einträge und prüfbare Grenzen.
+</div>
+<h3>Übung</h3>
+<div class="exercise">
+<strong>Aufgabe:</strong> Erstelle eine Mini-Webseite, die einen Zähler anzeigt und per Button erhöht. Beschreibe,
+welcher Teil Keim-Semantik ist und welcher Teil DOM/Event-Bridge ist.
+</div>
+</section>
+
+<section id="security">
+<h2>28. Security, SBOM & Capabilities</h2>
+<p>
+In Enterprise-Projekten reicht „es funktioniert“ nicht. Es muss klar sein, welche Rechte ein Programm hat,
+welche Pakete enthalten sind und welche Artefakte reproduzierbar erzeugt wurden.
+</p>
+<h3>Capability-Modell</h3>
+<p>
+Keim v7.4 führt eine deny-by-default-Denkweise ein:
+</p>
+<pre><code>Standard:
+  kein Netzwerk
+  kein Dateizugriff
+  keine FFI
+  keine unsicheren Host-Aufrufe
+
+Freigabe:
+  explizite Capability
+  manifestiert
+  prüfbar
+</code></pre>
+<h3>SBOM</h3>
+<p>Eine SBOM beschreibt, welche Bestandteile ein Build enthält.</p>
+<pre><code>python -m keim v74-sbom --cwd . --out build/v74_final/sbom
+</code></pre>
+<h3>Security-Check</h3>
+<pre><code>python -m keim v74-security examples/sprache_v74_enterprise_stabilization.keim
+</code></pre>
+<h3>Schulungsgespräch</h3>
+<ul>
+<li>Warum ist ein Lockfile wichtig?</li>
+<li>Warum darf ein Web-Adapter nicht automatisch Netzwerkrechte bekommen?</li>
+<li>Was passiert, wenn ein Paket nachträglich verändert wird?</li>
+<li>Warum sind SHA-256-Prüfsummen hilfreich?</li>
+</ul>
+</section>
+
+<section id="testing-hardening">
+<h2>29. Tests, Benchmarks & Hardening</h2>
+<p>
+v7.5 ergänzt harte Testartefakte. Der wichtigste Gedanke: Ein Enterprise-System wird nicht durch Behauptungen stabil,
+sondern durch wiederholbare Prüfungen.
+</p>
+<h3>Hardening-Matrix</h3>
+<pre><code>python -m keim v75-matrix --cwd . --out build/v75_matrix --json
+</code></pre>
+<p>Typische Artefakte:</p>
+<ul>
+<li><code>differential_matrix.json</code></li>
+<li><code>differential_matrix.junit.xml</code></li>
+<li><code>differential_matrix.html</code></li>
+<li><code>platform_matrix.json</code></li>
+<li><code>github_actions_matrix.yml</code></li>
+</ul>
+<h3>Browser/WASM-Harness</h3>
+<pre><code>python -m keim v75-wasm-browser --out build/v75_browser --json
+</code></pre>
+<p>Der Harness erzeugt:</p>
+<ul>
+<li>eine echte <code>.wasm</code>-Smoke-Datei</li>
+<li>Node-WebAssembly-Testcode</li>
+<li>Browser-Testseite</li>
+<li>Worker-Testskript</li>
+</ul>
+<h3>Benchmark-Grundsatz</h3>
+<div class="concept">
+<strong>Merksatz:</strong> Performance-Aussagen ohne Benchmark sind Hypothesen. Performance-Aussagen mit reproduzierbarem
+Benchmark sind überprüfbare technische Aussagen.
+</div>
+<h3>Übung: Testbericht lesen</h3>
+<div class="exercise">
+<strong>Aufgabe:</strong> Öffne einen HTML- oder JSON-Report aus der Hardening-Matrix. Markiere:
+Testname, Runtime-Pfad, Ergebnis, Dauer und Fehlerursache.
+</div>
+</section>
+
+<section id="training-impossible">
+<h2>30. Training Impossible</h2>
+<p>
+Das Schulungsprojekt „Training Impossible“ ist der didaktische Prototyp für Keims kybernetische Seite:
+Eine Simulation erzeugt Metriken, ein Optimizer erzeugt Policy-Kandidaten, daraus werden Bytecode- und Native-Plan-Artefakte.
+</p>
+<h3>Start</h3>
+<pre><code>python -m keim training-impossible --steps 120 --out build/training_impossible --json
+</code></pre>
+<h3>Artefakte</h3>
+<ul>
+<li><code>metrics.json</code></li>
+<li><code>optimized_policy.kbc72.json</code></li>
+<li><code>optimized_policy_native_plan.cpp</code></li>
+<li><code>training_replay.kreplay.json</code></li>
+<li><code>training_dashboard.html</code></li>
+<li><code>report.json</code></li>
+</ul>
+<h3>Was Lernende daran verstehen sollen</h3>
+<ol>
+<li>Eine Simulation hat messbare Zustände.</li>
+<li>Eine Policy beeinflusst diese Zustände.</li>
+<li>Optimierung erzeugt neue Kandidaten.</li>
+<li>Bytecode macht Kandidaten prüfbar.</li>
+<li>Replay macht den Verlauf nachvollziehbar.</li>
+</ol>
+<div class="warnbox">
+<strong>Wichtig:</strong> Das ist kein magisches autonomes KI-System. Es ist ein transparenter, kontrollierter Trainingsloop.
+Genau deshalb ist es gut für Schulungen geeignet.
+</div>
+</section>
+
+<section id="labs">
+<h2>31. Enterprise-Schulungslabs</h2>
+<p>
+Die folgenden Labs sind so aufgebaut, dass sie in Workshops direkt eingesetzt werden können.
+</p>
+<h3>Lab 1: Vom Grundprogramm zum Build-Artefakt</h3>
+<ol>
+<li>Schreibe ein kleines Keim-Programm mit Funktion und Rückgabe.</li>
+<li>Führe es aus.</li>
+<li>Erzeuge ein Build-Artefakt.</li>
+<li>Prüfe das Artefakt.</li>
+</ol>
+<pre><code>python -m keim v74-build examples/sprache_v74_enterprise_stabilization.keim --out build/lab1
+python -m keim v74-verify build/lab1/app.kbcstable
+</code></pre>
+<h3>Lab 2: Result und Match</h3>
+<ol>
+<li>Schreibe eine Funktion, die fehlschlagen kann.</li>
+<li>Gib <code>ok(...)</code> oder <code>fehler(...)</code> zurück.</li>
+<li>Verarbeite das Ergebnis mit <code>match</code>.</li>
+</ol>
+<h3>Lab 3: Web-App mit Adapter</h3>
+<ol>
+<li>Erzeuge ein Web-Projekt.</li>
+<li>Baue es.</li>
+<li>Erstelle einen JS-Adapter.</li>
+<li>Beschreibe die Berechtigungen.</li>
+</ol>
+<h3>Lab 4: Hardening-Report</h3>
+<ol>
+<li>Erzeuge die v7.5-Matrix.</li>
+<li>Öffne den HTML-Report.</li>
+<li>Ordne Fehlerarten den Schichten zu: Source, Bytecode, Runtime, Browser.</li>
+</ol>
+<h3>Lab 5: Training Impossible</h3>
+<ol>
+<li>Starte den Trainingslauf.</li>
+<li>Vergleiche Metriken.</li>
+<li>Öffne das Dashboard.</li>
+<li>Erkläre die erzeugten Artefakte.</li>
+</ol>
+</section>
+
+<section id="dozentenleitfaden">
+<h2>32. Dozentenleitfaden & Prüfungen</h2>
+<h3>Empfohlener Kursaufbau</h3>
+<table>
+<tr><th>Tag</th><th>Schwerpunkt</th><th>Kapitel</th><th>Ergebnis</th></tr>
+<tr><td>1</td><td>Grundlagen</td><td>1–8</td><td>Variablen, Typen, Listen, Karten</td></tr>
+<tr><td>2</td><td>Programme strukturieren</td><td>9–15</td><td>Funktionen, Module, Dateien, HTTP</td></tr>
+<tr><td>3</td><td>Robustheit</td><td>16–20, 25, 28</td><td>Fehler, Result, Security</td></tr>
+<tr><td>4</td><td>Enterprise-Artefakte</td><td>23–24, 29</td><td>Bytecode, Build, Tests, Matrix</td></tr>
+<tr><td>5</td><td>Web und Training</td><td>27, 30–31</td><td>Web-App, Training Impossible, Abschlussprojekt</td></tr>
+</table>
+<h3>Prüfungsfragen</h3>
+<ol>
+<li>Was ist der Unterschied zwischen Source-Code und Bytecode?</li>
+<li>Warum ist ein Lockfile für reproduzierbare Builds wichtig?</li>
+<li>Warum ist <code>Result</code> besser als ein unstrukturierter Fehlertext?</li>
+<li>Was macht ein Capability-Modell sicherer?</li>
+<li>Warum braucht WASM ein eigenes Heap-Modell für dynamische Werte?</li>
+<li>Was prüft eine Differentialtest-Matrix?</li>
+<li>Was ist der Unterschied zwischen einem Web-Adapter und einem direkten Import?</li>
+<li>Warum ist Replay für Simulationen wertvoll?</li>
+</ol>
+<h3>Bewertungsraster für Abschlussprojekt</h3>
+<table class="checklist">
+<tr><th>Kriterium</th><th>Sehr gut</th><th>Ausreichend</th><th>Nacharbeiten</th></tr>
+<tr><td>Funktionalität</td><td>Programm läuft und deckt Randfälle ab</td><td>Hauptfall läuft</td><td>Programm bricht ab</td></tr>
+<tr><td>Struktur</td><td>Module/Funktionen klar getrennt</td><td>teilweise strukturiert</td><td>alles in einem Block</td></tr>
+<tr><td>Fehlerbehandlung</td><td>Result/Match oder klare Fehlerlogik</td><td>einfache Prüfung</td><td>Fehler ignoriert</td></tr>
+<tr><td>Tests</td><td>mehrere Tests + Report</td><td>ein Test</td><td>keine Tests</td></tr>
+<tr><td>Enterprise-Artefakte</td><td>Build, Verify, Report, Lock/SBOM</td><td>Build vorhanden</td><td>keine Artefakte</td></tr>
+</table>
+<div class="teacher">
+<strong>Dozentenhinweis:</strong> Der Kurs soll nicht beweisen, dass Keim „alles besser“ macht. Er soll zeigen, wie moderne
+Sprach-, Runtime- und Web-Architektur transparent aufgebaut und geprüft werden kann.
+</div>
+</section>
+
+
+<section id="v785-runtime-packager">
+<h2>33. Update v7.8.5: Programme ausliefern statt nur ausführen</h2>
+<div class="update-banner">
+<strong>Neu in der Schulung:</strong> v7.8.5 ergänzt den bisherigen v7.5-Enterprise-Teil um reale Auslieferung:
+Full Runtime Packager, GPU-aware Bundles, Self-Bootstrapping Launcher, internes PE64/ELF64-Linking und Projekt-Web-Overlays.
+</div>
+
+<h3>Was Lernende jetzt zusätzlich verstehen sollen</h3>
+<div class="grid">
+<div class="card"><strong>Runtime-Bundle</strong><p>Ein Keim-Programm besteht nicht nur aus Source. Es kann mit Runtime, Manifest, Scripts, Web-Artefakten und optional GPU-Treiberplan ausgeliefert werden.</p></div>
+<div class="card"><strong>Launcher</strong><p>Der native Launcher startet die gebündelte Runtime. Dadurch braucht der Startpfad keine externe C/C++-Toolchain.</p></div>
+<div class="card"><strong>GPU-aware</strong><p>GPU-Treiber werden nicht blind vorausgesetzt, sondern als Manifest, Smoke-Test und Fallback-Plan behandelt.</p></div>
+<div class="card"><strong>Web Overlay</strong><p>Wenn ein Projekt <code>web/index.html</code> enthält, wird diese Ansicht in den Web-Build übernommen und durch Keim-Artefakte ergänzt.</p></div>
+</div>
+
+<h3>Die vier Paketformen</h3>
+<table>
+<tr><th>Modus</th><th>Einfach erklärt</th><th>Wann im Kurs verwenden?</th></tr>
+<tr><td><code>full-runtime</code></td><td>Alles Nötige wird mitgeliefert.</td><td>Abschlussprojekt und Deployment-Demo.</td></tr>
+<tr><td><code>native-subset</code></td><td>Direkter nativer Pfad für unterstützte Teilmengen.</td><td>Performance- und Compiler-Vergleich.</td></tr>
+<tr><td><code>zipapp</code></td><td>Python-Single-File-Artefakt.</td><td>Portables Unterrichtsartefakt.</td></tr>
+<tr><td><code>directory-bundle</code></td><td>Entpackter Ordner mit allen Dateien.</td><td>Debugging, Inspektion, Prüfung.</td></tr>
+</table>
+
+<h3>Kommandos für die Schulung</h3>
+<pre><code>python -m keim exe-status --json
+
+python -m keim exe-pack examples/agenten_zweige_v78_1_gpu_aware/src/main.keim ^
+  --out build/agenten_bundle ^
+  --name agenten_zweige ^
+  --target auto ^
+  --gpu-driver driver/build/CC_OpenCl.dll
+
+python -m keim exe-verify build/agenten_bundle --json
+python -m keim exe-run build/agenten_bundle
+</code></pre>
+
+<h3>Neues Merkschema</h3>
+<table>
+<tr><th>Frage</th><th>Antwort für Anfänger</th><th>Technische Vertiefung</th></tr>
+<tr><td>Was wird gepackt?</td><td>Programm plus Laufzeitumgebung.</td><td>Source, Runtime, Module, Value Model, Manifest, Scripts, optional Web/GPU.</td></tr>
+<tr><td>Was macht der Launcher?</td><td>Er startet das Paket.</td><td>PE64/ELF64-Bootstrapper ohne externe Toolchain, der <code>run.bat</code> oder <code>run.sh</code> ausführt.</td></tr>
+<tr><td>Was bedeutet GPU-aware?</td><td>GPU kann genutzt werden, muss aber prüfbar sein.</td><td>Treiberkopie, Manifest, Plan, Smoke-Test, CPU-Fallback.</td></tr>
+<tr><td>Warum Web Overlay?</td><td>Die eigene Oberfläche bleibt erhalten.</td><td>Projektdateien aus <code>web/</code> werden kopiert und Keim-Web-Artefakte ergänzt.</td></tr>
+</table>
+
+<div class="warnbox">
+<strong>Nicht verwechseln:</strong> v7.8.5 liefert ein reales selbststartendes Runtime-Paket. Das ist nicht automatisch eine vollständige native Übersetzung jedes Sprachfeatures.
+</div>
+</section>
+
+
+<footer>
+<p>Keim Programmieren-Grundkurs · Original v4.3.3 vollständig erhalten · erweitert für Keim Genesis v7.5 Enterprise Hardening Matrix und v7.8.5 Runtime Packaging · Allgemeine Programmierung plus Enterprise-Artefaktkette.</p>
+</footer>
+</main>
+</div>
+</body>
+</html>

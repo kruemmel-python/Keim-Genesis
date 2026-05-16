@@ -1,0 +1,11 @@
+modul demo.v64.named
+
+exportiere funktion main
+
+typ Benutzer:
+    name ist text
+    alter ist ganzzahl
+
+funktion main() gibt ganzzahl:
+    speicher user ist Benutzer setzt Benutzer(name: "Ada", alter: 42)
+    rueckgabe user.alter

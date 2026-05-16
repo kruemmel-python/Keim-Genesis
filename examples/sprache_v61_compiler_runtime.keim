@@ -1,0 +1,42 @@
+modul demo.v61
+
+exportiere funktion main
+
+typ Benutzer:
+    name ist text
+    alter ist ganzzahl
+
+akteur Zaehler:
+    speicher wert ist ganzzahl setzt 0
+
+    bei "hoch":
+        wert setzt wert + 1
+
+    bei "wert" antwortet ganzzahl:
+        rueckgabe wert
+
+funktion addiere(a ist ganzzahl, b ist ganzzahl) gibt ganzzahl:
+    rueckgabe a + b
+
+funktion main() gibt ganzzahl:
+    speicher zahlen ist liste<ganzzahl> setzt [1, 2, 3]
+    speicher m ist karte<text, ganzzahl> setzt {"eins": 1, "zwei": 2}
+    speicher ch ist kanal<ganzzahl> setzt kanal()
+    sende ch addiere(zahlen[0], m.zwei)
+    speicher empfangen ist ganzzahl setzt empfange(ch)
+    speicher z ist akteur setzt starte("Zaehler")
+    frage(z, "hoch")
+    frage(z, "hoch")
+    speicher stand ist ganzzahl setzt frage(z, "wert")
+    snapshot speichere "build/v61_snapshot.json"
+    replay marke "nach_actor"
+    pruefe empfangen == 3
+    pruefe stand == 2
+    rueckgabe empfangen + stand
+
+test "kanal und actor":
+    pruefe main() == 5
+
+test "typfehler wird erwartet":
+    erwarte fehler:
+        speicher falsch ist ganzzahl setzt "kein int"

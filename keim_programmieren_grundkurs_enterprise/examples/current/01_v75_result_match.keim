@@ -1,0 +1,15 @@
+modul kurs.v75.result
+
+funktion lade_punkt(name ist text) gibt ergebnis<ganzzahl, text>:
+    wenn name == "":
+        rueckgabe fehler("Name fehlt")
+    sonst:
+        rueckgabe ok(42)
+
+funktion main() gibt ganzzahl:
+    speicher r ist ergebnis<ganzzahl, text> setzt lade_punkt("Ada")
+    match r:
+        fall ok(wert):
+            rueckgabe wert
+        fall fehler(err):
+            rueckgabe 0

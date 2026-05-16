@@ -1,0 +1,22 @@
+modul training.impossible.policy
+
+exportiere funktion score_policy
+exportiere funktion main
+
+typ Steuerung:
+    wander ist kommazahl
+    food_follow ist kommazahl
+    danger_avoid ist kommazahl
+    metabolism ist kommazahl
+    diffusion ist kommazahl
+
+funktion score_policy(alive ist ganzzahl, energy ist kommazahl, hunger ist kommazahl) gibt kommazahl:
+    rueckgabe alive * 2 + energy * 12 - hunger * 8
+
+funktion main() gibt ganzzahl:
+    speicher alive ist ganzzahl setzt 42
+    speicher energy ist kommazahl setzt 0.9
+    speicher hunger ist kommazahl setzt 0.1
+    speicher score ist kommazahl setzt score_policy(alive, energy, hunger)
+    pruefe score > 80
+    rueckgabe alive

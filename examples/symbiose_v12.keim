@@ -1,0 +1,75 @@
+# Keim Genesis v1.2 — Symbiose
+#
+# v1.0: parametrisierte Bausteine
+# v1.1: Kernel-ABI + segmented Scatter als GPU-Referenz
+# v1.2: Parameter-Sweep und Beobachtungsdashboard
+
+welt symbiose mit 1200 agenten groesse 100 32
+
+feld hunger startet bei 0.20
+feld energie startet bei 0.84
+feld mut startet bei 0.30
+feld fokus startet bei 0.16
+feld vertrauen startet bei 0.22
+
+spur futter startet bei 0.0 quellen 32 diffundiert 0.145 zerfaellt 0.012
+spur gefahr startet bei 0.0 quellen 12 diffundiert 0.10 zerfaellt 0.018
+spur ruhe startet bei 0.0 quellen 10 diffundiert 0.13 zerfaellt 0.010
+spur signal startet bei 0.0 quellen 4 diffundiert 0.18 zerfaellt 0.016
+
+quelle futter bei 18 10 staerke 1.0
+quelle futter bei 84 24 staerke 1.0
+quelle gefahr bei 50 16 staerke 1.0
+quelle ruhe bei 10 27 staerke 1.0
+quelle ruhe bei 88 5 staerke 1.0
+quelle signal bei 50 6 staerke 1.0
+
+baustein stoffwechsel($e_verlust, $hunger_plus):
+    agent verliert energie $e_verlust
+    agent bekommt hunger $hunger_plus
+
+baustein kopple($feld, $spur, $art, $betrag):
+    feld $feld $art spur $spur mit $betrag
+
+baustein suche($feld, $spur, $grenze):
+    wenn $feld > $grenze: agent folgt spur $spur
+
+baustein fund:
+    wenn agent findet futter: hunger sinkt 0.36
+    wenn agent findet futter: energie waechst 0.25
+    wenn agent findet futter: mut waechst 0.035
+    wenn agent findet futter: spur futter wird staerker 0.58
+
+baustein emission:
+    feld fokus schreibt spur ruhe mit 0.012
+    feld mut sendet spur signal mit 0.010
+    feld hunger zeichnet spur gefahr mit 0.003
+    feld vertrauen sendet spur signal mit 0.009
+
+jede runde:
+    agent wandert 0.075
+    nutze stoffwechsel(0.004, 0.006)
+    nutze kopple(fokus, ruhe, folgt, 0.014)
+    nutze kopple(fokus, gefahr, meidet, 0.012)
+    nutze kopple(mut, futter, folgt, 0.010)
+    nutze kopple(mut, gefahr, meidet, 0.018)
+    nutze kopple(vertrauen, signal, folgt, 0.012)
+    wenn agent riecht spur gefahr > 0.24: agent meidet spur gefahr
+    nutze suche(hunger, futter, 0.50)
+    nutze suche(fokus, ruhe, 0.35)
+    wenn mut < 0.18: agent folgt spur ruhe
+    nutze suche(vertrauen, signal, 0.38)
+    nutze fund
+    nutze emission
+    spur futter breitet sich aus
+    zeige symbiose
+
+alle 3 runden:
+    spur ruhe breitet sich aus
+    spur signal breitet sich aus
+    fokus sinkt 0.008
+
+alle 5 runden:
+    spur gefahr breitet sich aus
+    mut sinkt 0.010
+    vertrauen sinkt 0.006

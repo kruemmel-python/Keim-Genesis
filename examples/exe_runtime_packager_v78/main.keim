@@ -1,0 +1,14 @@
+modul demo.v78.exe
+
+exportiere funktion main
+
+typ Benutzer:
+    name ist text
+    alter ist ganzzahl
+
+funktion main() gibt ganzzahl:
+    speicher zahlen ist liste<ganzzahl> setzt [10, 20, 12]
+    speicher index ist karte<text, ganzzahl> setzt {"offset": 0, "bonus": 20}
+    speicher benutzer ist Benutzer setzt Benutzer("Ada", 42)
+    pruefe benutzer.alter == 42
+    rueckgabe zahlen[0] + index.bonus + zahlen[2]

@@ -1,0 +1,14 @@
+berechtigung system.netz
+
+welt debugtest mit 2 agenten groesse 8 4
+speicher running bool startet bei wahr
+speicher zahlen ist liste<ganzzahl>
+speicher index ist karte<text, ganzzahl>
+speicher antwort text startet bei "ok"
+
+jede runde:
+    liste zahlen fuegt 42 hinzu
+    karte index setzt "antwort" auf 200
+    debug beobachtet speicher running
+    debug beobachtet speicher zahlen
+    debug sendet "kontrollpunkt"

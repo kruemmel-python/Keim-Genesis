@@ -1,0 +1,18 @@
+# Keim v4.4: Web-GUI, FFI-Deklaration, Hintergrund-Task und Await-Hook
+
+welt app mit 4 agenten groesse 10 5
+speicher status text startet bei "bereit"
+speicher task_ok bool startet bei falsch
+speicher ffi_result ganzzahl startet bei 0
+
+# FFI-Beispiel: Pfad muss lokal existieren, z.B. eine eigene DLL/SO.
+# bibliothek systemlib laedt "meine_bibliothek.dll"
+
+webgui kontrollraum bei 18081 titel "Keim Kontrollraum" api "http://127.0.0.1:18080"
+
+hintergrund vorbereiten:
+    speicher status setzt "hintergrund_fertig"
+
+jede runde:
+    agent wandert 0.1
+    erwarte vorbereiten in speicher task_ok

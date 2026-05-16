@@ -1,0 +1,90 @@
+# Keim Genesis v2.0 — drei große Sprachschritte
+#
+# 1) Bedingungsalgebra: und/oder/nicht plus Klammern
+# 2) Zeitspeicher: speicher NAME startet bei X, wird durch Regeln verändert
+# 3) Agentenausdrücke: feld NAME wird AUSDRUCK mit Feld-, Spur- und Speicherlesezugriffen
+
+verwende "basis"
+verwende "kreislauf"
+
+wert agenten = 1000
+wert breite = 96
+wert hoehe = 32
+wert hunger_start = 0.22
+wert energie_start = 0.82
+wert hunger_suche = std_suche_hunger
+wert alarm_decay = 0.035
+
+welt sprache20 mit $agenten agenten groesse $breite $hoehe
+
+feld hunger startet bei $hunger_start
+feld energie startet bei $energie_start
+feld risiko startet bei 0.0
+feld richtung startet bei 0.0
+feld fokus startet bei 0.10
+
+speicher alarm startet bei 0.0
+speicher takt startet bei 0.0
+
+spur futter startet bei 0.0 quellen 18 diffundiert 0.15 zerfaellt 0.012
+spur gefahr startet bei 0.0 quellen 7 diffundiert 0.10 zerfaellt 0.018
+spur ruhe startet bei 0.0 quellen 5 diffundiert 0.12 zerfaellt 0.010
+spur signal startet bei 0.0 quellen 4 diffundiert 0.17 zerfaellt 0.016
+
+quelle futter bei 14 8 staerke 1.0
+quelle futter bei 78 25 staerke 1.0
+quelle gefahr bei 48 16 staerke 1.0
+quelle ruhe bei 9 27 staerke 1.0
+quelle ruhe bei 84 5 staerke 1.0
+quelle signal bei 48 6 staerke 1.0
+
+baustein alarm_ausdruck:
+    feld risiko wird hunger * 0.65 + spur gefahr * 0.35 + speicher alarm * 0.20 - energie * 0.12
+    feld richtung wird spur futter * 0.55 + fokus * 0.25 - spur gefahr * 0.30
+
+baustein alarm_logik:
+    wenn risiko > 0.18 und nicht speicher alarm > 0.95:
+        speicher alarm waechst 0.22
+        feld risiko schreibt spur signal mit 0.004
+    sonst:
+        speicher alarm sinkt 0.010
+
+baustein bewegung:
+    wenn (speicher alarm > 0.12 oder agent riecht spur gefahr > 0.24):
+        agent meidet spur gefahr
+        fokus sinkt 0.004
+    wenn (richtung > 0.18 und hunger > $hunger_suche) und nicht speicher alarm > 0.70:
+        agent folgt spur futter
+        feld richtung schreibt spur signal mit 0.006
+
+jede runde:
+    agent wandert $std_wander
+    nutze stoffwechsel(0.006, 0.004)
+    nutze spur_zu_feld(fokus, ruhe, 0.010)
+    nutze alarm_ausdruck
+    nutze alarm_logik
+    nutze bewegung
+    wenn agent findet futter oder speicher alarm > 0.86: hunger sinkt 0.30
+    wenn agent findet futter und nicht speicher alarm > 0.86: energie waechst 0.20
+    speicher alarm sinkt $alarm_decay
+    speicher takt waechst 0.010
+    feld fokus schreibt spur ruhe mit 0.010
+    spur futter breitet sich aus
+    zeige sprache20
+
+alle 3 runden:
+    spur ruhe breitet sich aus
+    spur signal breitet sich aus
+    fokus sinkt 0.008
+
+alle 5 runden:
+    spur gefahr breitet sich aus
+    speicher takt setzt 0.0
+
+erwarte feld hunger zwischen 0 und 1
+erwarte feld risiko zwischen 0 und 1
+erwarte feld richtung zwischen 0 und 1
+erwarte speicher alarm zwischen 0 und 1
+erwarte speicher takt zwischen 0 und 1
+erwarte spur futter zwischen 0 und 1
+erwarte treffer >= 0

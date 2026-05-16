@@ -1,0 +1,12 @@
+modul kurs.v75.web
+
+# Didaktisches Beispiel: Die DOM-/JS-Bridge wird über das Web-Projekt erzeugt.
+# Keim hält die Fachlogik, der Adapter kapselt Browser-Details.
+
+funktion erhoehe(stand ist ganzzahl) gibt ganzzahl:
+    rueckgabe stand + 1
+
+funktion main() gibt ganzzahl:
+    speicher zaehler ist ganzzahl setzt 0
+    speicher zaehler setzt erhoehe(zaehler)
+    rueckgabe zaehler

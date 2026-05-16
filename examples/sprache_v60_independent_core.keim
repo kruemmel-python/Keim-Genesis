@@ -1,0 +1,25 @@
+modul demo.main
+
+verwende sprache_v51_foundation_runtime als math
+
+typ Benutzer:
+    name ist text
+    alter ist ganzzahl
+
+typ Antwort ist Erfolg | Fehler
+
+exportiere funktion main
+
+funktion begruesse(name ist text) gibt text:
+    rueckgabe "Hallo " + name
+
+funktion main() gibt ganzzahl:
+    speicher zahlen ist liste<ganzzahl> setzt [1, 2, 3]
+    speicher index ist karte<text, ganzzahl> setzt {"eins": 1, "zwei": 2}
+    speicher summe ist ganzzahl setzt math.addiere(zahlen[0], index.zwei)
+    ausgabe begruesse("Keim")
+    pruefe summe == 3
+    rueckgabe summe
+
+test "main liefert 3":
+    pruefe main() == 3

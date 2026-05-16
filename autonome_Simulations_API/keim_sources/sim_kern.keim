@@ -1,0 +1,20 @@
+# Modul-Ebene: sim_kern
+# Enthält die simulativen Keim-Regeln, die vom Host bei Bedarf in den
+# nativen v4.1/v4.2-Hotspot gespiegelt werden können.
+
+baustein sim_kern_schritt:
+    feld energie wird clamp(energie - speicher energie_verlust)
+    feld drift wird clamp(drift + speicher wind_signal)
+    wenn energie > 0.10:
+        agent wandert 0.03
+    sonst:
+        agent ruht
+    wenn agent findet futter:
+        energie waechst 0.20
+        spur futter wird staerker 0.25
+    spur futter breitet sich aus
+
+baustein sim_kern_snapshot:
+    speicher energie_mittel liest mittel feld energie
+    speicher energie_min liest min feld energie
+    tabelle snapshots fuegt tick=zeit energie=speicher.energie_mittel status="ok" ein
