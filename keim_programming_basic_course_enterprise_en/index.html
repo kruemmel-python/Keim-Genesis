@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Learning Programming with Keim</title>
+<style>
+:root{
+  --bg:#0f1218; --panel:#171c25; --panel2:#1e2633; --text:#eef3ff; --muted:#aab7cc;
+  --accent:#78dce8; --accent2:#a9dc76; --warn:#ffd866; --danger:#ff6188; --code:#0a0d12;
+  --border:#2f3a4d; --shadow:0 18px 50px rgba(0,0,0,.28);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:linear-gradient(145deg,#0f1218,#151b26 45%,#10141c);color:var(--text);line-height:1.62}
+a{color:var(--accent);text-decoration:none} a:hover{text-decoration:underline}
+header.hero{padding:56px 28px 34px;border-bottom:1px solid var(--border);background:radial-gradient(circle at 20% 20%,rgba(120,220,232,.18),transparent 35%),radial-gradient(circle at 80% 0%,rgba(169,220,118,.12),transparent 32%),#111722}
+.hero-inner{max-width:1220px;margin:0 auto}.badge{display:inline-block;border:1px solid rgba(120,220,232,.45);color:var(--accent);border-radius:999px;padding:5px 12px;background:rgba(120,220,232,.08);font-size:.9rem}
+h1{font-size:clamp(2.1rem,5vw,4.4rem);line-height:1.03;margin:18px 0 12px;letter-spacing:-.04em}.subtitle{font-size:1.22rem;color:var(--muted);max-width:900px}
+.layout{display:grid;grid-template-columns:310px minmax(0,1fr);gap:24px;max-width:1460px;margin:0 auto;padding:24px}
+nav{position:sticky;top:16px;align-self:start;background:rgba(23,28,37,.86);border:1px solid var(--border);border-radius:22px;padding:16px;box-shadow:var(--shadow);backdrop-filter:blur(12px);max-height:calc(100vh - 32px);overflow:auto}
+nav h2{font-size:1rem;margin:6px 8px 12px;color:var(--accent2)} nav a{display:block;padding:8px 10px;border-radius:10px;color:var(--muted);font-size:.95rem} nav a:hover{background:var(--panel2);color:var(--text);text-decoration:none}
+main{min-width:0}.card{background:linear-gradient(180deg,rgba(30,38,51,.86),rgba(23,28,37,.94));border:1px solid var(--border);border-radius:22px;padding:24px;box-shadow:var(--shadow);margin-bottom:22px}
+section{background:rgba(23,28,37,.84);border:1px solid var(--border);border-radius:22px;padding:26px;margin:22px 0;box-shadow:var(--shadow)}
+h2{font-size:1.8rem;margin-top:0;padding-bottom:10px;border-bottom:1px solid var(--border)} h3{font-size:1.25rem;color:var(--accent2);margin-top:1.4em}
+pre{background:var(--code);border:1px solid #222b3c;border-radius:16px;padding:16px;overflow:auto} code{font-family:ui-monospace,SFMono-Regular,Consolas,Monaco,monospace}
+table{width:100%;border-collapse:collapse;margin:14px 0;border:1px solid var(--border)} th,td{border:1px solid var(--border);padding:9px;vertical-align:top} th{background:#1e2633;color:#fff}
+.note{border-left:4px solid var(--accent);background:rgba(120,220,232,.08);padding:12px 14px;border-radius:12px}.warn{border-left-color:var(--warn);background:rgba(255,216,102,.08)}
+.kbd{display:inline-block;border:1px solid var(--border);background:#0b1018;border-radius:8px;padding:1px 6px;color:#fff}.tag{display:inline-block;border:1px solid var(--border);border-radius:999px;padding:2px 8px;margin:2px;color:var(--accent2);background:#111722}
+@media(max-width:900px){.layout{grid-template-columns:1fr}nav{position:relative;top:0;max-height:none}}
+</style>
+</head>
+<body>
+<header class="hero"><div class="hero-inner">
+<span class="badge">English edition · Keim Genesis v7.8.5</span>
+<h1>Learning Programming with Keim</h1>
+<p class="subtitle">General programming course in English: beginner basics, OOP, Web APIs, Enterprise runtime concepts and Keim v7.8.5 packaging.</p>
+<p><span class="tag">beginner-friendly</span><span class="tag">runtime</span><span class="tag">Enterprise v7.5</span><span class="tag">Packaging v7.8.5</span><span class="tag">GPU-aware delivery</span></p>
+</div></header>
+<div class="layout">
+<nav><h2>Contents</h2><a href="#s0">0. Preface: The Genesis of Keim</a>
+<a href="#s1">1. Course goals</a>
+<a href="#s2">2. How programming works</a>
+<a href="#s3">3. Setup and execution</a>
+<a href="#s4">4. First program</a>
+<a href="#s5">5. Variables and memory</a>
+<a href="#s6">6. Data types</a>
+<a href="#s7">7. Operators and expressions</a>
+<a href="#s8">8. Text</a>
+<a href="#s9">9. Tuples, lists and maps</a>
+<a href="#s10">10. Control flow: if, loops and process</a>
+<a href="#s11">11. Functions</a>
+<a href="#s12">12. Modules and imports</a>
+<a href="#s13">13. Object-oriented programming</a>
+<a href="#s14">14. Error handling</a>
+<a href="#s15">15. Files, JSON and CSV</a>
+<a href="#s16">16. HTTP and APIs</a>
+<a href="#s17">17. Time, crypto and processes</a>
+<a href="#s18">18. Debugging</a>
+<a href="#s19">19. Practice projects</a>
+<a href="#s20">20. Quick reference</a>
+<a href="#s21">21. Learning path</a>
+<a href="#s22">22. Update v7.5: what is new?</a>
+<a href="#s23">23. Migration v4.3.3 → v7.5</a>
+<a href="#s24">24. Architecture: from source to runtime</a>
+<a href="#s25">25. KBC-STABLE-1 and bytecode</a>
+<a href="#s26">26. Types, Result and Match</a>
+<a href="#s27">27. Native, WASM, GC and heap</a>
+<a href="#s28">28. Web apps and JS interop</a>
+<a href="#s29">29. Security, SBOM and capabilities</a>
+<a href="#s30">30. Tests, benchmarks and hardening</a>
+<a href="#s31">31. Training Impossible</a>
+<a href="#s32">32. Enterprise training labs</a>
+<a href="#s33">33. Instructor guide and exams</a>
+<a href="#s34">34. Update v7.8.5: deliver programs, not only run them</a></nav>
+<main>
+<div class="card note"><strong>Translation note:</strong> This English edition keeps the original course structure and technical intent. Keim language keywords inside code examples intentionally remain German where they are part of the language syntax.</div>
+<section id="s0"><h2>0. Preface: The Genesis of Keim</h2>
+
+<h3>The vision</h3>
+<p>Keim was designed as a sovereign programming substrate: readable enough for training, close enough to the machine to reason about runtime, memory, native execution and delivery artefacts. The course therefore teaches syntax, but also system thinking: values, state, rules, fields, agents, modules and runtime boundaries.</p>
+<h3>Why the name “Keim”?</h3>
+<p>A <em>keim</em>, a seed or germ, is a compact unit that contains a plan for growth. A small Keim program can start with a few named values and grow into an HTTP service, a field simulation, a Web adapter, a native target or a runtime package.</p>
+<h3>Path to v4.3.3 and beyond</h3>
+<p>The original v4.3.3 course remains the foundation. Later v7.5 Enterprise chapters add stable bytecode, Result/Match, Web/WASM, security and hardening. Version v7.8.5 adds the delivery layer: full runtime packaging, self-bootstrapping launchers, GPU-aware packaging and verifiable bundles.</p>
+
+</section>
+<section id="s1"><h2>1. Course goals</h2>
+
+<h3>You learn terms</h3><p>Variable, type, expression, condition, loop, function, object, class, error, module and API.</p>
+<h3>You learn thinking</h3><p>A program is a sequence of clear state changes. Data is read, checked, changed and emitted.</p>
+<h3>You learn practice</h3><p>Every chapter uses small Keim examples, typical mistakes and exercises.</p>
+<p><strong>Important:</strong> Keim uses readable German keywords, but the programming ideas are the same as in Python, JavaScript, Java or C#.</p>
+
+</section>
+<section id="s2"><h2>2. How programming works</h2>
+
+<p>A program consists of instructions. Most programs follow the same pattern: input, processing, state and output.</p>
+<table><tr><th>Step</th><th>Question</th><th>Example</th></tr><tr><td>Input</td><td>What data comes in?</td><td>Name, age, JSON request, file content.</td></tr><tr><td>Processing</td><td>What is computed or decided?</td><td>Is the age above 18? What is the price?</td></tr><tr><td>State</td><td>What is stored?</td><td>User, cart, settings.</td></tr><tr><td>Output</td><td>What comes out?</td><td>Text, JSON, file, HTTP response.</td></tr></table>
+<h3>Imperative thinking</h3><p>You give step-by-step commands.</p><pre><code>speicher zaehler ist ganzzahl = 0
+setze zaehler auf 1</code></pre>
+<h3>Declarative thinking</h3><p>You describe what should hold. A route declares which path answers a request.</p>
+
+</section>
+<section id="s3"><h2>3. Setup and execution</h2>
+
+<h3>Programming as a state machine</h3>
+<p>Keim treats a program as controlled state transitions. Values are created, checked, transformed and emitted. This is useful in simulations, APIs and training because every step can be explained as an explicit change.</p>
+<h3>Key terms</h3>
+<table><tr><th>Term</th><th>Meaning</th></tr>
+<tr><td>memory / Speicher</td><td>A named storage location with a type and a value.</td></tr>
+<tr><td>field</td><td>A computed space, grid or influence layer used by agents or simulations.</td></tr>
+<tr><td>trace</td><td>Persistent or temporary evidence left by agents or rules.</td></tr>
+<tr><td>agent</td><td>An entity that carries state and acts according to rules.</td></tr>
+<tr><td>runtime</td><td>The execution layer that interprets, compiles, packages or hosts the program.</td></tr></table>
+
+</section>
+<section id="s4"><h2>4. First program</h2>
+
+<table><tr><th>Folder</th><th>Purpose</th></tr>
+<tr><td><code>keim/</code></td><td>Core Python host, CLI, compiler and runtime modules.</td></tr>
+<tr><td><code>stdlib/</code></td><td>Standard library concepts and reusable Keim-level components.</td></tr>
+<tr><td><code>examples/</code></td><td>Training examples, current v7.5/v7.8.5 examples and legacy examples.</td></tr>
+<tr><td><code>tests/</code></td><td>Regression, runtime, packaging and driver tests.</td></tr>
+<tr><td><code>driver/</code></td><td>GPU/driver bridge and platform-near execution experiments.</td></tr>
+<tr><td><code>native/</code></td><td>Native runtime and linker-related artefacts.</td></tr>
+</table>
+
+</section>
+<section id="s5"><h2>5. Variables and memory</h2>
+
+<h3>Create a variable</h3><pre><code>speicher alter ist ganzzahl = 36
+speicher preis ist zahl = 19.99
+speicher name ist text = "Ada"
+speicher aktiv ist bool = wahr</code></pre>
+<h3>Change a variable</h3><pre><code>setze alter auf 37
+setze name auf "Grace"
+setze aktiv auf falsch</code></pre>
+<h3>Why types matter</h3><p>A number can be added. Text can be concatenated. A boolean is used for decisions. Confusing <code>"42"</code> with <code>42</code> is a classic beginner error.</p>
+
+</section>
+<section id="s6"><h2>6. Data types</h2>
+
+<table><tr><th>Keim type</th><th>General name</th><th>Use</th></tr><tr><td><code>ganzzahl</code></td><td>integer</td><td>whole numbers</td></tr><tr><td><code>zahl</code></td><td>float</td><td>decimal values</td></tr><tr><td><code>text</code></td><td>string</td><td>text</td></tr><tr><td><code>bool</code></td><td>boolean</td><td>true/false decisions</td></tr></table>
+
+</section>
+<section id="s7"><h2>7. Operators and expressions</h2>
+
+<p>Expressions combine values. Operators compare, calculate or combine text.</p><pre><code>speicher preis ist zahl = 19.99
+speicher anzahl ist ganzzahl = 3
+speicher gesamt ist zahl = preis * anzahl</code></pre>
+
+</section>
+<section id="s8"><h2>8. Text</h2>
+
+<h3>Text as data format</h3><p>Text is used for messages, paths, JSON and HTTP bodies.</p>
+<h3>Escaping</h3><p>Quotes inside text must be escaped when they are part of the value.</p><pre><code>speicher json ist text = "{\"ok\":true}"</code></pre>
+
+</section>
+<section id="s9"><h2>9. Tuples, lists and maps</h2>
+
+<h3>8.1 Tuples</h3><p>Tuples group a fixed number of values.</p><h3>8.2 Lists</h3><p>Lists contain ordered values.</p><h3>8.3 Maps</h3><p>Maps store values under keys and are the natural bridge to JSON.</p><h3>Presence test</h3><p>Check whether a key exists before reading optional data.</p>
+
+</section>
+<section id="s10"><h2>10. Control flow: if, loops and process</h2>
+
+<h3>9.1 Change memory</h3><pre><code>setze alter auf 37
+setze name auf "Grace"</code></pre>
+<h3>9.2 Read aggregations</h3><p>Aggregations summarize lists, maps, tables or fields.</p>
+<h3>9.3 Lists</h3><p>Lists preserve order and are useful for queues, paths and batches.</p>
+<h3>9.4 Maps</h3><p>Maps connect keys to values and are essential for JSON-like data, configuration and lookup tables.</p>
+<h3>Why maps matter</h3><p>Maps are the bridge between readable data and structured program state.</p>
+
+</section>
+<section id="s11"><h2>11. Functions</h2>
+
+<h3>Why functions?</h3><p>Functions prevent repetition and make logic testable.</p>
+<h3>Conceptual example</h3><pre><code>funktion verdopple x:
+    gib x * 2 zurueck</code></pre>
+<h3>Functional thinking</h3><p>Prefer clear input and output. Avoid hidden state until learners understand the consequences.</p>
+
+</section>
+<section id="s12"><h2>12. Modules and imports</h2>
+
+<h3>Why modules?</h3><p>Modules split large programs into understandable parts.</p><h3>Export</h3><p>An exported function or value becomes available to another module.</p>
+
+</section>
+<section id="s13"><h2>13. Object-oriented programming</h2>
+
+<h3>11.1 Functions</h3><p>Functions group reusable logic. They should receive input, compute a result and avoid hidden side effects where possible.</p>
+<h3>11.2 Built-in expression functions</h3><p>Built-ins cover common tasks such as text, math, paths, JSON and time.</p>
+<h3>11.3 Values</h3><p>Values are transported through expressions, function calls, modules and runtime boundaries.</p>
+<h3>11.4 Blocks</h3><p>Blocks form named regions of behavior and are useful in training because they can be tested separately.</p>
+<h3>11.5 Imports</h3><p>Imports make modules reusable and keep large programs understandable.</p>
+
+</section>
+<section id="s14"><h2>14. Error handling</h2>
+
+<h3>15.1 Minimal service</h3><pre><code>server api bei 18080 parallel 4:
+    route GET "/health" antwortet speicher antwort:
+        setze antwort auf "{\"ok\":true}"</code></pre>
+<h3>15.2 Route structure</h3><p>A route maps an HTTP method and path to a response block.</p>
+<h3>15.3 Partial updates</h3><p>PATCH-like logic changes only the submitted fields.</p>
+<h3>15.4 Start the autonomous simulation API</h3><pre><code>python autonome_Simulations_API/keim_daemon.py</code></pre>
+<h3>15.5 Test the API</h3><pre><code>curl http://localhost:18080/health</code></pre>
+
+</section>
+<section id="s15"><h2>15. Files, JSON and CSV</h2>
+
+<h3>Read JSON</h3><p>JSON is a common interchange format for configuration and APIs.</p><h3>Write JSON</h3><p>Writing JSON makes program state visible to other tools.</p><h3>Files as a typical task</h3><p>File input/output teaches persistence and error handling at the same time.</p>
+
+</section>
+<section id="s16"><h2>16. HTTP and APIs</h2>
+
+<table><tr><th>Area</th><th>Training use</th></tr>
+<tr><td>JSON</td><td>API payloads and configuration.</td></tr>
+<tr><td>Time</td><td>Timestamps, durations and scheduling.</td></tr>
+<tr><td>Crypto</td><td>Hashes and integrity checks.</td></tr>
+<tr><td>Process</td><td>Run external commands when the host allows it.</td></tr>
+<tr><td>Network client</td><td>Call APIs and test services.</td></tr>
+<tr><td>Math and pathfinding</td><td>Simulation, routing and scoring.</td></tr>
+<tr><td>Visualization</td><td>Make state transitions visible.</td></tr></table>
+
+</section>
+<section id="s17"><h2>17. Time, crypto and processes</h2>
+
+<h3>Time</h3><p>Use time for timestamps, scheduling and expiry.</p><h3>Crypto / hashing</h3><p>Hashes are useful for integrity checks and manifests.</p><h3>External processes</h3><p>Process execution must be explicit and capability-controlled.</p>
+
+</section>
+<section id="s18"><h2>18. Debugging</h2>
+
+<h3>The five questions</h3><ol><li>What input did I give?</li><li>What did I expect?</li><li>What actually happened?</li><li>Where is the first wrong state?</li><li>Which smallest change proves the cause?</li></ol>
+<h3>Typical errors</h3><p>Wrong type, wrong indentation, wrong path, occupied port, invalid JSON.</p><h3>Test step by step</h3><p>Change one thing at a time and keep runnable intermediate states.</p>
+
+</section>
+<section id="s19"><h2>19. Practice projects</h2>
+
+<h3>19.1 Wrong port</h3><p>Check whether another service already uses the port.</p>
+<h3>19.2 PowerShell curl trap</h3><p>On some Windows systems <code>curl</code> may be an alias. Use <code>curl.exe</code> when necessary.</p>
+<h3>19.3 Syntax errors</h3><p>Read the first reported position and simplify the program until the cause is visible.</p>
+<h3>19.4 Analyse first</h3><p>Run analysis and tests before changing several things at once.</p>
+
+</section>
+<section id="s20"><h2>20. Quick reference</h2>
+
+<ul><li>Calculator API</li><li>Configuration service</li><li>Agent field simulation</li><li>Local JSON database</li><li>HTTP health endpoint with error handling</li><li>Runtime package with verification report</li></ul>
+
+</section>
+<section id="s21"><h2>21. Learning path</h2>
+
+<ol><li>Learn values, types and simple control flow.</li><li>Add functions, modules and objects.</li><li>Use files, JSON and HTTP.</li><li>Learn testing and debugging.</li><li>Move to v7.5 Enterprise architecture.</li><li>Finish with v7.8.5 packaging and verification.</li></ol>
+
+</section>
+<section id="s22"><h2>22. Update v7.5: what is new?</h2>
+
+<h3>What remains important from v4.3.3?</h3><p>The beginner course remains valid: values, types, collections, HTTP, errors and objects.</p>
+<h3>What does v7.5 add?</h3><p>Stable bytecode, Result/Match, WASM heap runtime, security, hardening and enterprise release thinking.</p>
+<h3>Version path for training</h3><p>Teach v4.3.3 first, then use v7.5 as architectural extension.</p>
+
+</section>
+<section id="s23"><h2>23. Migration v4.3.3 → v7.5</h2>
+
+<h3>Translate terms</h3><p>Beginner terms become runtime terms: variables become typed values, errors become Results, APIs become capability-controlled artefacts.</p>
+<h3>Migration in four steps</h3><ol><li>Keep the old examples.</li><li>Add Result/Match examples.</li><li>Add runtime and bytecode inspection.</li><li>Add hardening checks.</li></ol>
+
+</section>
+<section id="s24"><h2>24. Architecture: from source to runtime</h2>
+
+<p>v7.5 keeps the original training model but adds enterprise-grade runtime concepts: stable bytecode, a clearer value model, Result/Match, Web/WASM targets, capabilities, SBOM and hardening.</p>
+
+</section>
+<section id="s25"><h2>25. KBC-STABLE-1 and bytecode</h2>
+
+<p>The architecture can be taught as a chain: source → parser → semantic analysis → bytecode/runtime model → interpreter/native/WASM execution → tests → package → verification.</p>
+<h3>Why this chain matters</h3><p>It gives learners a map from a line of source code to a deliverable artefact and shows where errors, security checks and performance decisions enter.</p>
+
+</section>
+<section id="s26"><h2>26. Types, Result and Match</h2>
+
+<p>KBC-STABLE-1 gives the course a stable intermediate representation. Learners can compare source-level intent with runtime-level operations.</p>
+<h3>Example</h3><p>A typed value declaration becomes a value allocation plus metadata. That makes type errors, package manifests and bytecode tests easier to explain.</p>
+
+</section>
+<section id="s27"><h2>27. Native, WASM, GC and heap</h2>
+
+<p>Keim uses memory management topics to show why high-level values still need low-level lifecycle rules. Region allocation is fast for short-lived groups. Hashmaps support dynamic lookup. GC recovers unused objects. Compaction improves locality but can invalidate raw references if not handled carefully.</p>
+
+</section>
+<section id="s28"><h2>28. Web apps and JS interop</h2>
+
+<p>Capabilities restrict what a program may access. SBOM documents included components. Reproducible builds make artefacts auditable. In training, these concepts are framed as engineering discipline, not bureaucracy.</p>
+
+</section>
+<section id="s29"><h2>29. Security, SBOM and capabilities</h2>
+
+<table><tr><th>Path</th><th>Benefit</th><th>Risk</th></tr>
+<tr><td>Python reference</td><td>Portable and debuggable.</td><td>Higher dispatch and object costs.</td></tr>
+<tr><td>Native</td><td>Lower overhead and platform integration.</td><td>Build, ABI and safety complexity.</td></tr>
+<tr><td>WASM</td><td>Sandboxed and browser-friendly.</td><td>Interop and heap-model complexity.</td></tr></table>
+
+</section>
+<section id="s30"><h2>30. Tests, benchmarks and hardening</h2>
+
+<p>The Training Impossible prototype demonstrates how a system can record attempts, compare outputs and improve workflows. It should be taught carefully: self-optimisation requires testable goals and guardrails.</p>
+<h3>What learners understand</h3><p>Feedback loops are only useful when measurements, constraints and rollback rules are clear.</p>
+
+</section>
+<section id="s31"><h2>31. Training Impossible</h2>
+
+<p>The Web path shows how Keim concepts meet browser artefacts. Import maps define module resolution, JS adapters form the boundary to the browser, and DOM interaction must stay explicit to remain teachable.</p>
+
+</section>
+<section id="s32"><h2>32. Enterprise training labs</h2>
+
+<h3>Lab 1: From basic program to build artefact</h3><p>Turn a small program into a buildable artefact.</p>
+<h3>Lab 2: Result and Match</h3><p>Replace vague failure with explicit results.</p>
+<h3>Lab 3: Web app with adapter</h3><p>Build the Web boundary and inspect generated files.</p>
+<h3>Lab 4: Hardening report</h3><p>Read a release report and classify risks.</p>
+<h3>Lab 5: Training Impossible</h3><p>Discuss feedback loops, goals and rollback.</p>
+
+</section>
+<section id="s33"><h2>33. Instructor guide and exams</h2>
+
+<h3>Recommended course structure</h3><p>Use short theory blocks, runnable examples and repeated inspection of artefacts.</p>
+<h3>Exam questions</h3><ul><li>Explain a typed memory declaration.</li><li>Explain Result/Match.</li><li>Explain why tests are not the same as hardening.</li><li>Explain the difference between runtime, launcher and compiler.</li></ul>
+<h3>Evaluation grid for final project</h3><table><tr><th>Area</th><th>Weight</th></tr><tr><td>Correctness</td><td>30%</td></tr><tr><td>Readable structure</td><td>20%</td></tr><tr><td>Error handling</td><td>20%</td></tr><tr><td>Tests / verification</td><td>20%</td></tr><tr><td>Explanation</td><td>10%</td></tr></table>
+
+</section>
+<section id="s34"><h2>34. Update v7.8.5: deliver programs, not only run them</h2>
+
+<h3>What learners should additionally understand</h3><p>A program can consist of source, runtime, manifest, launcher scripts, GPU plan, Web overlay and verification reports. Delivery is part of engineering.</p>
+<h3>The four package forms</h3><table><tr><th>Form</th><th>Meaning</th></tr><tr><td>full-runtime</td><td>complete runtime bundle</td></tr><tr><td>native-subset</td><td>smaller native-oriented package</td></tr><tr><td>zipapp</td><td>single-file Python zip application</td></tr><tr><td>directory-bundle</td><td>inspection-friendly folder layout</td></tr></table>
+<h3>Commands for training</h3><pre><code>python -m keim exe-status --json
+python -m keim exe-pack examples/agenten_zweige_v78_1_gpu_aware/src/main.keim --out build/agenten_bundle --name agenten_zweige --target auto
+python -m keim exe-verify build/agenten_bundle --json
+python -m keim exe-run build/agenten_bundle</code></pre>
+<h3>New memory rule</h3><p><strong>Source is not the package.</strong> A release must show what it contains, how it starts, what it requires and how it was verified.</p>
+
+</section>
+</main>
+</div>
+</body>
+</html>

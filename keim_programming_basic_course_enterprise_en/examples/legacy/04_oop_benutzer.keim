@@ -1,0 +1,20 @@
+# Objektorientierung: Benutzer und Admin
+
+klasse Benutzer:
+    eigenschaft name ist text
+    eigenschaft age ist ganzzahl
+    eigenschaft active ist bool
+
+klasse Admin ist Benutzer:
+    eigenschaft rechte ist text
+
+objekt haupt_admin ist Admin:
+    name = "Ada"
+    age = 36
+    active = wahr
+    rechte = "alles"
+
+speicher neuer_user ist referenz
+neu Benutzer in speicher neuer_user
+
+sammle muell

@@ -1,0 +1,8 @@
+# Allgemeines Grundbeispiel: Variablen und Typen
+
+speicher name ist text = "Ada"
+speicher age ist ganzzahl = 36
+speicher temperatur ist zahl = 21.5
+speicher active ist bool = wahr
+
+setze age auf 37

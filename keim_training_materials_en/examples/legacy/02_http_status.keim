@@ -1,0 +1,15 @@
+# 02_http_status.keim
+welt statusdienst mit 1 agenten groesse 4 4
+
+speicher response text startet bei "{}"
+speicher status karte startet bei {}
+speicher counter ganzzahl startet bei 0
+
+server api bei 18081 parallel 4:
+    route GET "/health" responseet speicher response:
+        karte status setzt "ok" auf wahr
+        karte status setzt "counter" auf speicher.counter
+        json schreibt speicher status in speicher response
+
+jede runde:
+    speicher counter waechst 1

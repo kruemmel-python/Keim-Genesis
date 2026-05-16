@@ -1,0 +1,59 @@
+{
+  "format": "keim-v785-training-packager-manifest",
+  "version": "7.8.5",
+  "purpose": "Schulungsmanifest für Full Runtime Packager, GPU-aware Bundles und Self-Bootstrapping Launcher",
+  "packaging_modes": [
+    "full-runtime",
+    "native-subset",
+    "zipapp",
+    "directory-bundle"
+  ],
+  "native_link_targets": [
+    "pe64-windows-x86_64",
+    "elf64-linux-x86_64"
+  ],
+  "features": [
+    "native_value_model",
+    "heap",
+    "strings",
+    "lists",
+    "maps",
+    "records",
+    "result_match",
+    "function_calls",
+    "module_table",
+    "runtime_imports_io_gpu_web",
+    "internal_native_launcher_no_external_compiler",
+    "zipapp_single_file_full_runtime",
+    "gpu_aware_packaging",
+    "bundled_gpu_drivers",
+    "gpu_manifest_plan_smoke",
+    "cpu_fallback_for_gpu",
+    "self_bootstrapping_runtime_launcher",
+    "real_waiting_native_launcher",
+    "launcher_sets_gpu_driver_path",
+    "project_web_overlay"
+  ],
+  "value_tags": [
+    "null",
+    "int",
+    "float",
+    "bool",
+    "text",
+    "list",
+    "map",
+    "record",
+    "result_ok",
+    "result_error",
+    "function",
+    "module",
+    "host_import"
+  ],
+  "reference_commands": [
+    "python -m keim exe-status --json",
+    "python -m keim exe-pack <file.keim> --out build/<bundle> --target auto",
+    "python -m keim exe-verify build/<bundle> --json",
+    "python -m keim exe-run build/<bundle>",
+    "python -m keim web-build --cwd <project> --out build/web --json"
+  ]
+}

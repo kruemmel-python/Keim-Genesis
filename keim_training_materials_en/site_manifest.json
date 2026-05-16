@@ -1,0 +1,143 @@
+{
+  "name": "keim_training_materials_en",
+  "version": "7.8.5",
+  "language": "en",
+  "generated": "2026-05-16",
+  "files": [
+    {
+      "path": "CHANGELOG_V750_ENTERPRISE_STRUCTURE.md",
+      "sha256": "a3fe75ce11afae60c3f3b1b5a80207841ba0b733f4136239a5bb825d4762dc54",
+      "size": 210
+    },
+    {
+      "path": "CHANGELOG_V785_TRAINING_STRUCTURE.md",
+      "sha256": "efcc03d8fae428793f7503a77e4bc175ff752887609c49c13357829b6ad57a11",
+      "size": 734
+    },
+    {
+      "path": "INSTRUCTOR_GUIDE.md",
+      "sha256": "47a83d65d0e401483219263b9d63a2b0b9b1c9394f6c250ad3d20e0f338520ff",
+      "size": 1411
+    },
+    {
+      "path": "MIGRATION_V433_TO_V750.md",
+      "sha256": "a698ae1eac0c154a5143c5e9fe3429ac54a9abfb4aa9d31b05b8eaaf60a4a90b",
+      "size": 841
+    },
+    {
+      "path": "MIGRATION_V750_TO_V785.md",
+      "sha256": "9e9c43dfb82b390cded74448eb9c8fd8200117901ea161309c7254ea26379679",
+      "size": 1969
+    },
+    {
+      "path": "README.txt",
+      "sha256": "49b2ae3cfe963d6b91caed0bf612eafc37c28ed37e8c1aede22de22ef3760077",
+      "size": 944
+    },
+    {
+      "path": "examples/01_minimal.keim",
+      "sha256": "9fd8db469960008ba8ea16be19638fa580c3f50942217702b53947851536ea6f",
+      "size": 330
+    },
+    {
+      "path": "examples/02_http_status.keim",
+      "sha256": "b21a7660a8c9aa9ae8398550e24ef9fe8254fadc4dcfa6a9cf2bae5e49f47e69",
+      "size": 474
+    },
+    {
+      "path": "examples/03_control_api.keim",
+      "sha256": "ad45055060729363b97c217000a7a0f087361bfdd30d35d3af760d51a77e77a5",
+      "size": 1410
+    },
+    {
+      "path": "examples/04_klassen_tabellen.keim",
+      "sha256": "eeb6dc18ddd7a769e22494cf38009819f0053b3899505d68c0da75d7969ddbb2",
+      "size": 667
+    },
+    {
+      "path": "examples/current/kbc_stable_manifest.json",
+      "sha256": "81ecbe1695a859c436d3b2430511e8f028169e179b3d2c880cd25b4ca2603744",
+      "size": 271
+    },
+    {
+      "path": "examples/current/v75_01_stable_bytecode.keim",
+      "sha256": "a2afed2ca86f1911a135e41773e12b0de3d2995f860d8804a56764b3299d88ef",
+      "size": 288
+    },
+    {
+      "path": "examples/current/v75_02_result_match.keim",
+      "sha256": "5ff71ed27d3804c2296f1ca969b03689932c55b15faa20b20bbae0c343772dc4",
+      "size": 441
+    },
+    {
+      "path": "examples/current/v75_03_record_map_list.keim",
+      "sha256": "068428bc6c4fa1a2ca7f678f3d5a56810b35cf0dc040fee16c64b458e561e129",
+      "size": 370
+    },
+    {
+      "path": "examples/current/v75_04_actor_replay.keim",
+      "sha256": "a4a69977d7fdb480e4435edb7b6e1510016cbdf2290f5753135da4c5129b9d18",
+      "size": 367
+    },
+    {
+      "path": "examples/current/v75_05_web_adapter.keim",
+      "sha256": "144bce00d1947e225d5e5fb763d46b1e7b4d258d4569bb043c30093accf6f97c",
+      "size": 206
+    },
+    {
+      "path": "examples/current/v75_06_training_impossible_policy.keim",
+      "sha256": "c91c440cf567c3b0cc92a2bcc6bac2d80758f2d85e9c3b72d3e7d476b1eee154",
+      "size": 303
+    },
+    {
+      "path": "examples/current/v785_01_exe_runtime_packager.keim",
+      "sha256": "d6670b3868cba014340cd29c04221c5f1571f2f7be165a8878614d0aecf45153",
+      "size": 577
+    },
+    {
+      "path": "examples/current/v785_02_gpu_aware_packaging.keim",
+      "sha256": "fa8f7e70f1a5b5e425a872edbcec4296b1b75c2e631c90ab8787e9014eb90ad8",
+      "size": 570
+    },
+    {
+      "path": "examples/current/v785_03_web_overlay_policy.keim",
+      "sha256": "26b851a2dfb61273ba14bb80f2645aa01f60826cd73550917d2ad477a3ad279d",
+      "size": 460
+    },
+    {
+      "path": "examples/current/v785_packager_manifest.json",
+      "sha256": "ab2b6adc9817e1c944e0590f90328ac8996a79d22b5505d9bc9e8ea52a1a0bd9",
+      "size": 1460
+    },
+    {
+      "path": "examples/current/web_importmap_demo.html",
+      "sha256": "046a98698340b3910afd5167314f8d12bd633aea520ea21932d742a6d2d837a6",
+      "size": 443
+    },
+    {
+      "path": "examples/legacy/01_minimal.keim",
+      "sha256": "9fd8db469960008ba8ea16be19638fa580c3f50942217702b53947851536ea6f",
+      "size": 330
+    },
+    {
+      "path": "examples/legacy/02_http_status.keim",
+      "sha256": "b21a7660a8c9aa9ae8398550e24ef9fe8254fadc4dcfa6a9cf2bae5e49f47e69",
+      "size": 474
+    },
+    {
+      "path": "examples/legacy/03_control_api.keim",
+      "sha256": "ad45055060729363b97c217000a7a0f087361bfdd30d35d3af760d51a77e77a5",
+      "size": 1410
+    },
+    {
+      "path": "examples/legacy/04_klassen_tabellen.keim",
+      "sha256": "eeb6dc18ddd7a769e22494cf38009819f0053b3899505d68c0da75d7969ddbb2",
+      "size": 667
+    },
+    {
+      "path": "index.html",
+      "sha256": "ba39d6a4cf1e01d0f1c0f2d0e855920ab28709cbb93ca701f507c59c782715aa",
+      "size": 27428
+    }
+  ]
+}

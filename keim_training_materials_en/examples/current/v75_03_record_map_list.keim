@@ -1,0 +1,13 @@
+modul schulung.v75.daten
+
+exportiere funktion main
+
+typ Sensor:
+    name ist text
+    wert ist ganzzahl
+
+funktion main() gibt ganzzahl:
+    speicher s ist Sensor setzt Sensor(name: "temperatur", wert: 21)
+    speicher werte ist liste<ganzzahl> setzt [s.wert, 7, 14]
+    speicher index ist karte<text, ganzzahl> setzt {"offset": 21}
+    rueckgabe werte[0] + index.offset

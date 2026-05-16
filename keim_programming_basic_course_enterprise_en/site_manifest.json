@@ -1,0 +1,133 @@
+{
+  "name": "keim_programming_basic_course_enterprise_en",
+  "version": "7.8.5",
+  "language": "en",
+  "generated": "2026-05-16",
+  "files": [
+    {
+      "path": "CHANGELOG_V750_ENTERPRISE_STRUCTURE.md",
+      "sha256": "a3fe75ce11afae60c3f3b1b5a80207841ba0b733f4136239a5bb825d4762dc54",
+      "size": 210
+    },
+    {
+      "path": "CHANGELOG_V785_TRAINING_STRUCTURE.md",
+      "sha256": "fa38474086d8318977df23054daa960adb0b123aa6131c41c50a90ed9c0c37c8",
+      "size": 730
+    },
+    {
+      "path": "INSTRUCTOR_GUIDE.md",
+      "sha256": "a88adfe6af1d256a144b554046fe1466b3b3efb5fbf119c938f0bfb562b065a7",
+      "size": 1427
+    },
+    {
+      "path": "MIGRATION_V433_TO_V750.md",
+      "sha256": "a698ae1eac0c154a5143c5e9fe3429ac54a9abfb4aa9d31b05b8eaaf60a4a90b",
+      "size": 841
+    },
+    {
+      "path": "MIGRATION_V750_TO_V785.md",
+      "sha256": "9e9c43dfb82b390cded74448eb9c8fd8200117901ea161309c7254ea26379679",
+      "size": 1969
+    },
+    {
+      "path": "README.txt",
+      "sha256": "f15ff1dfafba68e095b243e3753f54e5455fc19c80ddc21fa3241732f7f061d0",
+      "size": 958
+    },
+    {
+      "path": "examples/01_variablen.keim",
+      "sha256": "0dc00828576e01c48e5fab3ecf049f6c25e402d1b76fcb2e11d1cc88b7aed800",
+      "size": 198
+    },
+    {
+      "path": "examples/02_karten_json.keim",
+      "sha256": "1057b72575ca3244ccb93167e4ffdad01a79cea8f7b276c0c38429e1c3cab802",
+      "size": 320
+    },
+    {
+      "path": "examples/03_http_taschenrechner.keim",
+      "sha256": "b0ba391ff3b26c878acbfeac09af81d2ae0f98276d5f0f2294019a7081b62410",
+      "size": 994
+    },
+    {
+      "path": "examples/04_oop_benutzer.keim",
+      "sha256": "6ab444f0b0ba9054fb0030fcade66aa029bd40b8912e25e29e646c99b1d55f18",
+      "size": 398
+    },
+    {
+      "path": "examples/05_fehlerbehandlung.keim",
+      "sha256": "93b161e2c77f5fb40f3f4ac09209a725678c740734a0847e7fb9dfc64a3947de",
+      "size": 395
+    },
+    {
+      "path": "examples/current/01_v75_result_match.keim",
+      "sha256": "f002c4e048798bc182688c30bb27d6513afa84782d49fb4eafe4604e759859b4",
+      "size": 392
+    },
+    {
+      "path": "examples/current/02_v75_stable_build.keim",
+      "sha256": "7b3b3fa55dcc13f06ce4cb2f09cef4f82b712ac30ebb7bb8b51bd71b2c21bedb",
+      "size": 331
+    },
+    {
+      "path": "examples/current/03_v75_web_adapter_plan.keim",
+      "sha256": "243f9b9c598b7ee8700a178ac26996c3dd3fc1592d20444ddde239c64b770e2d",
+      "size": 382
+    },
+    {
+      "path": "examples/current/04_v75_training_policy.keim",
+      "sha256": "fa385908296e80f45ba05bb875422722865dcdbe7c236fc93a11418fc76158a9",
+      "size": 263
+    },
+    {
+      "path": "examples/current/v785_01_exe_runtime_packager.keim",
+      "sha256": "d6670b3868cba014340cd29c04221c5f1571f2f7be165a8878614d0aecf45153",
+      "size": 577
+    },
+    {
+      "path": "examples/current/v785_02_gpu_aware_packaging.keim",
+      "sha256": "fa8f7e70f1a5b5e425a872edbcec4296b1b75c2e631c90ab8787e9014eb90ad8",
+      "size": 570
+    },
+    {
+      "path": "examples/current/v785_03_web_overlay_policy.keim",
+      "sha256": "26b851a2dfb61273ba14bb80f2645aa01f60826cd73550917d2ad477a3ad279d",
+      "size": 460
+    },
+    {
+      "path": "examples/current/v785_packager_manifest.json",
+      "sha256": "ab2b6adc9817e1c944e0590f90328ac8996a79d22b5505d9bc9e8ea52a1a0bd9",
+      "size": 1460
+    },
+    {
+      "path": "examples/legacy/01_variablen.keim",
+      "sha256": "0dc00828576e01c48e5fab3ecf049f6c25e402d1b76fcb2e11d1cc88b7aed800",
+      "size": 198
+    },
+    {
+      "path": "examples/legacy/02_karten_json.keim",
+      "sha256": "1057b72575ca3244ccb93167e4ffdad01a79cea8f7b276c0c38429e1c3cab802",
+      "size": 320
+    },
+    {
+      "path": "examples/legacy/03_http_taschenrechner.keim",
+      "sha256": "b0ba391ff3b26c878acbfeac09af81d2ae0f98276d5f0f2294019a7081b62410",
+      "size": 994
+    },
+    {
+      "path": "examples/legacy/04_oop_benutzer.keim",
+      "sha256": "6ab444f0b0ba9054fb0030fcade66aa029bd40b8912e25e29e646c99b1d55f18",
+      "size": 398
+    },
+    {
+      "path": "examples/legacy/05_fehlerbehandlung.keim",
+      "sha256": "93b161e2c77f5fb40f3f4ac09209a725678c740734a0847e7fb9dfc64a3947de",
+      "size": 395
+    },
+    {
+      "path": "index.html",
+      "sha256": "d9691439f7e005addf5f2d935ba4dd74dbe5ef9f136ccd84c749a65fca2aabc9",
+      "size": 23458
+    }
+  ]
+}

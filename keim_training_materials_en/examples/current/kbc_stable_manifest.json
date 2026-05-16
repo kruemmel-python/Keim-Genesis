@@ -1,0 +1,15 @@
+{
+  "format": "KBC-STABLE-1",
+  "purpose": "Schulungsmanifest für stabile Bytecode-Artefakte",
+  "sections": [
+    "HEADER",
+    "TYPES",
+    "CONSTS",
+    "FUNCTIONS",
+    "CODE",
+    "DEBUG",
+    "SECURITY",
+    "SBOM"
+  ],
+  "example": "v75_01_stable_bytecode.keim"
+}

@@ -1,0 +1,13 @@
+modul schulung.v785.web_overlay
+
+exportiere funktion status_text
+
+funktion status_text(paket_geprueft ist wahrheitswert, web_overlay ist wahrheitswert) gibt text:
+    match paket_geprueft:
+        fall wahr:
+            wenn web_overlay:
+                rueckgabe "geprüftes Paket mit Projekt-Webansicht"
+            sonst:
+                rueckgabe "geprüftes Paket ohne Webansicht"
+        fall falsch:
+            rueckgabe "Paket noch nicht verifiziert"

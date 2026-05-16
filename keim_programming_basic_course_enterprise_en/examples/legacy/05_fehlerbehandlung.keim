@@ -1,0 +1,13 @@
+# Error handling
+
+speicher body ist text = "{ungueltiges json"
+speicher daten ist karte
+speicher response ist text = ""
+speicher status ist ganzzahl = 200
+
+versuche:
+    json liest speicher body in speicher daten
+    setze response auf "{\"ok\":true}"
+fange error in speicher error:
+    setze status auf 400
+    setze response auf "{\"ok\":false,\"error\":\"JSON konnte nicht gelesen werden\"}"

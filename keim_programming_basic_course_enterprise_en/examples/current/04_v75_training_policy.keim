@@ -1,0 +1,12 @@
+modul kurs.v75.training
+
+typ Metrik:
+    energie ist kommazahl
+    risiko ist kommazahl
+
+funktion policy(m ist Metrik) gibt text:
+    wenn m.risiko > 0.7:
+        rueckgabe "ausweichen"
+    wenn m.energie < 0.3:
+        rueckgabe "ruhen"
+    rueckgabe "erkunden"

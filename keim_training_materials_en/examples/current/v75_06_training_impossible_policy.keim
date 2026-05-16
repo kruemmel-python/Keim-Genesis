@@ -1,0 +1,10 @@
+modul schulung.v75.training
+
+exportiere funktion policy_score
+
+funktion policy_score(energie ist ganzzahl, hunger ist ganzzahl, risiko ist ganzzahl) gibt ganzzahl:
+    speicher score ist ganzzahl setzt energie - hunger - risiko
+    wenn score < 0:
+        rueckgabe 0
+    sonst:
+        rueckgabe score
